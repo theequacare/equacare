@@ -1,0 +1,44 @@
+/* Home Page Contact Form Styles */
+
+.contact-form-home {
+    padding: var(--spacing-2xl) 0;
+    background: var(--gray-50);
+}
+
+.contact-form-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.contact-form-header h2 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--gray-900);
+}
+
+.contact-form-header p {
+    font-size: 1.125rem;
+    color: var(--text-light);
+}
+
+.home-contact-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.simple-contact-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .simple-contact-form .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+

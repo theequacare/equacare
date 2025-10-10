@@ -3,17 +3,21 @@
 
 {% block title %}Home - Equacare LLC | Professional Home Care Services{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home-contact.css' %}">
+{% endblock %}
+
 {% block content %}
 <!-- Hero Section -->
 <section class="hero" style="background-image: url('{% static 'images/hero-bg.webp' %}');">
     <div class="hero-overlay"></div>
     <div class="container">
         <div class="hero-content">
-            <h1 class="hero-title">Compassionate Home Care Services</h1>
-            <p class="hero-subtitle">Professional personal care and companion services to help your loved ones live independently at home</p>
+            <h1 class="hero-title">A Little Help Goes a Long Way</h1>
+            <p class="hero-subtitle">We understand, and we are here to help with reliability, professionalism, and kindness. Our trained caregivers provide support with activities of daily living to ensure your comfort, convenience, health, and safety.</p>
             <div class="hero-buttons">
-                <a href="{% url 'website:services' %}" class="btn btn-primary">Our Services</a>
-                <a href="{% url 'website:contact' %}" class="btn btn-secondary">Get Started</a>
+                <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call Now: (515) 508-1556</a>
+                <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Request Free Consultation</a>
             </div>
         </div>
     </div>
@@ -67,9 +71,9 @@
             </div>
             <div class="about-preview-content">
                 <span class="section-label">About Equacare</span>
-                <h2>Expert Home Care Services</h2>
-                <p>At Equacare LLC, we specialize in home care services that help seniors and individuals maintain their independence, dignity, and quality of life at home. We focus on personal care, companionship, and daily living assistance.</p>
-                <p>Our compassionate caregivers provide the support your loved ones need with everyday activities like bathing, dressing, meal preparation, light housekeeping, and companionship. We're here to enhance quality of life while allowing them to age gracefully in the comfort of their own home.</p>
+                <h2>There When You Need Us</h2>
+                <p>Whether you need in-home support a few hours per week or multiple hours every day, we can help. Whether you want in-home care services for a week or from now on, we'll be at your side.</p>
+                <p>We serve you on the schedule that fits your needs, with caregivers who fit both your skills needs and your personality. We take every measure to ensure that home care is a fully satisfying experience for everyone involved. It all starts with a conversation.</p>
                 <ul class="check-list">
                     <li><i class="fas fa-check-circle"></i> Personalized care plans</li>
                     <li><i class="fas fa-check-circle"></i> Background-checked caregivers</li>
@@ -87,8 +91,8 @@
     <div class="container">
         <div class="section-header">
             <span class="section-label">Our Services</span>
-            <h2>Comprehensive Home Care Services</h2>
-            <p>Personal care, companionship, and daily living assistance - compassionate support for everyday needs</p>
+            <h2>How We Can Help</h2>
+            <p>From a few hours a week to around-the-clock care, we're here with a helping hand</p>
         </div>
         <div class="services-grid">
             {% if services %}
@@ -104,45 +108,45 @@
             {% else %}
                 <div class="service-card">
                     <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Homemaking</h3>
+                    <p>Meal preparation, cleaning, laundry</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
                         <i class="fas fa-hands-helping"></i>
                     </div>
-                    <h3>Personal Care</h3>
-                    <p>Assistance with bathing, dressing, grooming, and personal hygiene</p>
+                    <h3>Aide Services</h3>
+                    <p>Medication reminders, health monitoring, bathing assistance</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-user-friends"></i>
                     </div>
-                    <h3>Companion Care</h3>
-                    <p>Friendly companionship, conversation, and social engagement</p>
+                    <h3>Companionship</h3>
+                    <p>Running errands, playing games, hobbies, and more</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-utensils"></i>
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <h3>Meal Preparation</h3>
-                    <p>Nutritious meal planning, cooking, and assistance with eating</p>
+                    <h3>Long Term</h3>
+                    <p>As long as you need us, we'll be there to help</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <h3>Light Housekeeping</h3>
-                    <p>Help with laundry, dishes, tidying, and maintaining a clean home</p>
+                    <h3>Short Term</h3>
+                    <p>A few hours a day, or a few hours a week</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-car"></i>
+                        <i class="fas fa-heart"></i>
                     </div>
-                    <h3>Transportation</h3>
-                    <p>Safe transportation to appointments, errands, and social activities</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-pills"></i>
-                    </div>
-                    <h3>Medication Reminders</h3>
-                    <p>Timely reminders to take medications as prescribed</p>
+                    <h3>Flexible Care</h3>
+                    <p>We work around your schedule and needs</p>
                 </div>
             {% endif %}
         </div>
@@ -248,15 +252,65 @@
     </div>
 </section>
 
+<!-- Contact Form Section -->
+<section class="contact-form-home">
+    <div class="container">
+        <div class="contact-form-header">
+            <h2>Let Us Know What's On Your Mind</h2>
+            <p>Request a no-obligation, in-home consultation</p>
+        </div>
+        <div class="home-contact-wrapper">
+            <form id="homeContactForm" class="simple-contact-form">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="home_name">Name:</label>
+                        <input type="text" id="home_name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="home_email">Email:</label>
+                        <input type="email" id="home_email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="home_phone">Phone:</label>
+                        <input type="tel" id="home_phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="home_subject">Subject:</label>
+                        <select id="home_subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="Free Consultation">Request Free Consultation</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Services Information">Services Information</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="home_message">Message:</label>
+                    <textarea id="home_message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="btn-text">Send Message</span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Sending...
+                    </span>
+                </button>
+                <div id="homeFormMessage" class="form-message"></div>
+            </form>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="cta">
     <div class="container">
         <div class="cta-content">
-            <h2>Ready to Get Started?</h2>
-            <p>Contact us today for a free consultation and learn how we can help your family</p>
+            <h2>Ready to Talk?</h2>
+            <p>It all starts with a conversation. Call us or send a message above.</p>
             <div class="cta-buttons">
-                <a href="{% url 'website:contact' %}" class="btn btn-primary btn-lg">Schedule a Consultation</a>
-                <a href="tel:+15155081556" class="btn btn-secondary btn-lg"><i class="fas fa-phone"></i> (515) 508-1556</a>
+                <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call Now: (515) 508-1556</a>
             </div>
         </div>
     </div>
