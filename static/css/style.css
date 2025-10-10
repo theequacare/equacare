@@ -655,7 +655,7 @@ a:hover {
 
 .cta {
     padding: var(--spacing-2xl) 0;
-    background: linear-gradient(135deg, var(--primary-color), var(--healthcare-teal));
+    background: #0d9488;
     color: var(--white);
     text-align: center;
 }
