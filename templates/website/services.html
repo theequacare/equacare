@@ -4,134 +4,155 @@
 {% block title %}Our Services - Equacare LLC{% endblock %}
 
 {% block content %}
-<!-- Page Header -->
-<section class="page-header">
+<!-- Hero Header -->
+<section class="services-hero">
     <div class="container">
-        <h1>Non-Medical Home Care Services</h1>
-        <p>Personal care, companionship, and daily living assistance - no medical procedures</p>
+        <div class="services-hero-content">
+            <h1>Our Services</h1>
+            <p class="hero-lead">Compassionate, professional home care tailored to your needs</p>
+        </div>
     </div>
 </section>
 
-<!-- Services Detail Section -->
-<section class="services-detail">
+<!-- Intro Section with Images -->
+<section class="services-intro">
     <div class="container">
-        <div class="intro-text">
-            <h2>How We Can Help</h2>
-            <p>At Equacare LLC, we specialize exclusively in non-medical home care services. We do not provide medical treatments, nursing care, or clinical services. Instead, we focus on personal care assistance, companionship, and help with daily living activities to support your loved ones' independence and well-being at home.</p>
+        <div class="services-intro-grid">
+            <div class="services-intro-image">
+                <img src="{% static 'images/service-1.webp' %}" alt="Equacare home care services">
+            </div>
+            <div class="services-intro-content">
+                <h2>How We Can Help</h2>
+                <p>At Equacare, we provide non-medical home care services that help you or your loved ones live safely and comfortably at home. We focus on personal care, companionship, and assistance with daily activities—never medical treatments or nursing care.</p>
+            </div>
         </div>
+    </div>
+</section>
 
-        <div class="services-detailed-list">
-            <div class="service-detailed-card">
-                <div class="service-detailed-icon">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="service-detailed-content">
+<!-- Services Grid -->
+<section class="services-showcase">
+    <div class="container">
+        <div class="services-showcase-grid">
+            
+            <!-- Homemaking -->
+            <div class="service-showcase-card">
+                <div class="service-showcase-header">
+                    <div class="service-showcase-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
                     <h3>Homemaking</h3>
-                    <ul class="service-bullet-list">
-                        <li>Meal preparation</li>
-                        <li>Cleaning</li>
-                        <li>Laundry</li>
-                        <li>Making beds</li>
-                        <li>Changing light bulbs</li>
-                        <li>and more!</li>
+                </div>
+                <div class="service-showcase-body">
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Meal preparation</li>
+                        <li><i class="fas fa-check"></i> Cleaning</li>
+                        <li><i class="fas fa-check"></i> Laundry</li>
+                        <li><i class="fas fa-check"></i> Making beds</li>
+                        <li><i class="fas fa-check"></i> Changing light bulbs</li>
+                        <li><i class="fas fa-check"></i> and more!</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="service-detailed-card">
-                <div class="service-detailed-icon">
-                    <i class="fas fa-hands-helping"></i>
-                </div>
-                <div class="service-detailed-content">
+            <!-- Aide Services -->
+            <div class="service-showcase-card">
+                <div class="service-showcase-header">
+                    <div class="service-showcase-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
                     <h3>Aide Services</h3>
-                    <ul class="service-bullet-list">
-                        <li>Medication reminders</li>
-                        <li>Health monitoring</li>
-                        <li>Adherence to special diets</li>
-                        <li>Help walking and mobility assistance</li>
-                        <li>Skin care</li>
-                        <li>Bathing assistance</li>
-                        <li>Grooming</li>
-                        <li>Dressing</li>
-                        <li>Feeding</li>
-                        <li>and more!</li>
+                </div>
+                <div class="service-showcase-body">
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Medication reminders</li>
+                        <li><i class="fas fa-check"></i> Health monitoring</li>
+                        <li><i class="fas fa-check"></i> Adherence to special diets</li>
+                        <li><i class="fas fa-check"></i> Help walking and mobility assistance</li>
+                        <li><i class="fas fa-check"></i> Skin care</li>
+                        <li><i class="fas fa-check"></i> Bathing assistance</li>
+                        <li><i class="fas fa-check"></i> Grooming</li>
+                        <li><i class="fas fa-check"></i> Dressing</li>
+                        <li><i class="fas fa-check"></i> Feeding</li>
+                        <li><i class="fas fa-check"></i> and more!</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="service-detailed-card">
-                <div class="service-detailed-icon">
-                    <i class="fas fa-user-friends"></i>
-                </div>
-                <div class="service-detailed-content">
+            <!-- Companionship -->
+            <div class="service-showcase-card">
+                <div class="service-showcase-header">
+                    <div class="service-showcase-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
                     <h3>Companionship</h3>
-                    <ul class="service-bullet-list">
-                        <li>Help with remote controls</li>
-                        <li>Getting the mail</li>
-                        <li>Running errands</li>
-                        <li>Help with correspondence: letters, emails, social media</li>
-                        <li>Playing games and helping with hobbies</li>
-                        <li>Supervision when there is a risk of wandering or self-injury</li>
-                        <li>and more!</li>
+                </div>
+                <div class="service-showcase-body">
+                    <ul class="service-list">
+                        <li><i class="fas fa-check"></i> Help with remote controls</li>
+                        <li><i class="fas fa-check"></i> Getting the mail</li>
+                        <li><i class="fas fa-check"></i> Running errands</li>
+                        <li><i class="fas fa-check"></i> Help with correspondence: letters, emails, social media</li>
+                        <li><i class="fas fa-check"></i> Playing games and helping with hobbies</li>
+                        <li><i class="fas fa-check"></i> Supervision when there is a risk of wandering or self-injury</li>
+                        <li><i class="fas fa-check"></i> and more!</li>
                     </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Care Options -->
+<section class="care-options">
+    <div class="container">
+        <div class="care-options-wrapper">
+            <div class="care-options-image">
+                <img src="{% static 'images/service-2.webp' %}" alt="Flexible care options">
+            </div>
+            <div class="care-options-content">
+                <div class="care-options-header">
+                    <h2>Flexible Care Options</h2>
+                    <p>We work with your schedule and adjust as your needs change</p>
+                </div>
+                <div class="care-options-grid">
+            <div class="care-option-card">
+                <div class="care-option-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h4>Hourly Care</h4>
+                <p>A few hours a day or a few hours a week—we're flexible to meet your needs</p>
+            </div>
+            <div class="care-option-card">
+                <div class="care-option-icon">
+                    <i class="fas fa-calendar-day"></i>
+                </div>
+                <h4>Daily Care</h4>
+                <p>Consistent support throughout the day with a dedicated caregiver</p>
+            </div>
+            <div class="care-option-card">
+                <div class="care-option-icon">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <h4>24/7 Care</h4>
+                <p>Round-the-clock care and supervision for complete peace of mind</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Care Plans Section -->
-<section class="care-plans">
+<!-- Bottom CTA -->
+<section class="services-cta">
     <div class="container">
-        <div class="section-header">
-            <h2>Flexible Care Plans</h2>
-            <p>Choose the level of care that's right for your family</p>
-        </div>
-        <div class="care-plans-grid">
-            <div class="care-plan-card">
-                <h3>Hourly Care</h3>
-                <p class="plan-desc">Perfect for those who need assistance with specific tasks or companionship for a few hours a day.</p>
-                <ul>
-                    <li><i class="fas fa-check"></i> Minimum 4 hours per visit</li>
-                    <li><i class="fas fa-check"></i> Flexible scheduling</li>
-                    <li><i class="fas fa-check"></i> Ideal for light assistance</li>
-                </ul>
-                <a href="{% url 'website:contact' %}" class="btn btn-outline">Learn More</a>
+        <div class="services-cta-content">
+            <h2>Let's Talk About Your Needs</h2>
+            <p>Every situation is unique. Contact us for a free consultation to discuss how we can help.</p>
+            <div class="services-cta-buttons">
+                <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
+                <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Request Free Consultation</a>
             </div>
-            <div class="care-plan-card featured">
-                <div class="popular-badge">Most Popular</div>
-                <h3>Daily Care</h3>
-                <p class="plan-desc">Comprehensive daily support for those who need regular assistance with multiple activities.</p>
-                <ul>
-                    <li><i class="fas fa-check"></i> 8-12 hours per day</li>
-                    <li><i class="fas fa-check"></i> Consistent caregiver</li>
-                    <li><i class="fas fa-check"></i> Full range of services</li>
-                </ul>
-                <a href="{% url 'website:contact' %}" class="btn btn-primary">Get Started</a>
-            </div>
-            <div class="care-plan-card">
-                <h3>24/7 Live-In Care</h3>
-                <p class="plan-desc">Round-the-clock care and supervision for those who need continuous support and monitoring.</p>
-                <ul>
-                    <li><i class="fas fa-check"></i> 24-hour supervision</li>
-                    <li><i class="fas fa-check"></i> Overnight assistance</li>
-                    <li><i class="fas fa-check"></i> Peace of mind</li>
-                </ul>
-                <a href="{% url 'website:contact' %}" class="btn btn-outline">Learn More</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="cta">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Ready to Learn More?</h2>
-            <p>Contact us for a free consultation to discuss your care needs</p>
-            <a href="{% url 'website:contact' %}" class="btn btn-primary btn-lg">Schedule Free Consultation</a>
         </div>
     </div>
 </section>
 {% endblock %}
-

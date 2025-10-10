@@ -965,8 +965,273 @@ a:hover {
 }
 
 /* ===================================
-   16. Services Page Styles
+   16. Services Page Styles - Redesigned
    =================================== */
+
+/* Services Hero */
+.services-hero {
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+    color: var(--white);
+    margin-top: 70px;
+}
+
+.services-hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+.hero-lead {
+    font-size: 1.5rem;
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Services Intro */
+.services-intro {
+    padding: var(--spacing-2xl) 0;
+    background: var(--white);
+}
+
+.services-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-intro-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.services-intro-content {
+    padding: var(--spacing-lg);
+}
+
+.services-intro-content h2 {
+    font-size: 2.5rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-lg);
+}
+
+.services-intro-content p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+}
+
+/* Services Showcase */
+.services-showcase {
+    padding: var(--spacing-2xl) 0;
+    background: var(--gray-50);
+}
+
+.services-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.service-showcase-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    transition: all 0.3s ease;
+    border: 1px solid var(--gray-200);
+}
+
+.service-showcase-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
+}
+
+.service-showcase-header {
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--white);
+}
+
+.service-showcase-icon {
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    font-size: 2.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.service-showcase-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.service-showcase-body {
+    padding: var(--spacing-xl);
+}
+
+.service-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.service-list li {
+    padding: var(--spacing-sm) 0;
+    color: var(--gray-700);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    line-height: 1.6;
+}
+
+.service-list li i {
+    color: var(--success);
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+/* Care Options */
+.care-options {
+    padding: var(--spacing-2xl) 0;
+    background: var(--gray-50);
+}
+
+.care-options-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.care-options-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.care-options-content {
+    padding: var(--spacing-lg);
+}
+
+.care-options-header {
+    text-align: left;
+    margin-bottom: var(--spacing-xl);
+}
+
+.care-options-header h2 {
+    font-size: 2.5rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-md);
+}
+
+.care-options-header p {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+}
+
+.care-options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+}
+
+.care-option-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    border: 2px solid var(--gray-200);
+}
+
+.care-option-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.care-option-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    color: var(--white);
+    font-size: 2rem;
+}
+
+.care-option-card h4 {
+    font-size: 1.5rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.care-option-card p {
+    color: var(--gray-600);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Services CTA */
+.services-cta {
+    padding: var(--spacing-2xl) 0;
+    background: #0d9488;
+    color: var(--white);
+}
+
+.services-cta-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.services-cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--white);
+}
+
+.services-cta-content p {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.95;
+}
+
+.services-cta-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Old Services Page Styles */
 
 .services-detail {
     padding: var(--spacing-2xl) 0;
@@ -1442,8 +1707,47 @@ a:hover {
     .services-grid,
     .testimonials-grid,
     .care-plans-grid,
-    .services-detailed-list {
+    .services-detailed-list,
+    .services-showcase-grid,
+    .care-options-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .services-hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-lead {
+        font-size: 1.125rem;
+    }
+    
+    .services-intro-content h2,
+    .care-options-header h2,
+    .services-cta-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .services-intro-grid,
+    .care-options-wrapper {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .care-options-header {
+        text-align: center;
+    }
+    
+    .services-intro-content {
+        text-align: center;
+    }
+    
+    .services-cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .services-cta-buttons .btn {
+        width: 100%;
     }
     
     .service-detail-card {
