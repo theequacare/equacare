@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ContactMessage, Service, Testimonial, Notice, Document
+from .models import ContactMessage, Service, Testimonial, Notice, Document, HeroSection, AboutPreview
 
 
 @admin.register(ContactMessage)
@@ -46,4 +46,40 @@ class DocumentAdmin(admin.ModelAdmin):
     list_editable = ('is_active',)
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at',)
+
+
+@admin.register(HeroSection)
+class HeroSectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Content', {
+            'fields': ('title', 'subtitle', 'hero_image')
+        }),
+        ('Buttons', {
+            'fields': ('button_text_1', 'button_link_1', 'button_text_2', 'button_link_2')
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(AboutPreview)
+class AboutPreviewAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Content', {
+            'fields': ('section_label', 'title', 'content_paragraph_1', 'content_paragraph_2', 'preview_image')
+        }),
+        ('Button', {
+            'fields': ('button_text', 'button_link')
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
 

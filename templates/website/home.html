@@ -9,11 +9,30 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero" style="background-image: url('{% static 'images/hero-bg.webp' %}');">
+{% if hero %}
+<section class="hero" style="background-image: url('{{ hero.hero_image.url }}');">
     <div class="hero-overlay"></div>
 </section>
 
 <!-- Hero Content Section (Below Photo) -->
+<section class="hero-content-section">
+    <div class="container">
+        <div class="hero-content-wrapper">
+            <h1>{{ hero.title }}</h1>
+            <p>{{ hero.subtitle }}</p>
+            <div class="hero-buttons">
+                <a href="{{ hero.button_link_1 }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> {{ hero.button_text_1 }}</a>
+                <a href="{{ hero.button_link_2 }}" class="btn btn-secondary btn-lg">{{ hero.button_text_2 }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<!-- Fallback Hero Section -->
+<section class="hero" style="background-image: url('{% static 'images/hero-bg.webp' %}');">
+    <div class="hero-overlay"></div>
+</section>
+
 <section class="hero-content-section">
     <div class="container">
         <div class="hero-content-wrapper">
@@ -26,8 +45,34 @@
         </div>
     </div>
 </section>
+{% endif %}
 
 <!-- About Preview Section -->
+{% if about_preview %}
+<section class="about-preview">
+    <div class="container">
+        <div class="about-preview-grid">
+            <div class="about-preview-image">
+                <img src="{{ about_preview.preview_image.url }}" alt="{{ about_preview.title }}">
+            </div>
+            <div class="about-preview-content">
+                <span class="section-label">{{ about_preview.section_label }}</span>
+                <h2>{{ about_preview.title }}</h2>
+                <p>{{ about_preview.content_paragraph_1 }}</p>
+                <p>{{ about_preview.content_paragraph_2 }}</p>
+                <ul class="check-list">
+                    <li><i class="fas fa-check-circle"></i> Personalized care plans</li>
+                    <li><i class="fas fa-check-circle"></i> Background-checked caregivers</li>
+                    <li><i class="fas fa-check-circle"></i> Flexible scheduling options</li>
+                    <li><i class="fas fa-check-circle"></i> Ongoing supervision and support</li>
+                </ul>
+                <a href="{{ about_preview.button_link }}" class="btn btn-primary">{{ about_preview.button_text }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<!-- Fallback About Preview Section -->
 <section class="about-preview">
     <div class="container">
         <div class="about-preview-grid">
@@ -50,6 +95,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 
 <!-- Services Section -->
 <section class="services">

@@ -8,12 +8,18 @@ import json
 
 def home(request):
     """Home page view"""
+    from .models import HeroSection, AboutPreview
+    
     services = Service.objects.filter(is_active=True)[:6]
     testimonials = Testimonial.objects.filter(is_featured=True)[:3]
+    hero = HeroSection.objects.filter(is_active=True).first()
+    about_preview = AboutPreview.objects.filter(is_active=True).first()
     
     context = {
         'services': services,
         'testimonials': testimonials,
+        'hero': hero,
+        'about_preview': about_preview,
     }
     return render(request, 'website/home.html', context)
 
