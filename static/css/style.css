@@ -1543,83 +1543,190 @@ a:hover {
 }
 
 /* ===================================
-   17. Knowledge Center Page
+   17. Knowledge Center Page - Simple
    =================================== */
 
-.knowledge-center {
+.knowledge-center-simple {
     padding: var(--spacing-2xl) 0;
     background: var(--white);
     min-height: 80vh;
 }
 
-.knowledge-header {
+.knowledge-simple-header {
     text-align: center;
     margin-bottom: var(--spacing-2xl);
     padding-top: 100px;
 }
 
-.knowledge-header h1 {
+.knowledge-simple-header h1 {
     font-size: 3rem;
     color: var(--gray-900);
     margin-bottom: var(--spacing-md);
 }
 
-.knowledge-header p {
+.knowledge-simple-header p {
     font-size: 1.25rem;
     color: var(--gray-600);
-    max-width: 700px;
-    margin: 0 auto;
 }
 
-.knowledge-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--spacing-xl);
-    max-width: 1400px;
+/* Knowledge Sections */
+.knowledge-section {
+    max-width: 1200px;
     margin: 0 auto var(--spacing-2xl);
 }
 
-.knowledge-card {
+.knowledge-section h2 {
+    font-size: 2rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.knowledge-section h2 i {
+    color: var(--primary-color);
+}
+
+/* Notices */
+.notices-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.notice-card {
     background: var(--white);
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-lg);
     border: 2px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
     transition: all 0.3s ease;
 }
 
-.knowledge-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+.notice-card:hover {
     border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.knowledge-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
-    border-radius: 50%;
+.notice-header {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--spacing-lg);
-    color: var(--white);
-    font-size: 1.75rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-md);
 }
 
-.knowledge-card h3 {
+.notice-header h3 {
     font-size: 1.5rem;
     color: var(--gray-900);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.3;
+    margin: 0;
 }
 
-.knowledge-card p {
+.notice-date {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    white-space: nowrap;
+}
+
+.notice-content {
     color: var(--gray-700);
-    font-size: 1rem;
     line-height: 1.7;
 }
 
-.knowledge-cta {
+/* Documents */
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.document-card {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.document-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.document-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.document-info {
+    flex-grow: 1;
+}
+
+.document-info h3 {
+    font-size: 1.125rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-info p {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xs);
+}
+
+.document-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.document-download {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    color: var(--gray-400);
+}
+
+.document-card:hover .document-download {
+    color: var(--primary-color);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    color: var(--gray-500);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 1.125rem;
+}
+
+/* CTA */
+.knowledge-simple-cta {
     text-align: center;
     padding: var(--spacing-2xl);
     background: var(--gray-50);
@@ -1628,19 +1735,19 @@ a:hover {
     margin: var(--spacing-2xl) auto 0;
 }
 
-.knowledge-cta h2 {
+.knowledge-simple-cta h2 {
     font-size: 2rem;
     color: var(--gray-900);
     margin-bottom: var(--spacing-sm);
 }
 
-.knowledge-cta p {
+.knowledge-simple-cta p {
     font-size: 1.125rem;
     color: var(--gray-600);
     margin-bottom: var(--spacing-xl);
 }
 
-.knowledge-buttons {
+.knowledge-simple-buttons {
     display: flex;
     gap: var(--spacing-md);
     justify-content: center;
@@ -1970,28 +2077,37 @@ a:hover {
         width: 100%;
     }
     
-    .knowledge-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .knowledge-header h1 {
+    .knowledge-simple-header h1 {
         font-size: 2rem;
     }
     
-    .knowledge-header p {
+    .knowledge-simple-header p {
         font-size: 1.125rem;
     }
     
-    .knowledge-cta h2 {
+    .knowledge-section h2 {
         font-size: 1.5rem;
     }
     
-    .knowledge-buttons {
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .notice-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .knowledge-simple-cta h2 {
+        font-size: 1.5rem;
+    }
+    
+    .knowledge-simple-buttons {
         flex-direction: column;
         width: 100%;
     }
     
-    .knowledge-buttons .btn {
+    .knowledge-simple-buttons .btn {
         width: 100%;
     }
     

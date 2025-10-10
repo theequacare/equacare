@@ -55,3 +55,43 @@ class Testimonial(models.Model):
     def __str__(self):
         return f"{self.client_name} - {self.rating} stars"
 
+
+class Notice(models.Model):
+    """Model for announcements and notices"""
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Notice'
+        verbose_name_plural = 'Notices'
+
+    def __str__(self):
+        return self.title
+
+
+class Document(models.Model):
+    """Model for PDF documents and resources"""
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    file = models.FileField(upload_to='documents/')
+    category = models.CharField(max_length=100, choices=[
+        ('forms', 'Forms'),
+        ('policies', 'Policies'),
+        ('guides', 'Guides'),
+        ('other', 'Other'),
+    ], default='other')
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Document'
+        verbose_name_plural = 'Documents'
+
+    def __str__(self):
+        return self.title
+

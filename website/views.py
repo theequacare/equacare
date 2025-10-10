@@ -34,7 +34,16 @@ def services(request):
 
 def knowledge(request):
     """Knowledge Center page view"""
-    return render(request, 'website/knowledge.html')
+    from .models import Notice, Document
+    
+    notices = Notice.objects.filter(is_active=True)
+    documents = Document.objects.filter(is_active=True)
+    
+    context = {
+        'notices': notices,
+        'documents': documents,
+    }
+    return render(request, 'website/knowledge.html', context)
 
 
 def contact(request):

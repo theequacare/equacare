@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ContactMessage, Service, Testimonial
+from .models import ContactMessage, Service, Testimonial, Notice, Document
 
 
 @admin.register(ContactMessage)
@@ -26,4 +26,24 @@ class TestimonialAdmin(admin.ModelAdmin):
     search_fields = ('client_name', 'testimonial')
     list_editable = ('is_featured',)
     date_hierarchy = 'created_at'
+
+
+@admin.register(Notice)
+class NoticeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'created_at', 'updated_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('title', 'content')
+    list_editable = ('is_active',)
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
+
+
+@admin.register(Document)
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'is_active', 'created_at')
+    list_filter = ('category', 'is_active', 'created_at')
+    search_fields = ('title', 'description')
+    list_editable = ('is_active',)
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at',)
 
