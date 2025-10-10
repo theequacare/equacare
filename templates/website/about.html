@@ -4,184 +4,55 @@
 {% block title %}About Us - Equacare LLC{% endblock %}
 
 {% block content %}
-<!-- Page Header -->
-<section class="page-header">
+<!-- Simple About Section -->
+<section class="simple-about">
     <div class="container">
-        <h1>About Equacare LLC</h1>
-        <p>Your trusted partner for non-medical home care services</p>
-    </div>
-</section>
-
-<!-- About Content -->
-<section class="about-content">
-    <div class="container">
-        <div class="about-grid">
-            <div class="about-text">
-                <h2>Our Story</h2>
-                <p>Founded with a passion for helping others, Equacare LLC specializes in non-medical home care services for families in our community. We focus on personal care assistance, companionship, and daily living support - not medical treatments or nursing care.</p>
-                <p>Our non-medical caregivers help with everyday activities like bathing, dressing, meal preparation, light housekeeping, and providing meaningful companionship. We believe that everyone deserves to maintain their independence and dignity while receiving the personal care assistance they need at home.</p>
+        <div class="simple-about-content">
+            <div class="simple-about-header">
+                <h1>About Equacare</h1>
+                <p class="lead">Non-medical home care services for families in our community</p>
             </div>
-            <div class="about-image">
-                <img src="{% static 'images/about-team.webp' %}" alt="Equacare Team">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Mission, Vision, Values -->
-<section class="mission-section">
-    <div class="container">
-        <div class="mission-grid">
-            <div class="mission-card">
-                <div class="mission-icon">
-                    <i class="fas fa-bullseye"></i>
+            
+            <div class="simple-about-grid">
+                <div class="simple-about-text">
+                    <p>At Equacare, we understand that life can be challenging. That's why we provide compassionate, non-medical home care services to help you or your loved ones live comfortably and independently at home.</p>
+                    
+                    <p>Our trained caregivers assist with everyday activities like personal care, meal preparation, light housekeeping, and companionship. We don't provide medical treatments or nursing care - we focus on the personal support that makes daily life easier.</p>
+                    
+                    <div class="simple-features">
+                        <div class="simple-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Background-checked caregivers</span>
+                        </div>
+                        <div class="simple-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Flexible scheduling</span>
+                        </div>
+                        <div class="simple-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Personalized care plans</span>
+                        </div>
+                        <div class="simple-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Available 24/7</span>
+                        </div>
+                    </div>
                 </div>
-                <h3>Our Mission</h3>
-                <p>To provide compassionate, personalized, and professional home care services that enhance the quality of life and promote independence for our clients while giving families peace of mind.</p>
-            </div>
-            <div class="mission-card">
-                <div class="mission-icon">
-                    <i class="fas fa-eye"></i>
+                
+                <div class="simple-about-image">
+                    <img src="{% static 'images/about-team.webp' %}" alt="Equacare Caregivers">
                 </div>
-                <h3>Our Vision</h3>
-                <p>To be the most trusted and respected home care provider in our community, known for our commitment to excellence, compassion, and innovative care solutions.</p>
             </div>
-            <div class="mission-card">
-                <div class="mission-icon">
-                    <i class="fas fa-heart"></i>
+            
+            <div class="simple-cta">
+                <h2>Ready to Learn More?</h2>
+                <p>Let's talk about how we can help you or your loved ones.</p>
+                <div class="simple-cta-buttons">
+                    <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
+                    <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
                 </div>
-                <h3>Our Values</h3>
-                <ul>
-                    <li>Compassion and Empathy</li>
-                    <li>Respect and Dignity</li>
-                    <li>Excellence in Care</li>
-                    <li>Integrity and Trust</li>
-                    <li>Client-Centered Approach</li>
-                </ul>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Why Choose Us -->
-<section class="why-choose">
-    <div class="container">
-        <div class="section-header">
-            <h2>Why Choose Equacare LLC?</h2>
-            <p>What sets us apart from other home care providers</p>
-        </div>
-        <div class="why-grid">
-            <div class="why-card">
-                <i class="fas fa-user-check"></i>
-                <h4>Rigorous Screening</h4>
-                <p>All caregivers undergo comprehensive background checks, reference verification, and in-depth interviews</p>
-            </div>
-            <div class="why-card">
-                <i class="fas fa-graduation-cap"></i>
-                <h4>Ongoing Training</h4>
-                <p>Continuous education and training to ensure our caregivers provide the highest quality care</p>
-            </div>
-            <div class="why-card">
-                <i class="fas fa-clipboard-check"></i>
-                <h4>Personalized Plans</h4>
-                <p>Custom care plans tailored to each client's unique needs, preferences, and goals</p>
-            </div>
-            <div class="why-card">
-                <i class="fas fa-phone-volume"></i>
-                <h4>24/7 Support</h4>
-                <p>Round-the-clock availability for emergencies, questions, and peace of mind</p>
-            </div>
-            <div class="why-card">
-                <i class="fas fa-handshake"></i>
-                <h4>Family Communication</h4>
-                <p>Regular updates and open communication with families about their loved one's care</p>
-            </div>
-            <div class="why-card">
-                <i class="fas fa-certificate"></i>
-                <h4>Licensed & Insured</h4>
-                <p>Fully licensed, bonded, and insured for your complete protection and confidence</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Stats Section -->
-<section class="stats-section">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number" data-target="24">0</div>
-                <div class="stat-label">Hours Care Available</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" data-target="7">0</div>
-                <div class="stat-label">Days a Week Service</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" data-target="100">0</div>
-                <div class="stat-label">% Commitment to Quality</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" data-target="100">0</div>
-                <div class="stat-label">% Client Satisfaction Goal</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="cta">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Experience the Equacare Difference</h2>
-            <p>Let us show you how we can help your family with compassionate, professional care</p>
-            <a href="{% url 'website:contact' %}" class="btn btn-primary btn-lg">Contact Us Today</a>
         </div>
     </div>
 </section>
 {% endblock %}
-
-{% block extra_js %}
-<script>
-// Animate stats when they come into view
-document.addEventListener('DOMContentLoaded', function() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    const animateStats = () => {
-        statNumbers.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-target'));
-            const duration = 2000;
-            const increment = target / (duration / 16);
-            let current = 0;
-            
-            const updateStat = () => {
-                current += increment;
-                if (current < target) {
-                    stat.textContent = Math.floor(current);
-                    requestAnimationFrame(updateStat);
-                } else {
-                    stat.textContent = target;
-                }
-            };
-            
-            updateStat();
-        });
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateStats();
-                observer.disconnect();
-            }
-        });
-    });
-    
-    const statsSection = document.querySelector('.stats-section');
-    if (statsSection) {
-        observer.observe(statsSection);
-    }
-});
-</script>
-{% endblock %}
-
