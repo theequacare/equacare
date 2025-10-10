@@ -690,7 +690,7 @@ a:hover {
 
 .cta {
     padding: var(--spacing-2xl) 0;
-    background: #0d9488;
+    background: #0e7490;
     color: var(--white);
     text-align: center;
 }
@@ -2136,7 +2136,7 @@ a:hover {
 }
 
 .careers-cta {
-    background: var(--primary-color);
+    background: #0e7490;
     padding: var(--spacing-2xl) 0;
     text-align: center;
     color: var(--white);
