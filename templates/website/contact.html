@@ -85,22 +85,24 @@
                 </div>
                 
                 <div class="social-links-contact">
-                    {% if site_settings and (site_settings.facebook_url or site_settings.twitter_url or site_settings.instagram_url or site_settings.linkedin_url) %}
-                    <h4>Follow Us</h4>
-                    <div class="social-icons">
-                        {% if site_settings.facebook_url %}
-                        <a href="{{ site_settings.facebook_url }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    {% if site_settings %}
+                        {% if site_settings.facebook_url or site_settings.twitter_url or site_settings.instagram_url or site_settings.linkedin_url %}
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            {% if site_settings.facebook_url %}
+                            <a href="{{ site_settings.facebook_url }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            {% endif %}
+                            {% if site_settings.twitter_url %}
+                            <a href="{{ site_settings.twitter_url }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            {% endif %}
+                            {% if site_settings.instagram_url %}
+                            <a href="{{ site_settings.instagram_url }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            {% endif %}
+                            {% if site_settings.linkedin_url %}
+                            <a href="{{ site_settings.linkedin_url }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            {% endif %}
+                        </div>
                         {% endif %}
-                        {% if site_settings.twitter_url %}
-                        <a href="{{ site_settings.twitter_url }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        {% endif %}
-                        {% if site_settings.instagram_url %}
-                        <a href="{{ site_settings.instagram_url }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        {% endif %}
-                        {% if site_settings.linkedin_url %}
-                        <a href="{{ site_settings.linkedin_url }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        {% endif %}
-                    </div>
                     {% endif %}
                 </div>
             </div>
