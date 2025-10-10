@@ -880,6 +880,7 @@ a:hover {
 .simple-about-header {
     text-align: center;
     margin-bottom: var(--spacing-2xl);
+    padding-top: 100px;
 }
 
 .simple-about-header h1 {
