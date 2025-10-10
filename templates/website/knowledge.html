@@ -1,0 +1,104 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Knowledge Center - Equacare LLC{% endblock %}
+
+{% block content %}
+<!-- Knowledge Center -->
+<section class="knowledge-center">
+    <div class="container">
+        <div class="knowledge-header">
+            <h1>Knowledge Center</h1>
+            <p>Helpful information and resources about home care</p>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="knowledge-grid">
+            
+            <!-- Topic 1 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Understanding Non-Medical Home Care</h3>
+                <p>Non-medical home care focuses on helping with daily activities like bathing, dressing, meal preparation, and companionship. Unlike medical care, it doesn't involve treatments or procedures—just compassionate support to help you live independently at home.</p>
+            </div>
+
+            <!-- Topic 2 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <h3>Signs You May Need Home Care</h3>
+                <p>Common signs include difficulty with daily tasks, missed medications, weight loss, home safety concerns, or increased isolation. If you notice these signs in a loved one, it may be time to consider home care support.</p>
+            </div>
+
+            <!-- Topic 3 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Choosing the Right Caregiver</h3>
+                <p>Look for caregivers who are background-checked, trained, and match your loved one's personality. At Equacare, we carefully match caregivers to ensure compatibility and quality care.</p>
+            </div>
+
+            <!-- Topic 4 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Benefits of Aging at Home</h3>
+                <p>Staying at home provides comfort, independence, and familiar surroundings. Studies show that seniors who age at home often experience better health outcomes and quality of life compared to facility care.</p>
+            </div>
+
+            <!-- Topic 5 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Family Caregiver Support</h3>
+                <p>Caring for a loved one can be overwhelming. Respite care gives family caregivers a much-needed break while ensuring their loved one receives quality care. Remember, taking care of yourself helps you better care for others.</p>
+            </div>
+
+            <!-- Topic 6 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Home Safety Tips</h3>
+                <p>Simple modifications can prevent falls and accidents: remove tripping hazards, improve lighting, install grab bars, secure rugs, and ensure clear pathways. Our caregivers can help identify and address safety concerns.</p>
+            </div>
+
+            <!-- Topic 7 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>Understanding Care Costs</h3>
+                <p>Home care costs vary based on hours needed and level of assistance. Many families find it more affordable than facility care. Contact us for a free consultation to discuss your needs and create a care plan that fits your budget.</p>
+            </div>
+
+            <!-- Topic 8 -->
+            <div class="knowledge-card">
+                <div class="knowledge-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Getting Started</h3>
+                <p>Starting home care is simple: contact us for a free consultation, we'll assess your needs, create a personalized care plan, and match you with a qualified caregiver. We're here to make the process easy and stress-free.</p>
+            </div>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="knowledge-cta">
+            <h2>Have Questions?</h2>
+            <p>We're here to help. Contact us for more information about home care.</p>
+            <div class="knowledge-buttons">
+                <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
+                <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

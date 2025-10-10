@@ -1543,7 +1543,112 @@ a:hover {
 }
 
 /* ===================================
-   17. Contact Page Styles
+   17. Knowledge Center Page
+   =================================== */
+
+.knowledge-center {
+    padding: var(--spacing-2xl) 0;
+    background: var(--white);
+    min-height: 80vh;
+}
+
+.knowledge-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    padding-top: 100px;
+}
+
+.knowledge-header h1 {
+    font-size: 3rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-md);
+}
+
+.knowledge-header p {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 1400px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
+.knowledge-card {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--gray-200);
+    transition: all 0.3s ease;
+}
+
+.knowledge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.knowledge-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--white);
+    font-size: 1.75rem;
+}
+
+.knowledge-card h3 {
+    font-size: 1.5rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+}
+
+.knowledge-card p {
+    color: var(--gray-700);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.knowledge-cta {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    background: var(--gray-50);
+    border-radius: var(--radius-xl);
+    max-width: 900px;
+    margin: var(--spacing-2xl) auto 0;
+}
+
+.knowledge-cta h2 {
+    font-size: 2rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.knowledge-cta p {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xl);
+}
+
+.knowledge-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===================================
+   18. Contact Page Styles
    =================================== */
 
 .contact-section {
@@ -1862,6 +1967,31 @@ a:hover {
     }
     
     .simple-services-buttons .btn {
+        width: 100%;
+    }
+    
+    .knowledge-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .knowledge-header h1 {
+        font-size: 2rem;
+    }
+    
+    .knowledge-header p {
+        font-size: 1.125rem;
+    }
+    
+    .knowledge-cta h2 {
+        font-size: 1.5rem;
+    }
+    
+    .knowledge-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .knowledge-buttons .btn {
         width: 100%;
     }
     

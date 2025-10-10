@@ -48,6 +48,7 @@
                     <li><a href="{% url 'website:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
                     <li><a href="{% url 'website:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
                     <li><a href="{% url 'website:services' %}" class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}">Services</a></li>
+                    <li><a href="{% url 'website:knowledge' %}" class="{% if request.resolver_match.url_name == 'knowledge' %}active{% endif %}">Knowledge Center</a></li>
                     <li><a href="{% url 'website:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
                     <li><a href="tel:+15155081556" class="btn-call"><i class="fas fa-phone"></i> (515) 508-1556</a></li>
                 </ul>
@@ -81,6 +82,7 @@
                         <li><a href="{% url 'website:home' %}">Home</a></li>
                         <li><a href="{% url 'website:about' %}">About Us</a></li>
                         <li><a href="{% url 'website:services' %}">Our Services</a></li>
+                        <li><a href="{% url 'website:knowledge' %}">Knowledge Center</a></li>
                         <li><a href="{% url 'website:contact' %}">Contact</a></li>
                     </ul>
                 </div>

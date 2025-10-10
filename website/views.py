@@ -32,6 +32,11 @@ def services(request):
     return render(request, 'website/services.html', context)
 
 
+def knowledge(request):
+    """Knowledge Center page view"""
+    return render(request, 'website/knowledge.html')
+
+
 def contact(request):
     """Contact page view"""
     return render(request, 'website/contact.html')
