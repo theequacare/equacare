@@ -334,15 +334,11 @@ a:hover {
 
 .hero {
     position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 60vh;
+    min-height: 400px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: var(--white);
-    text-align: center;
     margin-top: 70px;
 }
 
@@ -393,6 +389,40 @@ a:hover {
     font-size: 2rem;
     color: var(--white);
     animation: bounce 2s infinite;
+}
+
+/* Hero Content Section (Below Photo) */
+.hero-content-section {
+    padding: var(--spacing-2xl) 0;
+    background: var(--white);
+    text-align: center;
+}
+
+.hero-content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.hero-content-wrapper h1 {
+    font-size: 3rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+}
+
+.hero-content-wrapper p {
+    font-size: 1.25rem;
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.8;
+}
+
+.hero-content-wrapper .hero-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* ===================================
@@ -1335,13 +1365,19 @@ a:hover {
     }
     
     .hero {
-        min-height: 80vh;
+        height: 50vh;
+        min-height: 300px;
     }
     
-    .hero-title { font-size: 2rem; }
-    .hero-subtitle { font-size: 1.125rem; }
+    .hero-content-wrapper h1 {
+        font-size: 2rem;
+    }
     
-    .hero-buttons {
+    .hero-content-wrapper p {
+        font-size: 1.125rem;
+    }
+    
+    .hero-content-wrapper .hero-buttons {
         flex-direction: column;
         width: 100%;
     }

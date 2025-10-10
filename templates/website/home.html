@@ -11,18 +11,19 @@
 <!-- Hero Section -->
 <section class="hero" style="background-image: url('{% static 'images/hero-bg.webp' %}');">
     <div class="hero-overlay"></div>
+</section>
+
+<!-- Hero Content Section (Below Photo) -->
+<section class="hero-content-section">
     <div class="container">
-        <div class="hero-content">
-            <h1 class="hero-title">Caring Support When You Need It Most</h1>
-            <p class="hero-subtitle">We know life can be challenging, and we're here to make it easier. Our compassionate caregivers deliver dependable, professional assistance with daily activities to help you live comfortably, safely, and independently at home.</p>
+        <div class="hero-content-wrapper">
+            <h1>Caring Support When You Need It Most</h1>
+            <p>We know life can be challenging, and we're here to make it easier. Our compassionate caregivers deliver dependable, professional assistance with daily activities to help you live comfortably, safely, and independently at home.</p>
             <div class="hero-buttons">
                 <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call Now: (515) 508-1556</a>
                 <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Request Free Consultation</a>
             </div>
         </div>
-    </div>
-    <div class="hero-scroll">
-        <i class="fas fa-chevron-down"></i>
     </div>
 </section>
 
