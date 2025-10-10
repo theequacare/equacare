@@ -238,6 +238,79 @@ class CTASection(models.Model):
         super().save(*args, **kwargs)
 
 
+class JobListing(models.Model):
+    """Model for job/career listings"""
+    title = models.CharField(max_length=200)
+    location = models.CharField(max_length=200, default="Urbandale, IA")
+    job_type = models.CharField(max_length=50, choices=[
+        ('full-time', 'Full-Time'),
+        ('part-time', 'Part-Time'),
+        ('contract', 'Contract'),
+        ('per-diem', 'Per Diem'),
+    ], default='full-time')
+    description = models.TextField(help_text="Brief job description")
+    responsibilities = models.TextField(help_text="List main responsibilities (one per line)")
+    qualifications = models.TextField(help_text="List required qualifications (one per line)")
+    benefits = models.TextField(blank=True, help_text="List benefits (one per line)")
+    salary_range = models.CharField(max_length=100, blank=True, help_text="e.g., $15-20/hour")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Job Listing'
+        verbose_name_plural = 'Job Listings'
+    
+    def __str__(self):
+        return f"{self.title} - {self.location}"
+    
+    def get_responsibilities_list(self):
+        """Return responsibilities as a list"""
+        return [resp.strip() for resp in self.responsibilities.split('\n') if resp.strip()]
+    
+    def get_qualifications_list(self):
+        """Return qualifications as a list"""
+        return [qual.strip() for qual in self.qualifications.split('\n') if qual.strip()]
+    
+    def get_benefits_list(self):
+        """Return benefits as a list"""
+        if self.benefits:
+            return [benefit.strip() for benefit in self.benefits.split('\n') if benefit.strip()]
+        return []
+
+
+class JobApplication(models.Model):
+    """Model for job applications"""
+    job = models.ForeignKey(JobListing, on_delete=models.CASCADE, related_name='applications')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    address = models.TextField(blank=True)
+    resume = models.FileField(upload_to='applications/', blank=True, null=True)
+    cover_letter = models.TextField(blank=True)
+    experience_years = models.IntegerField(default=0, help_text="Years of relevant experience")
+    availability = models.CharField(max_length=200, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=50, choices=[
+        ('new', 'New'),
+        ('reviewing', 'Reviewing'),
+        ('interview', 'Interview Scheduled'),
+        ('rejected', 'Rejected'),
+        ('hired', 'Hired'),
+    ], default='new')
+    notes = models.TextField(blank=True, help_text="Internal notes")
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Job Application'
+        verbose_name_plural = 'Job Applications'
+    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.job.title}"
+
+
 class SiteSettings(models.Model):
     """Model for site-wide contact information and settings"""
     # Company Info

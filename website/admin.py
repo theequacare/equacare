@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import (
     ContactMessage, Service, Testimonial, Notice, Document, 
-    HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings
+    HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings,
+    JobListing, JobApplication
 )
 
 
@@ -178,6 +179,65 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         }),
         ('Status', {
             'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(JobListing)
+class JobListingAdmin(admin.ModelAdmin):
+    list_display = ('title', 'location', 'job_type', 'is_active', 'created_at')
+    list_filter = ('job_type', 'is_active', 'created_at')
+    search_fields = ('title', 'location', 'description')
+    list_editable = ('is_active',)
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
+    fieldsets = (
+        ('Job Information', {
+            'fields': ('title', 'location', 'job_type', 'salary_range')
+        }),
+        ('Description', {
+            'fields': ('description',),
+            'description': 'Brief overview of the position'
+        }),
+        ('Responsibilities', {
+            'fields': ('responsibilities',),
+            'description': 'List main job responsibilities (one per line)'
+        }),
+        ('Qualifications', {
+            'fields': ('qualifications',),
+            'description': 'List required qualifications (one per line)'
+        }),
+        ('Benefits', {
+            'fields': ('benefits',),
+            'description': 'Optional: List benefits (one per line)'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'created_at', 'updated_at')
+        }),
+    )
+
+
+@admin.register(JobApplication)
+class JobApplicationAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'job', 'email', 'phone', 'status', 'created_at')
+    list_filter = ('status', 'created_at', 'job')
+    search_fields = ('first_name', 'last_name', 'email', 'phone')
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at',)
+    list_editable = ('status',)
+    fieldsets = (
+        ('Applicant Information', {
+            'fields': ('first_name', 'last_name', 'email', 'phone', 'address')
+        }),
+        ('Job Details', {
+            'fields': ('job', 'experience_years', 'availability')
+        }),
+        ('Application Materials', {
+            'fields': ('resume', 'cover_letter'),
+            'description': 'Resume upload and cover letter'
+        }),
+        ('Status & Notes', {
+            'fields': ('status', 'notes', 'created_at')
         }),
     )
 

@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from .models import Service, Testimonial, ContactMessage
+from .models import Service, Testimonial, ContactMessage, JobListing, JobApplication
 import json
 
 
@@ -99,6 +99,71 @@ def submit_contact(request):
             'message': 'Thank you for contacting us! We will get back to you soon.'
         })
         
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'message': 'An error occurred. Please try again later.'
+        }, status=500)
+
+
+def careers(request):
+    """Careers page view"""
+    jobs = JobListing.objects.filter(is_active=True)
+    context = {
+        'jobs': jobs,
+    }
+    return render(request, 'website/careers.html', context)
+
+
+@require_http_methods(["POST"])
+def submit_application(request):
+    """Handle job application submission"""
+    try:
+        job_id = request.POST.get('job_id')
+        job = get_object_or_404(JobListing, id=job_id, is_active=True)
+        
+        # Get form data
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        address = request.POST.get('address', '').strip()
+        cover_letter = request.POST.get('cover_letter', '').strip()
+        experience_years = request.POST.get('experience_years', 0)
+        availability = request.POST.get('availability', '').strip()
+        resume = request.FILES.get('resume')
+        
+        # Validation
+        if not all([first_name, last_name, email, phone]):
+            return JsonResponse({
+                'success': False,
+                'message': 'Please fill in all required fields.'
+            }, status=400)
+        
+        # Save application
+        application = JobApplication.objects.create(
+            job=job,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone=phone,
+            address=address,
+            cover_letter=cover_letter,
+            experience_years=int(experience_years) if experience_years else 0,
+            availability=availability,
+            resume=resume
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Thank you for your application! We will review it and get back to you soon.'
+        })
+        
+    except JobListing.DoesNotExist:
+        return JsonResponse({
+            'success': False,
+            'message': 'Job listing not found.'
+        }, status=404)
     except Exception as e:
         return JsonResponse({
             'success': False,

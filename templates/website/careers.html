@@ -1,0 +1,317 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Careers - Join Our Team | Equacare LLC{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Join Our Team</h1>
+        <p>Make a difference in people's lives while building a rewarding career</p>
+    </div>
+</section>
+
+<!-- Why Join Us Section -->
+<section class="careers-intro">
+    <div class="container">
+        <div class="careers-intro-content">
+            <h2>Why Work With Equacare?</h2>
+            <p>At Equacare, we're more than just a team – we're a family dedicated to providing compassionate, professional home care services. Join us and be part of something meaningful.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Make a Difference</h3>
+                    <p>Impact lives every day by providing quality care</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Flexible Schedule</h3>
+                    <p>Work schedules that fit your lifestyle</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Training & Growth</h3>
+                    <p>Ongoing education and career advancement</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Supportive Team</h3>
+                    <p>Work with caring, professional colleagues</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Job Listings Section -->
+<section class="job-listings">
+    <div class="container">
+        <div class="section-header">
+            <h2>Current Openings</h2>
+            <p>Explore opportunities to join our compassionate care team</p>
+        </div>
+        
+        {% if jobs %}
+            <div class="jobs-list">
+                {% for job in jobs %}
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title-section">
+                            <h3>{{ job.title }}</h3>
+                            <div class="job-meta">
+                                <span class="job-location"><i class="fas fa-map-marker-alt"></i> {{ job.location }}</span>
+                                <span class="job-type"><i class="fas fa-briefcase"></i> {{ job.get_job_type_display }}</span>
+                                {% if job.salary_range %}
+                                <span class="job-salary"><i class="fas fa-dollar-sign"></i> {{ job.salary_range }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <button class="btn btn-primary apply-btn" data-job-id="{{ job.id }}" data-job-title="{{ job.title }}">
+                            Apply Now
+                        </button>
+                    </div>
+                    
+                    <div class="job-description">
+                        <p>{{ job.description }}</p>
+                    </div>
+                    
+                    <div class="job-details">
+                        <div class="job-detail-section">
+                            <h4><i class="fas fa-tasks"></i> Responsibilities</h4>
+                            <ul>
+                                {% for responsibility in job.get_responsibilities_list %}
+                                <li>{{ responsibility }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        <div class="job-detail-section">
+                            <h4><i class="fas fa-check-circle"></i> Qualifications</h4>
+                            <ul>
+                                {% for qualification in job.get_qualifications_list %}
+                                <li>{{ qualification }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        {% if job.get_benefits_list %}
+                        <div class="job-detail-section">
+                            <h4><i class="fas fa-gift"></i> Benefits</h4>
+                            <ul>
+                                {% for benefit in job.get_benefits_list %}
+                                <li>{{ benefit }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-jobs">
+                <i class="fas fa-briefcase"></i>
+                <h3>No Openings at This Time</h3>
+                <p>We don't have any open positions right now, but we're always interested in meeting talented caregivers. Please check back soon or send us your resume for future opportunities.</p>
+                <a href="{% url 'website:contact' %}" class="btn btn-primary">Contact Us</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Application Modal -->
+<div id="applicationModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Apply for <span id="modalJobTitle"></span></h2>
+        
+        <form id="applicationForm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" id="job_id" name="job_id">
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first_name">First Name <span class="required">*</span></label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="last_name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="last_name" name="last_name" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="2"></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="experience_years">Years of Experience</label>
+                    <input type="number" id="experience_years" name="experience_years" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="availability">Availability</label>
+                    <input type="text" id="availability" name="availability" placeholder="e.g., Full-time, Weekends">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="resume">Resume (PDF or Word)</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+            </div>
+            
+            <div class="form-group">
+                <label for="cover_letter">Cover Letter</label>
+                <textarea id="cover_letter" name="cover_letter" rows="6" placeholder="Tell us why you'd be a great fit..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">
+                <span class="btn-text">Submit Application</span>
+                <span class="btn-loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Submitting...
+                </span>
+            </button>
+            
+            <div id="applicationMessage" class="form-message"></div>
+        </form>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<section class="careers-cta">
+    <div class="container">
+        <h2>Questions About Joining Our Team?</h2>
+        <p>We'd love to hear from you! Contact us to learn more about career opportunities.</p>
+        <div class="cta-buttons">
+            {% if site_settings %}
+            <a href="tel:{{ site_settings.phone_link }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call {{ site_settings.phone }}</a>
+            {% else %}
+            <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
+            {% endif %}
+            <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('applicationModal');
+    const applyBtns = document.querySelectorAll('.apply-btn');
+    const closeBtn = document.querySelector('.close-modal');
+    const applicationForm = document.getElementById('applicationForm');
+    
+    // Open modal when apply button is clicked
+    applyBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const jobId = this.dataset.jobId;
+            const jobTitle = this.dataset.jobTitle;
+            
+            document.getElementById('job_id').value = jobId;
+            document.getElementById('modalJobTitle').textContent = jobTitle;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // Close modal
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    window.addEventListener('click', function(e) {
+        if (e.target == modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Handle form submission
+    applicationForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = applicationForm.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        const formMessage = document.getElementById('applicationMessage');
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline-block';
+        formMessage.textContent = '';
+        formMessage.className = 'form-message';
+        
+        // Get form data
+        const formData = new FormData(applicationForm);
+        
+        try {
+            const response = await fetch('{% url "website:submit_application" %}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                },
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                formMessage.textContent = result.message;
+                formMessage.className = 'form-message success';
+                applicationForm.reset();
+                
+                // Close modal after 2 seconds
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    formMessage.textContent = '';
+                }, 2000);
+            } else {
+                formMessage.textContent = result.message;
+                formMessage.className = 'form-message error';
+            }
+        } catch (error) {
+            formMessage.textContent = 'An error occurred. Please try again later.';
+            formMessage.className = 'form-message error';
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline-block';
+            btnLoading.style.display = 'none';
+        }
+    });
+});
+</script>
+{% endblock %}
+
