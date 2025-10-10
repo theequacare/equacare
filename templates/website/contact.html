@@ -169,7 +169,7 @@
             <i class="fas fa-map-marked-alt"></i>
             <p>Map Location Here</p>
             {% if site_settings %}
-            <p class="small">{{ site_settings.get_full_address }}</p>
+            <p class="small">{{ site_settings.street_address }}, {{ site_settings.city }}, {{ site_settings.state }} {{ site_settings.zip_code }}</p>
             {% else %}
             <p class="small">7611 Douglas Ave #24, Urbandale, IA 50322-3076</p>
             {% endif %}
