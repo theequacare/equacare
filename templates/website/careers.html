@@ -181,6 +181,99 @@
     </div>
 </div>
 
+<!-- Application Form Section -->
+<section class="application-section">
+    <div class="container">
+        <div class="application-header">
+            <h2>Apply for a Position</h2>
+            <p>Submit your application to join our team</p>
+        </div>
+        
+        <div class="application-form-wrapper">
+            <form id="directApplicationForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="direct_first_name">First Name <span class="required">*</span></label>
+                        <input type="text" id="direct_first_name" name="first_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="direct_last_name">Last Name <span class="required">*</span></label>
+                        <input type="text" id="direct_last_name" name="last_name" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="direct_email">Email <span class="required">*</span></label>
+                        <input type="email" id="direct_email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="direct_phone">Phone <span class="required">*</span></label>
+                        <input type="tel" id="direct_phone" name="phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direct_job_id">Position <span class="required">*</span></label>
+                    <select id="direct_job_id" name="job_id" required>
+                        <option value="">Select a position...</option>
+                        {% for job in jobs %}
+                        <option value="{{ job.id }}">{{ job.title }}</option>
+                        {% endfor %}
+                        <option value="general">General Application</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direct_resume">Upload Resume <span class="required">*</span></label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="direct_resume" name="resume" accept=".pdf,.doc,.docx" required hidden>
+                        <div class="file-drop-area-compact" id="directResumeDropArea">
+                            <i class="fas fa-upload"></i>
+                            <span>Click to upload or drag & drop</span>
+                            <small>PDF, DOC, DOCX (Max 5MB)</small>
+                        </div>
+                        <div class="file-preview" id="directResumePreview" style="display: none;">
+                            <div class="file-info">
+                                <i class="fas fa-file-alt"></i>
+                                <div class="file-details">
+                                    <span class="file-name" id="directResumeFileName"></span>
+                                    <span class="file-size" id="directResumeFileSize"></span>
+                                </div>
+                                <button type="button" class="file-remove" id="directResumeRemove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direct_cover_letter">Why do you want to work with us? <span class="required">*</span></label>
+                    <textarea id="direct_cover_letter" name="cover_letter" rows="4" required placeholder="Tell us about your experience and why you're interested in this position... (Min 100 characters)"></textarea>
+                </div>
+                
+                <input type="hidden" id="direct_experience_years" name="experience_years" value="0">
+                <input type="hidden" id="direct_availability" name="availability" value="">
+                <input type="hidden" id="direct_address" name="address" value="">
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="btn-text"><i class="fas fa-paper-plane"></i> Submit Application</span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Submitting...
+                    </span>
+                </button>
+                
+                <div id="directApplicationMessage" class="form-message"></div>
+            </form>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="careers-cta">
     <div class="container">
@@ -188,11 +281,11 @@
         <p>We'd love to hear from you! Contact us to learn more about career opportunities.</p>
         <div class="cta-buttons">
             {% if site_settings %}
-            <a href="tel:{{ site_settings.phone_link }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call {{ site_settings.phone }}</a>
+            <a href="tel:{{ site_settings.phone_link }}" class="btn btn-light btn-lg"><i class="fas fa-phone"></i> Call {{ site_settings.phone }}</a>
             {% else %}
-            <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
+            <a href="tel:+15155081556" class="btn btn-light btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
             {% endif %}
-            <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
+            <a href="{% url 'website:contact' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
         </div>
     </div>
 </section>
@@ -394,6 +487,160 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             formMessage.textContent = 'An error occurred. Please try again later.';
             formMessage.className = 'form-message error';
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline-block';
+            btnLoading.style.display = 'none';
+        }
+    });
+    
+    // ========================================
+    // Direct Application Form (On Page)
+    // ========================================
+    
+    const directApplicationForm = document.getElementById('directApplicationForm');
+    const directResumeInput = document.getElementById('direct_resume');
+    const directResumeDropArea = document.getElementById('directResumeDropArea');
+    const directResumePreview = document.getElementById('directResumePreview');
+    const directResumeFileName = document.getElementById('directResumeFileName');
+    const directResumeFileSize = document.getElementById('directResumeFileSize');
+    const directResumeRemove = document.getElementById('directResumeRemove');
+    
+    // File upload: Click to browse
+    directResumeDropArea.addEventListener('click', function() {
+        directResumeInput.click();
+    });
+    
+    // File upload: Drag and drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        directResumeDropArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        directResumeDropArea.addEventListener(eventName, function() {
+            directResumeDropArea.classList.add('drag-over');
+        }, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        directResumeDropArea.addEventListener(eventName, function() {
+            directResumeDropArea.classList.remove('drag-over');
+        }, false);
+    });
+    
+    directResumeDropArea.addEventListener('drop', function(e) {
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            directResumeInput.files = files;
+            handleDirectFileSelect(files[0]);
+        }
+    });
+    
+    // File input change
+    directResumeInput.addEventListener('change', function(e) {
+        if (e.target.files.length) {
+            handleDirectFileSelect(e.target.files[0]);
+        }
+    });
+    
+    // Handle file selection for direct form
+    function handleDirectFileSelect(file) {
+        // Validate file type
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('Please upload a PDF or Word document.');
+            return;
+        }
+        
+        // Validate file size (5MB max)
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+            alert('File size must be less than 5MB.');
+            return;
+        }
+        
+        // Show file preview
+        directResumeFileName.textContent = file.name;
+        directResumeFileSize.textContent = formatFileSize(file.size);
+        directResumeDropArea.style.display = 'none';
+        directResumePreview.style.display = 'block';
+    }
+    
+    // Remove file from direct form
+    directResumeRemove.addEventListener('click', function(e) {
+        e.stopPropagation();
+        directResumeInput.value = '';
+        directResumeDropArea.style.display = 'block';
+        directResumePreview.style.display = 'none';
+    });
+    
+    // Handle direct application form submission
+    directApplicationForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = directApplicationForm.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        const formMessage = document.getElementById('directApplicationMessage');
+        
+        // Validate cover letter length
+        const coverLetter = document.getElementById('direct_cover_letter').value;
+        if (coverLetter.length < 100) {
+            formMessage.textContent = 'Cover letter must be at least 100 characters.';
+            formMessage.className = 'form-message error';
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        
+        // Validate resume upload
+        if (!directResumeInput.files.length) {
+            formMessage.textContent = 'Please upload your resume.';
+            formMessage.className = 'form-message error';
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline-block';
+        formMessage.textContent = '';
+        formMessage.className = 'form-message';
+        
+        // Get form data
+        const formData = new FormData(directApplicationForm);
+        
+        try {
+            const response = await fetch('{% url "website:submit_application" %}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                },
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                formMessage.textContent = result.message;
+                formMessage.className = 'form-message success';
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Reset form
+                directApplicationForm.reset();
+                directResumeInput.value = '';
+                directResumeDropArea.style.display = 'block';
+                directResumePreview.style.display = 'none';
+            } else {
+                formMessage.textContent = result.message;
+                formMessage.className = 'form-message error';
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } catch (error) {
+            formMessage.textContent = 'An error occurred. Please try again later.';
+            formMessage.className = 'form-message error';
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } finally {
             // Reset button state
             submitBtn.disabled = false;
