@@ -1584,7 +1584,7 @@ a:hover {
 }
 
 .knowledge-section h2 {
-    font-size: 2.25rem;
+    font-size: 1.5rem;
     color: var(--gray-900);
     margin-bottom: var(--spacing-xl);
     display: flex;
@@ -1652,7 +1652,7 @@ a:hover {
 }
 
 .notice-header h3 {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     color: var(--gray-900);
     margin: 0;
     font-weight: 600;
@@ -1737,7 +1737,7 @@ a:hover {
 }
 
 .document-info h3 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--gray-900);
     margin-bottom: var(--spacing-sm);
     font-weight: 600;
@@ -1819,7 +1819,7 @@ a:hover {
 }
 
 .knowledge-simple-cta h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--gray-900);
     margin-bottom: var(--spacing-sm);
     font-weight: 700;
