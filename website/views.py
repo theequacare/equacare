@@ -8,18 +8,24 @@ import json
 
 def home(request):
     """Home page view"""
-    from .models import HeroSection, AboutPreview
+    from .models import HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection
     
     services = Service.objects.filter(is_active=True)[:6]
     testimonials = Testimonial.objects.filter(is_featured=True)[:3]
     hero = HeroSection.objects.filter(is_active=True).first()
     about_preview = AboutPreview.objects.filter(is_active=True).first()
+    services_header = ServicesHeader.objects.filter(is_active=True).first()
+    contact_form_section = ContactFormSection.objects.filter(is_active=True).first()
+    cta_section = CTASection.objects.filter(is_active=True).first()
     
     context = {
         'services': services,
         'testimonials': testimonials,
         'hero': hero,
         'about_preview': about_preview,
+        'services_header': services_header,
+        'contact_form_section': contact_form_section,
+        'cta_section': cta_section,
     }
     return render(request, 'website/home.html', context)
 

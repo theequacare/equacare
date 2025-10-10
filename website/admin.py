@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import ContactMessage, Service, Testimonial, Notice, Document, HeroSection, AboutPreview
+from .models import (
+    ContactMessage, Service, Testimonial, Notice, Document, 
+    HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection
+)
 
 
 @admin.register(ContactMessage)
@@ -77,6 +80,57 @@ class AboutPreviewAdmin(admin.ModelAdmin):
         }),
         ('Button', {
             'fields': ('button_text', 'button_link')
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(ServicesHeader)
+class ServicesHeaderAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Content', {
+            'fields': ('section_label', 'title', 'subtitle')
+        }),
+        ('Button', {
+            'fields': ('button_text', 'button_link')
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(ContactFormSection)
+class ContactFormSectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Content', {
+            'fields': ('title', 'subtitle')
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(CTASection)
+class CTASectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'show_button', 'is_active', 'updated_at')
+    list_filter = ('is_active', 'show_button')
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Content', {
+            'fields': ('title', 'subtitle')
+        }),
+        ('Button', {
+            'fields': ('show_button', 'button_text', 'button_link')
         }),
         ('Status', {
             'fields': ('is_active', 'updated_at')

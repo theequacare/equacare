@@ -100,11 +100,19 @@
 <!-- Services Section -->
 <section class="services">
     <div class="container">
+        {% if services_header %}
+        <div class="section-header">
+            <span class="section-label">{{ services_header.section_label }}</span>
+            <h2>{{ services_header.title }}</h2>
+            <p>{{ services_header.subtitle }}</p>
+        </div>
+        {% else %}
         <div class="section-header">
             <span class="section-label">Our Services</span>
             <h2>How We Can Help</h2>
             <p>From a few hours a week to around-the-clock care, we're here with a helping hand</p>
         </div>
+        {% endif %}
         <div class="services-grid">
             {% if services %}
                 {% for service in services %}
@@ -141,7 +149,11 @@
             {% endif %}
         </div>
         <div class="text-center" style="margin-top: 3rem;">
-            <a href="{% url 'website:services' %}" class="btn btn-primary">View All Services</a>
+            {% if services_header %}
+                <a href="{{ services_header.button_link }}" class="btn btn-primary">{{ services_header.button_text }}</a>
+            {% else %}
+                <a href="{% url 'website:services' %}" class="btn btn-primary">View All Services</a>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -149,10 +161,17 @@
 <!-- Contact Form Section -->
 <section class="contact-form-home">
     <div class="container">
+        {% if contact_form_section %}
+        <div class="contact-form-header">
+            <h2>{{ contact_form_section.title }}</h2>
+            <p>{{ contact_form_section.subtitle }}</p>
+        </div>
+        {% else %}
         <div class="contact-form-header">
             <h2>Let Us Know What's On Your Mind</h2>
             <p>Request a no-obligation, in-home consultation</p>
         </div>
+        {% endif %}
         <div class="home-contact-wrapper">
             <form id="homeContactForm" class="simple-contact-form">
                 {% csrf_token %}
@@ -198,6 +217,21 @@
 </section>
 
 <!-- CTA Section -->
+{% if cta_section %}
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>{{ cta_section.title }}</h2>
+            <p>{{ cta_section.subtitle }}</p>
+            {% if cta_section.show_button %}
+            <div class="cta-buttons">
+                <a href="{{ cta_section.button_link }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> {{ cta_section.button_text }}</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% else %}
 <section class="cta">
     <div class="container">
         <div class="cta-content">
@@ -209,6 +243,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% endblock %}
 
 {% block extra_js %}

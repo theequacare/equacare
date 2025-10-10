@@ -147,3 +147,69 @@ class AboutPreview(models.Model):
             AboutPreview.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
         super().save(*args, **kwargs)
 
+
+class ServicesHeader(models.Model):
+    """Model for services section header on homepage"""
+    section_label = models.CharField(max_length=100, default="Our Services")
+    title = models.CharField(max_length=200, default="How We Can Help")
+    subtitle = models.TextField(default="From a few hours a week to around-the-clock care, we're here with a helping hand")
+    button_text = models.CharField(max_length=100, default="View All Services")
+    button_link = models.CharField(max_length=200, default="/services/")
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Services Section Header'
+        verbose_name_plural = 'Services Section Header'
+
+    def __str__(self):
+        return f"Services Header - {self.title}"
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            ServicesHeader.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
+
+class ContactFormSection(models.Model):
+    """Model for contact form section on homepage"""
+    title = models.CharField(max_length=200, default="Let Us Know What's On Your Mind")
+    subtitle = models.TextField(default="Request a no-obligation, in-home consultation")
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Contact Form Section'
+        verbose_name_plural = 'Contact Form Section'
+
+    def __str__(self):
+        return f"Contact Form - {self.title}"
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            ContactFormSection.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
+
+class CTASection(models.Model):
+    """Model for CTA (Call to Action) section at bottom of homepage"""
+    title = models.CharField(max_length=200, default="Ready to Talk?")
+    subtitle = models.TextField(default="It all starts with a conversation. Call us or send a message above.")
+    button_text = models.CharField(max_length=100, default="Call Now: (515) 508-1556")
+    button_link = models.CharField(max_length=200, default="tel:+15155081556")
+    show_button = models.BooleanField(default=True, help_text="Show/hide the call button")
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'CTA Section'
+        verbose_name_plural = 'CTA Section'
+
+    def __str__(self):
+        return f"CTA - {self.title}"
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            CTASection.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
