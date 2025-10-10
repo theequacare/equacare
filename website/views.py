@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.core.mail import send_mail, EmailMessage
+from django.conf import settings
 from .models import Service, Testimonial, ContactMessage, JobListing, JobApplication
 import json
 
@@ -100,6 +102,35 @@ def submit_contact(request):
             message=message
         )
         
+        # Send email notification
+        try:
+            email_subject = f'New Contact Form Submission: {subject}'
+            email_body = f"""
+New contact form submission from Equacare website:
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+Subject: {subject}
+
+Message:
+{message}
+
+---
+This is an automated notification from your Equacare website.
+            """
+            
+            send_mail(
+                email_subject,
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.ADMIN_EMAIL],
+                fail_silently=True,
+            )
+        except Exception as e:
+            # Log error but don't fail the request
+            print(f"Email error: {e}")
+        
         return JsonResponse({
             'success': True,
             'message': 'Thank you for contacting us! We will get back to you soon.'
@@ -159,6 +190,49 @@ def submit_application(request):
             availability=availability,
             resume=resume
         )
+        
+        # Send email notification with resume
+        try:
+            email_subject = f'New Job Application: {job.title} - {first_name} {last_name}'
+            email_body = f"""
+New job application received from Equacare website:
+
+Position: {job.title}
+Applicant: {first_name} {last_name}
+Email: {email}
+Phone: {phone}
+Address: {address}
+Experience: {experience_years} years
+Availability: {availability}
+
+Cover Letter:
+{cover_letter}
+
+The resume is attached to this email.
+
+View full application in admin panel:
+http://127.0.0.1:8000/admin/website/jobapplication/{application.id}/change/
+
+---
+This is an automated notification from your Equacare website.
+            """
+            
+            # Create email with attachment
+            email_message = EmailMessage(
+                email_subject,
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.ADMIN_EMAIL],
+            )
+            
+            # Attach resume if provided
+            if resume:
+                email_message.attach(resume.name, resume.read(), resume.content_type)
+            
+            email_message.send(fail_silently=True)
+        except Exception as e:
+            # Log error but don't fail the request
+            print(f"Email error: {e}")
         
         return JsonResponse({
             'success': True,
