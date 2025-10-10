@@ -1,0 +1,269 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}Home - Equacare LLC | Professional Home Care Services{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Compassionate Care for Your Loved Ones</h1>
+            <p class="hero-subtitle">Professional non-medical home care services tailored to your family's needs</p>
+            <div class="hero-buttons">
+                <a href="{% url 'website:services' %}" class="btn btn-primary">Our Services</a>
+                <a href="{% url 'website:contact' %}" class="btn btn-secondary">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <i class="fas fa-chevron-down"></i>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-nurse"></i>
+                </div>
+                <h3>Qualified Caregivers</h3>
+                <p>Experienced, trained, and background-checked professionals</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>24/7 Availability</h3>
+                <p>Round-the-clock care and support when you need it most</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Personalized Care</h3>
+                <p>Customized care plans designed for individual needs</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Licensed & Insured</h3>
+                <p>Fully licensed, bonded, and insured for your peace of mind</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Preview Section -->
+<section class="about-preview">
+    <div class="container">
+        <div class="about-preview-grid">
+            <div class="about-preview-image">
+                <img src="{% static 'images/about-preview.jpg' %}" alt="Caregiver with senior">
+                <div class="experience-badge">
+                    <span class="number">10+</span>
+                    <span class="text">Years of Experience</span>
+                </div>
+            </div>
+            <div class="about-preview-content">
+                <span class="section-label">About Equacare</span>
+                <h2>Providing Quality Care with Compassion and Dignity</h2>
+                <p>At Equacare LLC, we understand that your loved ones deserve the highest quality of care in the comfort and familiarity of their own home. Our mission is to enhance the quality of life for seniors and individuals who need assistance with daily activities.</p>
+                <p>We provide personalized, non-medical home care services that promote independence, dignity, and well-being. Our compassionate caregivers are carefully selected, thoroughly trained, and dedicated to delivering exceptional care.</p>
+                <ul class="check-list">
+                    <li><i class="fas fa-check-circle"></i> Personalized care plans</li>
+                    <li><i class="fas fa-check-circle"></i> Background-checked caregivers</li>
+                    <li><i class="fas fa-check-circle"></i> Flexible scheduling options</li>
+                    <li><i class="fas fa-check-circle"></i> Ongoing supervision and support</li>
+                </ul>
+                <a href="{% url 'website:about' %}" class="btn btn-primary">Learn More About Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Our Services</span>
+            <h2>Comprehensive Home Care Solutions</h2>
+            <p>We offer a wide range of non-medical home care services to meet your family's unique needs</p>
+        </div>
+        <div class="services-grid">
+            {% if services %}
+                {% for service in services %}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="{{ service.icon }}"></i>
+                    </div>
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Personal Care</h3>
+                    <p>Assistance with bathing, dressing, grooming, and personal hygiene</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Companion Care</h3>
+                    <p>Friendly companionship, conversation, and social engagement</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Meal Preparation</h3>
+                    <p>Nutritious meal planning, cooking, and assistance with eating</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Light Housekeeping</h3>
+                    <p>Help with laundry, dishes, tidying, and maintaining a clean home</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Transportation</h3>
+                    <p>Safe transportation to appointments, errands, and social activities</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Medication Reminders</h3>
+                    <p>Timely reminders to take medications as prescribed</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="text-center" style="margin-top: 3rem;">
+            <a href="{% url 'website:services' %}" class="btn btn-primary">View All Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Testimonials</span>
+            <h2>What Families Say About Us</h2>
+            <p>Don't just take our word for it - hear from the families we've had the privilege to serve</p>
+        </div>
+        <div class="testimonials-grid">
+            {% if testimonials %}
+                {% for testimonial in testimonials %}
+                <div class="testimonial-card">
+                    <div class="rating">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= testimonial.rating %}
+                                <i class="fas fa-star"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="testimonial-text">"{{ testimonial.testimonial }}"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>{{ testimonial.client_name }}</h4>
+                            <span>{{ testimonial.relationship }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Equacare has been a blessing for our family. The caregivers are professional, caring, and truly dedicated to my mother's well-being. We couldn't be happier with the service."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <span>Daughter of Client</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The level of care and attention my father receives is outstanding. The caregivers treat him with respect and dignity. Thank you, Equacare, for giving us peace of mind."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Michael Chen</h4>
+                            <span>Son of Client</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Professional, reliable, and compassionate. Equacare exceeded our expectations. My grandmother looks forward to her caregiver's visits every day."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Emily Rodriguez</h4>
+                            <span>Granddaughter of Client</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Get Started?</h2>
+            <p>Contact us today for a free consultation and learn how we can help your family</p>
+            <div class="cta-buttons">
+                <a href="{% url 'website:contact' %}" class="btn btn-primary btn-lg">Schedule a Consultation</a>
+                <a href="tel:+1234567890" class="btn btn-secondary btn-lg"><i class="fas fa-phone"></i> Call Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

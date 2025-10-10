@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Equacare LLC - Professional Non-Medical Home Care Services. Compassionate care for your loved ones in the comfort of their home.">
+    <meta name="keywords" content="home care, non-medical care, elderly care, companion care, personal care">
+    <title>{% block title %}Equacare LLC - Professional Home Care Services{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="{% url 'website:home' %}" class="logo">
+                    <i class="fas fa-heart-pulse"></i>
+                    <span>Equacare <span class="llc">LLC</span></span>
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="{% url 'website:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'website:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'website:services' %}" class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}">Services</a></li>
+                    <li><a href="{% url 'website:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+                    <li><a href="tel:+1234567890" class="btn-call"><i class="fas fa-phone"></i> Call Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-heart-pulse"></i> Equacare LLC</h3>
+                    <p>Providing compassionate, professional non-medical home care services to help your loved ones live safely and comfortably at home.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'website:home' %}">Home</a></li>
+                        <li><a href="{% url 'website:about' %}">About Us</a></li>
+                        <li><a href="{% url 'website:services' %}">Our Services</a></li>
+                        <li><a href="{% url 'website:contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="{% url 'website:services' %}">Personal Care</a></li>
+                        <li><a href="{% url 'website:services' %}">Companion Care</a></li>
+                        <li><a href="{% url 'website:services' %}">Meal Preparation</a></li>
+                        <li><a href="{% url 'website:services' %}">Transportation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> <a href="tel:+1234567890">(123) 456-7890</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@equacare.com">info@equacare.com</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Care Street, Suite 100<br>Your City, ST 12345</li>
+                        <li><i class="fas fa-clock"></i> Available 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Equacare LLC. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+
