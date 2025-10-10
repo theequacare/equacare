@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     ContactMessage, Service, Testimonial, Notice, Document, 
     HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings,
-    JobListing, JobApplication
+    JobListing, JobApplication, AboutPage
 )
 
 
@@ -238,6 +238,29 @@ class JobApplicationAdmin(admin.ModelAdmin):
         }),
         ('Status & Notes', {
             'fields': ('status', 'notes', 'created_at')
+        }),
+    )
+
+
+@admin.register(AboutPage)
+class AboutPageAdmin(admin.ModelAdmin):
+    list_display = ('page_title', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Page Header', {
+            'fields': ('page_title', 'subtitle')
+        }),
+        ('Main Content', {
+            'fields': ('paragraph_1', 'paragraph_2', 'about_image'),
+            'description': 'Main about page content and image'
+        }),
+        ('CTA Section', {
+            'fields': ('cta_title', 'cta_text', 'button_text'),
+            'description': 'Call-to-action section at the bottom'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
         }),
     )
 

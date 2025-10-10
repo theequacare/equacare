@@ -32,7 +32,13 @@ def home(request):
 
 def about(request):
     """About page view"""
-    return render(request, 'website/about.html')
+    from .models import AboutPage
+    
+    about_page = AboutPage.objects.filter(is_active=True).first()
+    context = {
+        'about_page': about_page,
+    }
+    return render(request, 'website/about.html', context)
 
 
 def services(request):

@@ -311,6 +311,40 @@ class JobApplication(models.Model):
         return f"{self.first_name} {self.last_name} - {self.job.title}"
 
 
+class AboutPage(models.Model):
+    """Model for About page content"""
+    # Header
+    page_title = models.CharField(max_length=200, default="About Equacare")
+    subtitle = models.CharField(max_length=300, default="Non-medical home care services for families in our community")
+    
+    # Content
+    paragraph_1 = models.TextField(default="At Equacare, we understand that life can be challenging. That's why we provide compassionate, non-medical home care services to help you or your loved ones live comfortably and independently at home.")
+    paragraph_2 = models.TextField(default="Our trained caregivers assist with everyday activities like personal care, meal preparation, light housekeeping, and companionship. We don't provide medical treatments or nursing care - we focus on the personal support that makes daily life easier.")
+    
+    # Image
+    about_image = models.ImageField(upload_to='about/', help_text="Recommended size: 800x600px")
+    
+    # CTA Section
+    cta_title = models.CharField(max_length=200, default="Ready to Learn More?")
+    cta_text = models.TextField(default="Let's talk about how we can help you or your loved ones.")
+    button_text = models.CharField(max_length=100, default="Contact Us")
+    
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'About Page'
+        verbose_name_plural = 'About Page'
+    
+    def __str__(self):
+        return f"About Page - {self.page_title}"
+    
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            AboutPage.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
+
 class SiteSettings(models.Model):
     """Model for site-wide contact information and settings"""
     # Company Info
