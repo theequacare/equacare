@@ -28,8 +28,13 @@
                         </div>
                         <div>
                             <h4>Phone</h4>
+                            {% if site_settings %}
+                            <p><a href="tel:{{ site_settings.phone_link }}">{{ site_settings.phone }}</a></p>
+                            <p class="small">{{ site_settings.availability_text }}</p>
+                            {% else %}
                             <p><a href="tel:+15155081556">(515) 508-1556</a></p>
                             <p class="small">Available 24/7</p>
+                            {% endif %}
                         </div>
                     </div>
                     
@@ -39,7 +44,11 @@
                         </div>
                         <div>
                             <h4>Email</h4>
+                            {% if site_settings %}
+                            <p><a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
+                            {% else %}
                             <p><a href="mailto:equacar77@gmail.com">equacar77@gmail.com</a></p>
+                            {% endif %}
                             <p class="small">We'll respond within 24 hours</p>
                         </div>
                     </div>
@@ -50,7 +59,11 @@
                         </div>
                         <div>
                             <h4>Office Address</h4>
+                            {% if site_settings %}
+                            <p>{{ site_settings.street_address }}<br>{{ site_settings.city }}, {{ site_settings.state }} {{ site_settings.zip_code }}</p>
+                            {% else %}
                             <p>7611 Douglas Ave #24<br>Urbandale, IA 50322-3076</p>
+                            {% endif %}
                             <p class="small">Monday - Friday: 9AM - 5PM</p>
                         </div>
                     </div>
@@ -61,20 +74,34 @@
                         </div>
                         <div>
                             <h4>Service Hours</h4>
+                            {% if site_settings %}
+                            <p>{{ site_settings.availability_text }}</p>
+                            {% else %}
                             <p>24/7 Care Available</p>
+                            {% endif %}
                             <p class="small">We're always here when you need us</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="social-links-contact">
+                    {% if site_settings and (site_settings.facebook_url or site_settings.twitter_url or site_settings.instagram_url or site_settings.linkedin_url) %}
                     <h4>Follow Us</h4>
                     <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        {% if site_settings.facebook_url %}
+                        <a href="{{ site_settings.facebook_url }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        {% endif %}
+                        {% if site_settings.twitter_url %}
+                        <a href="{{ site_settings.twitter_url }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                        {% if site_settings.instagram_url %}
+                        <a href="{{ site_settings.instagram_url }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if site_settings.linkedin_url %}
+                        <a href="{{ site_settings.linkedin_url }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        {% endif %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -141,7 +168,11 @@
         <div class="map-placeholder">
             <i class="fas fa-map-marked-alt"></i>
             <p>Map Location Here</p>
+            {% if site_settings %}
+            <p class="small">{{ site_settings.get_full_address }}</p>
+            {% else %}
             <p class="small">7611 Douglas Ave #24, Urbandale, IA 50322-3076</p>
+            {% endif %}
         </div>
     </div>
 </section>

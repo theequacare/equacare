@@ -76,7 +76,11 @@
             <h2>Have Questions?</h2>
             <p>Contact us for more information</p>
             <div class="knowledge-simple-buttons">
+                {% if site_settings %}
+                <a href="tel:{{ site_settings.phone_link }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call {{ site_settings.phone }}</a>
+                {% else %}
                 <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
+                {% endif %}
                 <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
             </div>
         </div>
