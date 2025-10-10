@@ -237,3 +237,67 @@ class CTASection(models.Model):
             CTASection.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
         super().save(*args, **kwargs)
 
+
+class SiteSettings(models.Model):
+    """Model for site-wide contact information and settings"""
+    # Company Info
+    company_name = models.CharField(max_length=200, default="Equacare LLC")
+    tagline = models.CharField(max_length=300, default="Professional Non-Medical Home Care Services", blank=True)
+    
+    # Contact Information
+    phone = models.CharField(max_length=20, default="(515) 508-1556")
+    phone_link = models.CharField(max_length=20, default="+15155081556", help_text="Phone number for tel: links (no spaces or dashes)")
+    email = models.EmailField(default="equacar77@gmail.com")
+    
+    # Address
+    street_address = models.CharField(max_length=200, default="7611 Douglas Ave #24")
+    city = models.CharField(max_length=100, default="Urbandale")
+    state = models.CharField(max_length=2, default="IA")
+    zip_code = models.CharField(max_length=20, default="50322-3076")
+    
+    # Hours/Availability
+    availability_text = models.CharField(max_length=100, default="Available 24/7")
+    
+    # Social Media (optional)
+    facebook_url = models.URLField(blank=True, help_text="Full Facebook page URL")
+    twitter_url = models.URLField(blank=True, help_text="Full Twitter profile URL")
+    linkedin_url = models.URLField(blank=True, help_text="Full LinkedIn page URL")
+    instagram_url = models.URLField(blank=True, help_text="Full Instagram profile URL")
+    
+    # Footer Text
+    footer_about = models.TextField(
+        default="Equacare LLC provides compassionate non-medical home care services to families in our community.",
+        help_text="Brief description for footer"
+    )
+    copyright_text = models.CharField(
+        max_length=200, 
+        default="© 2024 Equacare LLC. All rights reserved.",
+        help_text="Copyright text in footer"
+    )
+    
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Site Settings'
+        verbose_name_plural = 'Site Settings'
+
+    def __str__(self):
+        return f"Site Settings - {self.company_name}"
+    
+    def get_full_address(self):
+        """Return formatted full address"""
+        return f"{self.street_address}, {self.city}, {self.state} {self.zip_code}"
+    
+    def get_address_lines(self):
+        """Return address as separate lines for display"""
+        return {
+            'line1': self.street_address,
+            'line2': f"{self.city}, {self.state} {self.zip_code}"
+        }
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            SiteSettings.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+

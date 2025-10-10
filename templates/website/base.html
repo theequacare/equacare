@@ -65,13 +65,28 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
+                    {% if site_settings %}
+                    <h3><i class="fas fa-heart-pulse"></i> {{ site_settings.company_name }}</h3>
+                    <p>{{ site_settings.footer_about }}</p>
+                    {% else %}
                     <h3><i class="fas fa-heart-pulse"></i> Equacare LLC</h3>
                     <p>Your trusted partner for non-medical home care. We provide personal care assistance, companionship, and daily living support - helping your loved ones maintain independence at home.</p>
+                    {% endif %}
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        {% if site_settings %}
+                            {% if site_settings.facebook_url %}
+                            <a href="{{ site_settings.facebook_url }}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                            {% endif %}
+                            {% if site_settings.twitter_url %}
+                            <a href="{{ site_settings.twitter_url }}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            {% endif %}
+                            {% if site_settings.instagram_url %}
+                            <a href="{{ site_settings.instagram_url }}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            {% endif %}
+                            {% if site_settings.linkedin_url %}
+                            <a href="{{ site_settings.linkedin_url }}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
                 
@@ -98,17 +113,30 @@
                 
                 <div class="footer-section">
                     <h4>Contact Info</h4>
+                    {% if site_settings %}
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> <a href="tel:{{ site_settings.phone_link }}">{{ site_settings.phone }}</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> {{ site_settings.street_address }}<br>{{ site_settings.city }}, {{ site_settings.state }} {{ site_settings.zip_code }}</li>
+                        <li><i class="fas fa-clock"></i> {{ site_settings.availability_text }}</li>
+                    </ul>
+                    {% else %}
                     <ul class="contact-info">
                         <li><i class="fas fa-phone"></i> <a href="tel:+15155081556">(515) 508-1556</a></li>
                         <li><i class="fas fa-envelope"></i> <a href="mailto:equacar77@gmail.com">equacar77@gmail.com</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> 7611 Douglas Ave #24<br>Urbandale, IA 50322-3076</li>
                         <li><i class="fas fa-clock"></i> Available 24/7</li>
                     </ul>
+                    {% endif %}
                 </div>
             </div>
             
             <div class="footer-bottom">
+                {% if site_settings %}
+                <p>{{ site_settings.copyright_text }} | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                {% else %}
                 <p>&copy; 2025 Equacare LLC. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                {% endif %}
             </div>
         </div>
     </footer>

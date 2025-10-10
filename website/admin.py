@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     ContactMessage, Service, Testimonial, Notice, Document, 
-    HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection
+    HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings
 )
 
 
@@ -143,6 +143,38 @@ class CTASectionAdmin(admin.ModelAdmin):
         }),
         ('Button', {
             'fields': ('show_button', 'button_text', 'button_link')
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(SiteSettings)
+class SiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ('company_name', 'phone', 'email', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Company Information', {
+            'fields': ('company_name', 'tagline')
+        }),
+        ('Contact Information', {
+            'fields': ('phone', 'phone_link', 'email', 'availability_text'),
+            'description': 'Main contact details shown throughout the site'
+        }),
+        ('Address', {
+            'fields': ('street_address', 'city', 'state', 'zip_code'),
+            'description': 'Physical address for your location'
+        }),
+        ('Social Media Links', {
+            'fields': ('facebook_url', 'twitter_url', 'linkedin_url', 'instagram_url'),
+            'description': 'Optional: Add your social media profile URLs',
+            'classes': ('collapse',)
+        }),
+        ('Footer Content', {
+            'fields': ('footer_about', 'copyright_text'),
+            'description': 'Text displayed in the website footer'
         }),
         ('Status', {
             'fields': ('is_active', 'updated_at')
