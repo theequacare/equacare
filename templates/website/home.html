@@ -317,3 +317,71 @@
 </section>
 {% endblock %}
 
+{% block extra_js %}
+<script>
+// Home page contact form handler
+document.addEventListener('DOMContentLoaded', function() {
+    const homeContactForm = document.getElementById('homeContactForm');
+    
+    if (homeContactForm) {
+        homeContactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = homeContactForm.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const formMessage = document.getElementById('homeFormMessage');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-block';
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+            
+            // Get form data
+            const formData = new FormData(homeContactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                subject: formData.get('subject'),
+                message: formData.get('message'),
+                csrfmiddlewaretoken: formData.get('csrfmiddlewaretoken')
+            };
+            
+            try {
+                const response = await fetch('{% url "website:submit_contact" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': data.csrfmiddlewaretoken
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    formMessage.textContent = result.message;
+                    formMessage.className = 'form-message success';
+                    homeContactForm.reset();
+                } else {
+                    formMessage.textContent = result.message;
+                    formMessage.className = 'form-message error';
+                }
+            } catch (error) {
+                formMessage.textContent = 'An error occurred. Please try again or call us directly.';
+                formMessage.className = 'form-message error';
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline-block';
+                btnLoading.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
+
