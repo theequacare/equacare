@@ -4,153 +4,76 @@
 {% block title %}Our Services - Equacare LLC{% endblock %}
 
 {% block content %}
-<!-- Hero Header -->
-<section class="services-hero">
+<!-- Simple Services Page -->
+<section class="simple-services">
     <div class="container">
-        <div class="services-hero-content">
+        <!-- Header -->
+        <div class="simple-services-header">
             <h1>Our Services</h1>
-            <p class="hero-lead">Compassionate, professional home care tailored to your needs</p>
+            <p>Non-medical home care services to help you live comfortably at home</p>
         </div>
-    </div>
-</section>
 
-<!-- Intro Section with Images -->
-<section class="services-intro">
-    <div class="container">
-        <div class="services-intro-grid">
-            <div class="services-intro-image">
-                <img src="{% static 'images/service-1.webp' %}" alt="Equacare home care services">
-            </div>
-            <div class="services-intro-content">
-                <h2>How We Can Help</h2>
-                <p>At Equacare, we provide non-medical home care services that help you or your loved ones live safely and comfortably at home. We focus on personal care, companionship, and assistance with daily activities—never medical treatments or nursing care.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Services Grid -->
-<section class="services-showcase">
-    <div class="container">
-        <div class="services-showcase-grid">
+        <!-- Services Cards -->
+        <div class="simple-services-grid">
             
             <!-- Homemaking -->
-            <div class="service-showcase-card">
-                <div class="service-showcase-header">
-                    <div class="service-showcase-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3>Homemaking</h3>
+            <div class="simple-service-card">
+                <div class="simple-service-icon">
+                    <i class="fas fa-home"></i>
                 </div>
-                <div class="service-showcase-body">
-                    <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Meal preparation</li>
-                        <li><i class="fas fa-check"></i> Cleaning</li>
-                        <li><i class="fas fa-check"></i> Laundry</li>
-                        <li><i class="fas fa-check"></i> Making beds</li>
-                        <li><i class="fas fa-check"></i> Changing light bulbs</li>
-                        <li><i class="fas fa-check"></i> and more!</li>
-                    </ul>
-                </div>
+                <h3>Homemaking</h3>
+                <ul>
+                    <li>Meal preparation</li>
+                    <li>Cleaning</li>
+                    <li>Laundry</li>
+                    <li>Making beds</li>
+                    <li>Changing light bulbs</li>
+                    <li>and more!</li>
+                </ul>
             </div>
 
             <!-- Aide Services -->
-            <div class="service-showcase-card">
-                <div class="service-showcase-header">
-                    <div class="service-showcase-icon">
-                        <i class="fas fa-hands-helping"></i>
-                    </div>
-                    <h3>Aide Services</h3>
+            <div class="simple-service-card">
+                <div class="simple-service-icon">
+                    <i class="fas fa-hands-helping"></i>
                 </div>
-                <div class="service-showcase-body">
-                    <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Medication reminders</li>
-                        <li><i class="fas fa-check"></i> Health monitoring</li>
-                        <li><i class="fas fa-check"></i> Adherence to special diets</li>
-                        <li><i class="fas fa-check"></i> Help walking and mobility assistance</li>
-                        <li><i class="fas fa-check"></i> Skin care</li>
-                        <li><i class="fas fa-check"></i> Bathing assistance</li>
-                        <li><i class="fas fa-check"></i> Grooming</li>
-                        <li><i class="fas fa-check"></i> Dressing</li>
-                        <li><i class="fas fa-check"></i> Feeding</li>
-                        <li><i class="fas fa-check"></i> and more!</li>
-                    </ul>
-                </div>
+                <h3>Aide Services</h3>
+                <ul>
+                    <li>Medication reminders</li>
+                    <li>Health monitoring</li>
+                    <li>Adherence to special diets</li>
+                    <li>Mobility assistance</li>
+                    <li>Bathing assistance</li>
+                    <li>Grooming & dressing</li>
+                    <li>and more!</li>
+                </ul>
             </div>
 
             <!-- Companionship -->
-            <div class="service-showcase-card">
-                <div class="service-showcase-header">
-                    <div class="service-showcase-icon">
-                        <i class="fas fa-user-friends"></i>
-                    </div>
-                    <h3>Companionship</h3>
+            <div class="simple-service-card">
+                <div class="simple-service-icon">
+                    <i class="fas fa-user-friends"></i>
                 </div>
-                <div class="service-showcase-body">
-                    <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Help with remote controls</li>
-                        <li><i class="fas fa-check"></i> Getting the mail</li>
-                        <li><i class="fas fa-check"></i> Running errands</li>
-                        <li><i class="fas fa-check"></i> Help with correspondence: letters, emails, social media</li>
-                        <li><i class="fas fa-check"></i> Playing games and helping with hobbies</li>
-                        <li><i class="fas fa-check"></i> Supervision when there is a risk of wandering or self-injury</li>
-                        <li><i class="fas fa-check"></i> and more!</li>
-                    </ul>
-                </div>
+                <h3>Companionship</h3>
+                <ul>
+                    <li>Running errands</li>
+                    <li>Playing games</li>
+                    <li>Help with correspondence</li>
+                    <li>Helping with hobbies</li>
+                    <li>Supervision for safety</li>
+                    <li>and more!</li>
+                </ul>
             </div>
 
         </div>
-    </div>
-</section>
 
-<!-- Care Options -->
-<section class="care-options">
-    <div class="container">
-        <div class="care-options-wrapper">
-            <div class="care-options-image">
-                <img src="{% static 'images/service-2.webp' %}" alt="Flexible care options">
-            </div>
-            <div class="care-options-content">
-                <div class="care-options-header">
-                    <h2>Flexible Care Options</h2>
-                    <p>We work with your schedule and adjust as your needs change</p>
-                </div>
-                <div class="care-options-grid">
-            <div class="care-option-card">
-                <div class="care-option-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h4>Hourly Care</h4>
-                <p>A few hours a day or a few hours a week—we're flexible to meet your needs</p>
-            </div>
-            <div class="care-option-card">
-                <div class="care-option-icon">
-                    <i class="fas fa-calendar-day"></i>
-                </div>
-                <h4>Daily Care</h4>
-                <p>Consistent support throughout the day with a dedicated caregiver</p>
-            </div>
-            <div class="care-option-card">
-                <div class="care-option-icon">
-                    <i class="fas fa-moon"></i>
-                </div>
-                <h4>24/7 Care</h4>
-                <p>Round-the-clock care and supervision for complete peace of mind</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Bottom CTA -->
-<section class="services-cta">
-    <div class="container">
-        <div class="services-cta-content">
-            <h2>Let's Talk About Your Needs</h2>
-            <p>Every situation is unique. Contact us for a free consultation to discuss how we can help.</p>
-            <div class="services-cta-buttons">
+        <!-- CTA -->
+        <div class="simple-services-cta">
+            <h2>Ready to Get Started?</h2>
+            <p>Contact us to discuss your care needs</p>
+            <div class="simple-services-buttons">
                 <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
-                <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Request Free Consultation</a>
+                <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
             </div>
         </div>
     </div>

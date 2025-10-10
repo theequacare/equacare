@@ -965,7 +965,130 @@ a:hover {
 }
 
 /* ===================================
-   16. Services Page Styles - Redesigned
+   16. Simple Services Page
+   =================================== */
+
+.simple-services {
+    padding: var(--spacing-2xl) 0;
+    background: var(--white);
+    min-height: 80vh;
+}
+
+.simple-services-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    padding-top: 70px;
+}
+
+.simple-services-header h1 {
+    font-size: 3rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-md);
+}
+
+.simple-services-header p {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.simple-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto var(--spacing-2xl);
+}
+
+.simple-service-card {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--gray-200);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.simple-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.simple-service-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    color: var(--white);
+    font-size: 2rem;
+}
+
+.simple-service-card h3 {
+    font-size: 1.75rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-lg);
+}
+
+.simple-service-card ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.simple-service-card ul li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-md);
+    color: var(--gray-700);
+    font-size: 1rem;
+    position: relative;
+}
+
+.simple-service-card ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.simple-services-cta {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    background: var(--gray-50);
+    border-radius: var(--radius-xl);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.simple-services-cta h2 {
+    font-size: 2rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.simple-services-cta p {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xl);
+}
+
+.simple-services-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===================================
+   OLD Services Page Styles - Redesigned
    =================================== */
 
 /* Services Hero */
@@ -1709,8 +1832,30 @@ a:hover {
     .care-plans-grid,
     .services-detailed-list,
     .services-showcase-grid,
-    .care-options-grid {
+    .care-options-grid,
+    .simple-services-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .simple-services-header h1 {
+        font-size: 2rem;
+    }
+    
+    .simple-services-header p {
+        font-size: 1.125rem;
+    }
+    
+    .simple-services-cta h2 {
+        font-size: 1.5rem;
+    }
+    
+    .simple-services-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .simple-services-buttons .btn {
+        width: 100%;
     }
     
     .services-hero-content h1 {
