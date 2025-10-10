@@ -166,8 +166,9 @@ ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 ## Support
 
 For questions or support, please contact:
-- Email: info@equacare.com
-- Phone: (123) 456-7890
+- Email: equacar77@gmail.com
+- Phone: (515) 508-1556
+- Address: 7611 Douglas Ave #24, Urbandale, IA 50322-3076
 
 ---
 
