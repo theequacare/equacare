@@ -21,6 +21,7 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/logo-styles.css' %}">
     
     {% block extra_css %}{% endblock %}
 </head>
@@ -30,8 +31,11 @@
         <div class="container">
             <div class="nav-wrapper">
                 <a href="{% url 'website:home' %}" class="logo">
-                    <i class="fas fa-heart-pulse"></i>
-                    <span>Equacare <span class="llc">LLC</span></span>
+                    <img src="{% static 'images/logo.png' %}" alt="Equacare LLC Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="logo-text" style="display: none;">
+                        <i class="fas fa-heart-pulse"></i>
+                        <span>Equacare <span class="llc">LLC</span></span>
+                    </span>
                 </a>
                 
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">

@@ -1,0 +1,35 @@
+/* Logo Styles */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logo-img {
+    height: 45px;
+}
+
+.logo-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 40px;
+    }
+    
+    .navbar.scrolled .logo-img {
+        height: 35px;
+    }
+}
+
