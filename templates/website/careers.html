@@ -34,32 +34,38 @@
             <form id="directApplicationForm" enctype="multipart/form-data">
                 {% csrf_token %}
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="direct_first_name">First Name <span class="required">*</span></label>
-                        <input type="text" id="direct_first_name" name="first_name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="direct_last_name">Last Name <span class="required">*</span></label>
-                        <input type="text" id="direct_last_name" name="last_name" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="direct_email">Email <span class="required">*</span></label>
-                        <input type="email" id="direct_email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="direct_phone">Phone <span class="required">*</span></label>
-                        <input type="tel" id="direct_phone" name="phone" required>
-                    </div>
+                <div class="form-group">
+                    <label for="direct_name">Name <span class="required">*</span></label>
+                    <input type="text" id="direct_name" name="name" required placeholder="Full name">
                 </div>
                 
                 <div class="form-group">
-                    <label for="direct_job_id">Position <span class="required">*</span></label>
+                    <label for="direct_email">Email <span class="required">*</span></label>
+                    <input type="email" id="direct_email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direct_phone">Phone <span class="required">*</span></label>
+                    <input type="tel" id="direct_phone" name="phone" required>
+                </div>
+                
+                <div class="form-note">
+                    <i class="fas fa-info-circle"></i>
+                    <p><strong>Note:</strong> If you are uploading a resume, you may type "see upload" in fields below where duplicate information is requested.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direct_address">Full address</label>
+                    <textarea id="direct_address" name="address" rows="2" placeholder="Enter address, city, state, and zip"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="best_time">Best time to call you</label>
+                    <input type="text" id="best_time" name="best_time" placeholder="e.g., Mornings, Afternoons, Evenings">
+                </div>
+                
+                <div class="form-group">
+                    <label for="direct_job_id">Position for which you are applying <span class="required">*</span></label>
                     <select id="direct_job_id" name="job_id" required>
                         <option value="">Select a position...</option>
                         {% for job in jobs %}
@@ -70,7 +76,32 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="direct_resume">Upload Resume <span class="required">*</span></label>
+                    <label for="date_available">Date available</label>
+                    <input type="date" id="date_available" name="date_available">
+                </div>
+                
+                <div class="form-group">
+                    <label for="degree_info">What is your degree or certification? When and where did you earn it?</label>
+                    <textarea id="degree_info" name="degree_info" rows="3" placeholder="e.g., Certified Nursing Assistant (CNA), Iowa Department of Public Health, 2020"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="other_certifications">Do you have any other relevant degrees or certifications?</label>
+                    <textarea id="other_certifications" name="other_certifications" rows="3" placeholder="List any additional certifications, licenses, or training"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="current_employment">Place of current employment and your position</label>
+                    <input type="text" id="current_employment" name="current_employment" placeholder="Company name and position title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="employment_history">Employment history</label>
+                    <textarea id="employment_history" name="employment_history" rows="4" placeholder="List previous employers, positions, and dates of employment"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direct_resume">Resume upload <span class="required">*</span></label>
                     <div class="file-upload-wrapper">
                         <input type="file" id="direct_resume" name="resume" accept=".pdf,.doc,.docx" required hidden>
                         <div class="file-drop-area-compact" id="directResumeDropArea">
@@ -94,13 +125,63 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="direct_cover_letter">Why do you want to work with us? <span class="required">*</span></label>
-                    <textarea id="direct_cover_letter" name="cover_letter" rows="4" required placeholder="Tell us about your experience and why you're interested in this position... (Min 100 characters)"></textarea>
+                    <label for="supporting_doc1">Supporting Documents upload</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="supporting_doc1" name="supporting_doc1" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
+                        <div class="file-drop-area-compact" id="supportingDoc1DropArea">
+                            <i class="fas fa-upload"></i>
+                            <span>Click to upload or drag & drop</span>
+                            <small>Certifications, licenses, etc.</small>
+                        </div>
+                        <div class="file-preview" id="supportingDoc1Preview" style="display: none;">
+                            <div class="file-info">
+                                <i class="fas fa-file-alt"></i>
+                                <div class="file-details">
+                                    <span class="file-name" id="supportingDoc1FileName"></span>
+                                    <span class="file-size" id="supportingDoc1FileSize"></span>
+                                </div>
+                                <button type="button" class="file-remove" id="supportingDoc1Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <input type="hidden" id="direct_experience_years" name="experience_years" value="0">
-                <input type="hidden" id="direct_availability" name="availability" value="">
-                <input type="hidden" id="direct_address" name="address" value="">
+                <div class="form-group">
+                    <label for="supporting_doc2">Supporting Documents Upload</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="supporting_doc2" name="supporting_doc2" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
+                        <div class="file-drop-area-compact" id="supportingDoc2DropArea">
+                            <i class="fas fa-upload"></i>
+                            <span>Click to upload or drag & drop</span>
+                            <small>Additional documents</small>
+                        </div>
+                        <div class="file-preview" id="supportingDoc2Preview" style="display: none;">
+                            <div class="file-info">
+                                <i class="fas fa-file-alt"></i>
+                                <div class="file-details">
+                                    <span class="file-name" id="supportingDoc2FileName"></span>
+                                    <span class="file-size" id="supportingDoc2FileSize"></span>
+                                </div>
+                                <button type="button" class="file-remove" id="supportingDoc2Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="general_comments">General comments</label>
+                    <textarea id="general_comments" name="general_comments" rows="4" placeholder="Any additional information you'd like to share"></textarea>
+                </div>
+                
+                <input type="hidden" name="first_name" id="hidden_first_name" value="">
+                <input type="hidden" name="last_name" id="hidden_last_name" value="">
+                <input type="hidden" name="cover_letter" id="hidden_cover_letter" value="">
+                <input type="hidden" name="experience_years" value="0">
+                <input type="hidden" name="availability" value="">
                 
                 <button type="submit" class="btn btn-primary btn-block">
                     <span class="btn-text"><i class="fas fa-paper-plane"></i> Submit Application</span>
@@ -156,6 +237,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const directResumeFileName = document.getElementById('directResumeFileName');
     const directResumeFileSize = document.getElementById('directResumeFileSize');
     const directResumeRemove = document.getElementById('directResumeRemove');
+    
+    // Supporting document 1 elements
+    const supportingDoc1Input = document.getElementById('supporting_doc1');
+    const supportingDoc1DropArea = document.getElementById('supportingDoc1DropArea');
+    const supportingDoc1Preview = document.getElementById('supportingDoc1Preview');
+    const supportingDoc1FileName = document.getElementById('supportingDoc1FileName');
+    const supportingDoc1FileSize = document.getElementById('supportingDoc1FileSize');
+    const supportingDoc1Remove = document.getElementById('supportingDoc1Remove');
+    
+    // Supporting document 2 elements
+    const supportingDoc2Input = document.getElementById('supporting_doc2');
+    const supportingDoc2DropArea = document.getElementById('supportingDoc2DropArea');
+    const supportingDoc2Preview = document.getElementById('supportingDoc2Preview');
+    const supportingDoc2FileName = document.getElementById('supportingDoc2FileName');
+    const supportingDoc2FileSize = document.getElementById('supportingDoc2FileSize');
+    const supportingDoc2Remove = document.getElementById('supportingDoc2Remove');
     
     // File upload: Click to browse
     directResumeDropArea.addEventListener('click', function() {
@@ -225,6 +322,104 @@ document.addEventListener('DOMContentLoaded', function() {
         directResumePreview.style.display = 'none';
     });
     
+    // Supporting Document 1 upload handlers
+    supportingDoc1DropArea.addEventListener('click', function() {
+        supportingDoc1Input.click();
+    });
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        supportingDoc1DropArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        supportingDoc1DropArea.addEventListener(eventName, function() {
+            supportingDoc1DropArea.classList.add('drag-over');
+        }, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        supportingDoc1DropArea.addEventListener(eventName, function() {
+            supportingDoc1DropArea.classList.remove('drag-over');
+        }, false);
+    });
+    
+    supportingDoc1DropArea.addEventListener('drop', function(e) {
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            supportingDoc1Input.files = files;
+            handleSupportingDoc1Select(files[0]);
+        }
+    });
+    
+    supportingDoc1Input.addEventListener('change', function(e) {
+        if (e.target.files.length) {
+            handleSupportingDoc1Select(e.target.files[0]);
+        }
+    });
+    
+    function handleSupportingDoc1Select(file) {
+        supportingDoc1FileName.textContent = file.name;
+        supportingDoc1FileSize.textContent = formatFileSize(file.size);
+        supportingDoc1DropArea.style.display = 'none';
+        supportingDoc1Preview.style.display = 'block';
+    }
+    
+    supportingDoc1Remove.addEventListener('click', function(e) {
+        e.stopPropagation();
+        supportingDoc1Input.value = '';
+        supportingDoc1DropArea.style.display = 'block';
+        supportingDoc1Preview.style.display = 'none';
+    });
+    
+    // Supporting Document 2 upload handlers
+    supportingDoc2DropArea.addEventListener('click', function() {
+        supportingDoc2Input.click();
+    });
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        supportingDoc2DropArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        supportingDoc2DropArea.addEventListener(eventName, function() {
+            supportingDoc2DropArea.classList.add('drag-over');
+        }, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        supportingDoc2DropArea.addEventListener(eventName, function() {
+            supportingDoc2DropArea.classList.remove('drag-over');
+        }, false);
+    });
+    
+    supportingDoc2DropArea.addEventListener('drop', function(e) {
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            supportingDoc2Input.files = files;
+            handleSupportingDoc2Select(files[0]);
+        }
+    });
+    
+    supportingDoc2Input.addEventListener('change', function(e) {
+        if (e.target.files.length) {
+            handleSupportingDoc2Select(e.target.files[0]);
+        }
+    });
+    
+    function handleSupportingDoc2Select(file) {
+        supportingDoc2FileName.textContent = file.name;
+        supportingDoc2FileSize.textContent = formatFileSize(file.size);
+        supportingDoc2DropArea.style.display = 'none';
+        supportingDoc2Preview.style.display = 'block';
+    }
+    
+    supportingDoc2Remove.addEventListener('click', function(e) {
+        e.stopPropagation();
+        supportingDoc2Input.value = '';
+        supportingDoc2DropArea.style.display = 'block';
+        supportingDoc2Preview.style.display = 'none';
+    });
+    
     // Handle direct application form submission
     directApplicationForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -234,14 +429,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnLoading = submitBtn.querySelector('.btn-loading');
         const formMessage = document.getElementById('directApplicationMessage');
         
-        // Validate cover letter length
-        const coverLetter = document.getElementById('direct_cover_letter').value;
-        if (coverLetter.length < 100) {
-            formMessage.textContent = 'Cover letter must be at least 100 characters.';
-            formMessage.className = 'form-message error';
-            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
-        }
+        // Populate hidden fields for backend compatibility
+        const fullName = document.getElementById('direct_name').value.trim();
+        const nameParts = fullName.split(' ');
+        const firstName = nameParts[0] || fullName;
+        const lastName = nameParts.slice(1).join(' ') || fullName;
+        
+        document.getElementById('hidden_first_name').value = firstName;
+        document.getElementById('hidden_last_name').value = lastName;
+        
+        // Use general comments as cover letter
+        const generalComments = document.getElementById('general_comments').value.trim();
+        document.getElementById('hidden_cover_letter').value = generalComments || 'Application submitted via careers form.';
         
         // Validate resume upload
         if (!directResumeInput.files.length) {
@@ -277,11 +476,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 formMessage.className = 'form-message success';
                 formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
-                // Reset form
+                // Reset form and all file uploads
                 directApplicationForm.reset();
                 directResumeInput.value = '';
                 directResumeDropArea.style.display = 'block';
                 directResumePreview.style.display = 'none';
+                
+                supportingDoc1Input.value = '';
+                supportingDoc1DropArea.style.display = 'block';
+                supportingDoc1Preview.style.display = 'none';
+                
+                supportingDoc2Input.value = '';
+                supportingDoc2DropArea.style.display = 'block';
+                supportingDoc2Preview.style.display = 'none';
             } else {
                 formMessage.textContent = result.message;
                 formMessage.className = 'form-message error';
