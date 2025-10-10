@@ -166,12 +166,54 @@
             <h2>{{ contact_form_section.title }}</h2>
             <p>{{ contact_form_section.subtitle }}</p>
         </div>
+        <div class="home-contact-wrapper">
+            <form id="homeContactForm" class="simple-contact-form" 
+                  data-success-message="{{ contact_form_section.success_message }}"
+                  data-error-message="{{ contact_form_section.error_message }}">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="home_name">{{ contact_form_section.name_label }}</label>
+                        <input type="text" id="home_name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="home_email">{{ contact_form_section.email_label }}</label>
+                        <input type="email" id="home_email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="home_phone">{{ contact_form_section.phone_label }}</label>
+                        <input type="tel" id="home_phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="home_subject">{{ contact_form_section.subject_label }}</label>
+                        <select id="home_subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            {% for option in contact_form_section.get_subject_options_list %}
+                            <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="home_message">{{ contact_form_section.message_label }}</label>
+                    <textarea id="home_message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="btn-text">{{ contact_form_section.submit_button_text }}</span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Sending...
+                    </span>
+                </button>
+                <div id="homeFormMessage" class="form-message"></div>
+            </form>
+        </div>
         {% else %}
         <div class="contact-form-header">
             <h2>Let Us Know What's On Your Mind</h2>
             <p>Request a no-obligation, in-home consultation</p>
         </div>
-        {% endif %}
         <div class="home-contact-wrapper">
             <form id="homeContactForm" class="simple-contact-form">
                 {% csrf_token %}
@@ -213,6 +255,7 @@
                 <div id="homeFormMessage" class="form-message"></div>
             </form>
         </div>
+        {% endif %}
     </div>
 </section>
 
@@ -291,16 +334,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const result = await response.json();
                 
+                // Use custom messages from admin if available, otherwise use server response
+                const successMsg = homeContactForm.dataset.successMessage || result.message;
+                const errorMsg = homeContactForm.dataset.errorMessage || result.message;
+                
                 if (result.success) {
-                    formMessage.textContent = result.message;
+                    formMessage.textContent = successMsg;
                     formMessage.className = 'form-message success';
                     homeContactForm.reset();
                 } else {
-                    formMessage.textContent = result.message;
+                    formMessage.textContent = errorMsg;
                     formMessage.className = 'form-message error';
                 }
             } catch (error) {
-                formMessage.textContent = 'An error occurred. Please try again or call us directly.';
+                const errorMsg = homeContactForm.dataset.errorMessage || 'An error occurred. Please try again or call us directly.';
+                formMessage.textContent = errorMsg;
                 formMessage.className = 'form-message error';
             } finally {
                 // Reset button state

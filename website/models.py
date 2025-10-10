@@ -173,8 +173,28 @@ class ServicesHeader(models.Model):
 
 class ContactFormSection(models.Model):
     """Model for contact form section on homepage"""
+    # Header
     title = models.CharField(max_length=200, default="Let Us Know What's On Your Mind")
     subtitle = models.TextField(default="Request a no-obligation, in-home consultation")
+    
+    # Form Field Labels
+    name_label = models.CharField(max_length=100, default="Name:")
+    email_label = models.CharField(max_length=100, default="Email:")
+    phone_label = models.CharField(max_length=100, default="Phone:")
+    subject_label = models.CharField(max_length=100, default="Subject:")
+    message_label = models.CharField(max_length=100, default="Message:")
+    
+    # Subject Options (one per line)
+    subject_options = models.TextField(
+        default="Request Free Consultation\nGeneral Inquiry\nServices Information",
+        help_text="Enter one subject option per line"
+    )
+    
+    # Button & Messages
+    submit_button_text = models.CharField(max_length=100, default="Send Message")
+    success_message = models.TextField(default="Thank you for contacting us! We will get back to you soon.")
+    error_message = models.TextField(default="An error occurred. Please try again or call us directly.")
+    
     is_active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -184,6 +204,10 @@ class ContactFormSection(models.Model):
 
     def __str__(self):
         return f"Contact Form - {self.title}"
+    
+    def get_subject_options_list(self):
+        """Return subject options as a list"""
+        return [opt.strip() for opt in self.subject_options.split('\n') if opt.strip()]
 
     def save(self, *args, **kwargs):
         if self.is_active:

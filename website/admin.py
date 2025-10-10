@@ -111,8 +111,20 @@ class ContactFormSectionAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     readonly_fields = ('updated_at',)
     fieldsets = (
-        ('Content', {
+        ('Header', {
             'fields': ('title', 'subtitle')
+        }),
+        ('Form Field Labels', {
+            'fields': ('name_label', 'email_label', 'phone_label', 'subject_label', 'message_label'),
+            'description': 'Customize the labels for each form field'
+        }),
+        ('Subject Dropdown Options', {
+            'fields': ('subject_options',),
+            'description': 'Enter one subject option per line. Example:\nRequest Free Consultation\nGeneral Inquiry\nServices Information'
+        }),
+        ('Button & Messages', {
+            'fields': ('submit_button_text', 'success_message', 'error_message'),
+            'description': 'Customize button text and form submission messages'
         }),
         ('Status', {
             'fields': ('is_active', 'updated_at')
