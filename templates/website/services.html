@@ -16,145 +16,66 @@
 <section class="services-detail">
     <div class="container">
         <div class="intro-text">
-            <h2>Non-Medical Home Care Services</h2>
+            <h2>How We Can Help</h2>
             <p>At Equacare LLC, we specialize exclusively in non-medical home care services. We do not provide medical treatments, nursing care, or clinical services. Instead, we focus on personal care assistance, companionship, and help with daily living activities to support your loved ones' independence and well-being at home.</p>
-            <p><strong>Our non-medical services include:</strong> personal care assistance, companion care, meal preparation, light housekeeping, transportation, medication reminders (not administration), and more.</p>
         </div>
 
-        <div class="services-list">
-            {% if services %}
-                {% for service in services %}
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="{{ service.icon }}"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>{{ service.title }}</h3>
-                        <p>{{ service.description }}</p>
-                    </div>
+        <div class="services-detailed-list">
+            <div class="service-detailed-card">
+                <div class="service-detailed-icon">
+                    <i class="fas fa-home"></i>
                 </div>
-                {% endfor %}
-            {% else %}
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-hands-helping"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Personal Care Assistance</h3>
-                        <p>Our caregivers provide compassionate assistance with activities of daily living including bathing, dressing, grooming, toileting, and personal hygiene. We help maintain dignity while ensuring comfort and safety.</p>
-                    </div>
+                <div class="service-detailed-content">
+                    <h3>Homemaking</h3>
+                    <ul class="service-bullet-list">
+                        <li>Meal preparation</li>
+                        <li>Cleaning</li>
+                        <li>Laundry</li>
+                        <li>Making beds</li>
+                        <li>Changing light bulbs</li>
+                        <li>and more!</li>
+                    </ul>
                 </div>
+            </div>
 
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-user-friends"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Companion Care</h3>
-                        <p>More than just assistance, we provide meaningful companionship. Our caregivers engage in conversation, play games, participate in hobbies, and provide the social interaction that enriches daily life and prevents isolation.</p>
-                    </div>
+            <div class="service-detailed-card">
+                <div class="service-detailed-icon">
+                    <i class="fas fa-hands-helping"></i>
                 </div>
+                <div class="service-detailed-content">
+                    <h3>Aide Services</h3>
+                    <ul class="service-bullet-list">
+                        <li>Medication reminders</li>
+                        <li>Health monitoring</li>
+                        <li>Adherence to special diets</li>
+                        <li>Help walking and mobility assistance</li>
+                        <li>Skin care</li>
+                        <li>Bathing assistance</li>
+                        <li>Grooming</li>
+                        <li>Dressing</li>
+                        <li>Feeding</li>
+                        <li>and more!</li>
+                    </ul>
+                </div>
+            </div>
 
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Meal Planning & Preparation</h3>
-                        <p>Nutritious, delicious meals tailored to dietary requirements and preferences. We plan menus, shop for groceries, prepare meals, and provide assistance with eating when needed to ensure proper nutrition.</p>
-                    </div>
+            <div class="service-detailed-card">
+                <div class="service-detailed-icon">
+                    <i class="fas fa-user-friends"></i>
                 </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Light Housekeeping</h3>
-                        <p>Maintaining a clean, organized home environment. Services include laundry, dishes, vacuuming, dusting, organizing, and general tidying to create a safe and comfortable living space.</p>
-                    </div>
+                <div class="service-detailed-content">
+                    <h3>Companionship</h3>
+                    <ul class="service-bullet-list">
+                        <li>Help with remote controls</li>
+                        <li>Getting the mail</li>
+                        <li>Running errands</li>
+                        <li>Help with correspondence: letters, emails, social media</li>
+                        <li>Playing games and helping with hobbies</li>
+                        <li>Supervision when there is a risk of wandering or self-injury</li>
+                        <li>and more!</li>
+                    </ul>
                 </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Transportation Services</h3>
-                        <p>Safe, reliable transportation to medical appointments, grocery shopping, social events, religious services, and other errands. We help maintain independence and connection to the community.</p>
-                    </div>
-                </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-pills"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Medication Reminders</h3>
-                        <p>Timely reminders to take medications as prescribed by healthcare providers. We help organize medications and ensure adherence to medication schedules for better health outcomes.</p>
-                    </div>
-                </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-walking"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Mobility Assistance</h3>
-                        <p>Safe assistance with walking, transferring, and using mobility aids. We help prevent falls and maintain physical activity levels appropriate for each individual's abilities.</p>
-                    </div>
-                </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Overnight Care</h3>
-                        <p>Peace of mind through the night with our overnight care services. Caregivers provide supervision, assistance, and companionship during nighttime hours to ensure safety and comfort.</p>
-                    </div>
-                </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Dementia & Alzheimer's Care</h3>
-                        <p>Specialized care for individuals with memory impairments. Our trained caregivers provide patient, understanding support while engaging clients in appropriate activities and ensuring their safety.</p>
-                    </div>
-                </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-hospital-user"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Respite Care</h3>
-                        <p>Temporary relief for family caregivers. Whether you need a few hours or several days, our caregivers step in to provide quality care so you can rest, recharge, or attend to other responsibilities.</p>
-                    </div>
-                </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Post-Hospitalization Care</h3>
-                        <p>Transitional care following hospital discharge. We help with recovery, follow medical care plans, assist with exercises, and ensure a smooth, safe return to home life.</p>
-                    </div>
-                </div>
-
-                <div class="service-detail-card">
-                    <div class="service-detail-icon">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <div class="service-detail-content">
-                        <h3>Flexible Scheduling</h3>
-                        <p>Care when you need it - hourly, daily, overnight, or live-in care options. We work with your schedule and can adjust care plans as needs change over time.</p>
-                    </div>
-                </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 </section>

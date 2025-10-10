@@ -1015,6 +1015,76 @@ a:hover {
     margin-bottom: var(--spacing-sm);
 }
 
+/* Services Detailed List (with bullet points) */
+.services-detailed-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
+}
+
+.service-detailed-card {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--gray-200);
+    transition: var(--transition);
+}
+
+.service-detailed-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.service-detailed-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--healthcare-teal));
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2.5rem;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.service-detailed-content {
+    text-align: center;
+}
+
+.service-detailed-content h3 {
+    font-size: 1.75rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-lg);
+}
+
+.service-bullet-list {
+    list-style: none;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.service-bullet-list li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+    color: var(--gray-700);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.service-bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
 .care-plans {
     padding: var(--spacing-2xl) 0;
     background: var(--gray-50);
@@ -1371,7 +1441,8 @@ a:hover {
     .features-grid,
     .services-grid,
     .testimonials-grid,
-    .care-plans-grid {
+    .care-plans-grid,
+    .services-detailed-list {
         grid-template-columns: 1fr;
     }
     
