@@ -40,25 +40,27 @@
         </div>
 
         <!-- Documents Section -->
-        <div class="knowledge-section">
+        <div class="knowledge-section documents-section">
             <h2><i class="fas fa-file-pdf"></i> Documents & Resources</h2>
+            <p class="section-subtitle">Download helpful forms, guides, and information</p>
             
             {% if documents %}
-                <div class="documents-grid">
+                <div class="documents-horizontal">
                     {% for document in documents %}
-                    <a href="{{ document.file.url }}" class="document-card" target="_blank">
-                        <div class="document-icon">
+                    <a href="{{ document.file.url }}" class="document-card-horizontal" target="_blank">
+                        <div class="doc-icon-wrapper">
                             <i class="fas fa-file-pdf"></i>
                         </div>
-                        <div class="document-info">
+                        <div class="doc-content">
+                            <span class="doc-category-badge">{{ document.get_category_display }}</span>
                             <h3>{{ document.title }}</h3>
                             {% if document.description %}
                             <p>{{ document.description }}</p>
                             {% endif %}
-                            <span class="document-category">{{ document.get_category_display }}</span>
                         </div>
-                        <div class="document-download">
+                        <div class="doc-action">
                             <i class="fas fa-download"></i>
+                            <span>Download</span>
                         </div>
                     </a>
                     {% endfor %}

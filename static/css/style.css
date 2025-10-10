@@ -1812,6 +1812,138 @@ a:hover {
     font-weight: 500;
 }
 
+/* Horizontal Document Layout - Professional Design */
+.documents-section {
+    background: var(--gray-50);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.documents-section .section-subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-top: -1rem;
+    margin-bottom: var(--spacing-xl);
+}
+
+.documents-horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.document-card-horizontal {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.document-card-horizontal::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #2563eb, #0d9488);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+}
+
+.document-card-horizontal:hover::before {
+    transform: scaleY(1);
+}
+
+.document-card-horizontal:hover {
+    border-color: #2563eb;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
+    transform: translateX(4px);
+}
+
+.doc-icon-wrapper {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.doc-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.doc-category-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--gray-100);
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+}
+
+.doc-content h3 {
+    font-size: 1.125rem;
+    color: var(--gray-900);
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+}
+
+.doc-content p {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.doc-action {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+}
+
+.doc-action i {
+    font-size: 1.25rem;
+}
+
+.doc-action span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.document-card-horizontal:hover .doc-action {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
 /* CTA */
 .knowledge-simple-cta {
     text-align: center;
@@ -2181,6 +2313,28 @@ a:hover {
     
     .documents-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Horizontal documents responsive */
+    .document-card-horizontal {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+    }
+    
+    .doc-icon-wrapper {
+        align-self: center;
+    }
+    
+    .doc-action {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .doc-action span {
+        font-size: 0.875rem;
     }
     
     .notice-header {
