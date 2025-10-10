@@ -1559,7 +1559,7 @@ a:hover {
 }
 
 .knowledge-simple-header h1 {
-    font-size: 3rem;
+    font-size: 2.25rem;
     color: var(--gray-900);
     margin-bottom: var(--spacing-md);
     font-weight: 700;
