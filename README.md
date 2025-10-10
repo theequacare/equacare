@@ -166,7 +166,7 @@ ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 ## Support
 
 For questions or support, please contact:
-- Email: equacar77@gmail.com
+- Email: dipakcalif@gmail.com
 - Phone: (515) 508-1556
 - Address: 7611 Douglas Ave #24, Urbandale, IA 50322-3076
 

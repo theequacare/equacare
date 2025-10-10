@@ -30,7 +30,7 @@ You'll be asked for:
 
 2. **Email address**: 
    ```
-   Email address: equacar77@gmail.com
+   Email address: dipakcalif@gmail.com
    ```
 
 3. **Password**: (type a password - it won't show while typing)
@@ -85,7 +85,7 @@ source venv/bin/activate
 python manage.py createsuperuser
 
 Username: admin
-Email address: equacar77@gmail.com
+Email address: dipakcalif@gmail.com
 Password: ********
 Password (again): ********
 
