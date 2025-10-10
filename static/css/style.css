@@ -2305,6 +2305,37 @@ a:hover {
     margin-top: 0.5rem;
 }
 
+/* Career Info Section */
+.career-info-section {
+    padding: var(--spacing-2xl) 0;
+    background: var(--white);
+}
+
+.career-info-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.career-info-content p {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-lg);
+}
+
+.career-info-content p:last-child {
+    margin-bottom: 0;
+}
+
+.page-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-top: var(--spacing-md);
+    font-style: italic;
+}
+
 /* Application Form Section */
 .application-section {
     padding: var(--spacing-xl) 0 var(--spacing-2xl);
@@ -2319,13 +2350,8 @@ a:hover {
 .application-header h2 {
     font-size: 1.75rem;
     color: var(--gray-900);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 0;
     font-weight: 600;
-}
-
-.application-header p {
-    font-size: 1rem;
-    color: var(--text-light);
 }
 
 .application-form-wrapper {
