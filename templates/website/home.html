@@ -158,6 +158,39 @@
     </div>
 </section>
 
+<!-- Testimonials Section -->
+{% if testimonials %}
+<section class="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Client Reviews</span>
+            <h2>What Our Families Say</h2>
+            <p>Hear from families who trust us with their loved ones' care</p>
+        </div>
+        <div class="testimonials-grid">
+            {% for testimonial in testimonials %}
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= testimonial.rating %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <p class="testimonial-text">"{{ testimonial.testimonial }}"</p>
+                <div class="testimonial-author">
+                    <strong>{{ testimonial.client_name }}</strong>
+                    <span>{{ testimonial.relationship }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <!-- Contact Form Section -->
 <section class="contact-form-home">
     <div class="container">

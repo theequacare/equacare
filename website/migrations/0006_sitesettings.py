@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('tagline', models.CharField(blank=True, default='Professional Non-Medical Home Care Services', max_length=300)),
                 ('phone', models.CharField(default='(515) 508-1556', max_length=20)),
                 ('phone_link', models.CharField(default='+15155081556', help_text='Phone number for tel: links (no spaces or dashes)', max_length=20)),
-                ('email', models.EmailField(default='equacar77@gmail.com', max_length=254)),
+                ('email', models.EmailField(default='equacare77@gmail.com', max_length=254)),
                 ('street_address', models.CharField(default='7611 Douglas Ave #24', max_length=200)),
                 ('city', models.CharField(default='Urbandale', max_length=100)),
                 ('state', models.CharField(default='IA', max_length=2)),

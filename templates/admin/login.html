@@ -1,0 +1,31 @@
+{% extends "admin/login.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .password-reset-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .password-reset-link a {
+        color: #447e9b;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .password-reset-link a:hover {
+        text-decoration: underline;
+        color: #2b5672;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+<div class="password-reset-link">
+    <a href="{% url 'admin_password_reset' %}">🔒 Forgot your password?</a>
+</div>
+{% endblock %}
+

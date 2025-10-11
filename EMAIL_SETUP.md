@@ -1,6 +1,6 @@
 # Email Notification Setup Guide
 
-All contact form submissions and job applications will now be sent to: **dipakcalif@gmail.com**
+All contact form submissions and job applications will now be sent to: **equacare77@gmail.com**
 
 ## 📧 Gmail App Password Setup
 
@@ -16,7 +16,7 @@ To allow Django to send emails through Gmail, you need to create an **App Passwo
 ### Step 2: Create App Password
 
 1. Go to: https://myaccount.google.com/apppasswords
-2. Sign in to your Google Account (dipakcalif@gmail.com)
+2. Sign in to your Google Account (equacare77@gmail.com)
 3. Under "Select app", choose **Mail**
 4. Under "Select device", choose **Other (Custom name)**
 5. Type: **Equacare Django Website**
@@ -71,12 +71,12 @@ send_mail(
     'Test Email from Equacare',
     'This is a test email to verify the configuration.',
     settings.DEFAULT_FROM_EMAIL,
-    ['dipakcalif@gmail.com'],
+    ['equacare77@gmail.com'],
     fail_silently=False,
 )
 ```
 
-If successful, you should receive an email at dipakcalif@gmail.com!
+If successful, you should receive an email at equacare77@gmail.com!
 
 ---
 
@@ -147,13 +147,13 @@ echo $EMAIL_PASSWORD
 ## 📝 Current Configuration
 
 ```python
-EMAIL: dipakcalif@gmail.com
+EMAIL: equacare77@gmail.com
 SMTP HOST: smtp.gmail.com
 PORT: 587
 TLS: Enabled
 ```
 
-All emails will appear to come from: **dipakcalif@gmail.com**
+All emails will appear to come from: **equacare77@gmail.com**
 
 ---
 

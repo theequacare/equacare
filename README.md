@@ -166,7 +166,7 @@ ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 ## Support
 
 For questions or support, please contact:
-- Email: dipakcalif@gmail.com
+- Email: equacare77@gmail.com
 - Phone: (515) 508-1556
 - Address: 7611 Douglas Ave #24, Urbandale, IA 50322-3076
 
