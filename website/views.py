@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from .models import Service, Testimonial, ContactMessage, JobListing, JobApplication
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def home(request):
@@ -129,7 +131,7 @@ This is an automated notification from your Equacare website.
             )
         except Exception as e:
             # Log error but don't fail the request
-            print(f"Email error: {e}")
+            logger.error(f"Failed to send contact form email: {e}")
         
         return JsonResponse({
             'success': True,
@@ -232,7 +234,7 @@ This is an automated notification from your Equacare website.
             email_message.send(fail_silently=True)
         except Exception as e:
             # Log error but don't fail the request
-            print(f"Email error: {e}")
+            logger.error(f"Failed to send job application email: {e}")
         
         return JsonResponse({
             'success': True,
