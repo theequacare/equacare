@@ -354,7 +354,7 @@ class SiteSettings(models.Model):
     # Contact Information
     phone = models.CharField(max_length=20, default="(515) 508-1556")
     phone_link = models.CharField(max_length=20, default="+15155081556", help_text="Phone number for tel: links (no spaces or dashes)")
-    email = models.EmailField(default="dipakcalif@gmail.com")
+    email = models.EmailField(default="equacare77@gmail.com")
     
     # Address
     street_address = models.CharField(max_length=200, default="7611 Douglas Ave #24")

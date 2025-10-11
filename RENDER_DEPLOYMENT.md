@@ -8,7 +8,7 @@ This guide will help you deploy your Equacare website to Render.com for **comple
 
 - ✅ GitHub account (you already have this)
 - ✅ Code pushed to GitHub (already done!)
-- ✅ Email: dipakcalif@gmail.com
+- ✅ Email: equacare77@gmail.com
 
 ---
 
@@ -61,7 +61,7 @@ Click **"Advanced"** and add these environment variables:
 | `DEBUG` | `False` |
 | `EMAIL_PASSWORD` | `[Your Gmail App Password]` |
 
-**Important:** For `EMAIL_PASSWORD`, use the Gmail App Password you created earlier for `dipakcalif@gmail.com`.
+**Important:** For `EMAIL_PASSWORD`, use the Gmail App Password you created earlier for `equacare77@gmail.com`.
 
 > If you haven't created an App Password yet, follow the instructions in `EMAIL_SETUP.md`.
 
@@ -122,7 +122,7 @@ Your database is fresh, so you need to create an admin user:
    ```
 4. Follow the prompts:
    - Username: `admin`
-   - Email: `dipakcalif@gmail.com`
+   - Email: `equacare77@gmail.com`
    - Password: (create a strong password)
 
 ### **Add Content via Admin**
