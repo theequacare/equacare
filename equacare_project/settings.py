@@ -128,6 +128,9 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Media files - S3 Configuration
+USE_S3 = os.environ.get('USE_S3', 'False') == 'True'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -136,9 +139,6 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# Media files - S3 Configuration
-USE_S3 = os.environ.get('USE_S3', 'False') == 'True'
 
 # WhiteNoise configuration for serving static files (only when not using S3)
 if not USE_S3:
