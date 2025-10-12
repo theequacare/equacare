@@ -338,7 +338,7 @@ a:hover {
     min-height: 600px;
     max-height: 700px;
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;
     margin-top: 70px;
@@ -347,6 +347,9 @@ a:hover {
     filter: brightness(1.1) contrast(1.05);
     width: 100%;
     overflow: hidden;
+    /* Ensure proper scaling on all devices */
+    background-clip: padding-box;
+    object-fit: cover;
 }
 
 .hero-overlay {
@@ -2718,6 +2721,15 @@ a:hover {
    =================================== */
 
 @media (max-width: 1024px) {
+    .hero {
+        height: 70vh;
+        min-height: 500px;
+        max-height: 600px;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: scroll;
+    }
+    
     .hero-title { font-size: 2.5rem; }
     .hero-subtitle { font-size: 1.25rem; }
     
@@ -2779,6 +2791,7 @@ a:hover {
         background-attachment: scroll;
         width: 100%;
         overflow: hidden;
+        margin-top: 60px;
     }
     
     .hero-content-section {
@@ -2970,14 +2983,16 @@ a:hover {
     
     .hero {
         height: 50vh;
-        min-height: 350px;
-        max-height: 450px;
+        min-height: 300px;
+        max-height: 400px;
         background-size: cover;
         background-position: center center;
         background-attachment: scroll;
-        margin-top: 60px;
+        margin-top: 50px;
         width: 100%;
         overflow: hidden;
+        /* Ensure image scales properly on mobile */
+        background-clip: padding-box;
     }
     
     .hero-title { 
@@ -3013,6 +3028,26 @@ a:hover {
     .service-card,
     .testimonial-card {
         padding: var(--spacing-md);
+    }
+}
+
+/* Extra small devices (phones, 360px and down) */
+@media (max-width: 360px) {
+    .hero {
+        height: 45vh;
+        min-height: 250px;
+        max-height: 350px;
+        background-size: cover;
+        background-position: center center;
+        margin-top: 45px;
+    }
+    
+    .hero-title { 
+        font-size: 1.25rem; 
+    }
+    
+    .hero-subtitle { 
+        font-size: 0.9rem; 
     }
 }
 
