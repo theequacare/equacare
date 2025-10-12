@@ -3121,39 +3121,40 @@ a:hover {
 }
 
 .ceo-image-placeholder {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto var(--spacing-md);
+    width: 250px;
+    height: 250px;
+    margin: 0 auto var(--spacing-lg);
     background: linear-gradient(135deg, var(--primary-color), var(--healthcare-blue));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 4.5rem;
+    font-size: 6rem;
     color: white;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-xl);
+    border: 6px solid white;
 }
 
 .ceo-image-photo {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto var(--spacing-md);
+    width: 250px;
+    height: 250px;
+    margin: 0 auto var(--spacing-lg);
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: var(--shadow-lg);
-    border: 4px solid white;
+    box-shadow: var(--shadow-xl);
+    border: 6px solid white;
 }
 
 .ceo-name {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: var(--gray-900);
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
     font-family: var(--font-heading);
     font-weight: 700;
 }
 
 .ceo-title {
-    font-size: 1rem;
+    font-size: 1.125rem;
     color: var(--primary-color);
     font-weight: 500;
     margin-bottom: 0;
@@ -3220,9 +3221,9 @@ a:hover {
     
     .ceo-image-placeholder,
     .ceo-image-photo {
-        width: 150px;
-        height: 150px;
-        font-size: 4rem;
+        width: 200px;
+        height: 200px;
+        font-size: 5rem;
     }
 }
 
@@ -3237,8 +3238,40 @@ a:hover {
         padding: var(--spacing-lg);
     }
     
+    .ceo-image-placeholder,
+    .ceo-image-photo {
+        width: 180px;
+        height: 180px;
+        font-size: 4.5rem;
+    }
+    
+    .ceo-name {
+        font-size: 1.5rem;
+    }
+    
+    .ceo-title {
+        font-size: 1rem;
+    }
+    
     .ceo-quote {
         font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ceo-image-placeholder,
+    .ceo-image-photo {
+        width: 150px;
+        height: 150px;
+        font-size: 4rem;
+    }
+    
+    .ceo-name {
+        font-size: 1.25rem;
+    }
+    
+    .ceo-title {
+        font-size: 0.9rem;
     }
 }
 
