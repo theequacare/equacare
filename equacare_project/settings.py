@@ -137,12 +137,12 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Media files - S3 Configuration
+USE_S3 = os.environ.get('USE_S3', 'False') == 'True'
+
 # WhiteNoise configuration for serving static files (only when not using S3)
 if not USE_S3:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Media files - S3 Configuration
-USE_S3 = os.environ.get('USE_S3', 'False') == 'True'
 
 if USE_S3:
     # AWS S3 settings
