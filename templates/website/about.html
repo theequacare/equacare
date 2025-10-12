@@ -25,6 +25,37 @@
                 </div>
             </div>
             
+            <!-- CEO Section -->
+            {% if ceo_section %}
+            <div class="ceo-section">
+                <div class="ceo-container">
+                    <h2 class="section-title">{{ ceo_section.section_title }}</h2>
+                    <div class="ceo-content">
+                        <div class="ceo-image-wrapper">
+                            {% if ceo_section.ceo_image %}
+                            <img src="{{ ceo_section.ceo_image.url }}" alt="{{ ceo_section.ceo_name }}" class="ceo-image-photo">
+                            {% else %}
+                            <div class="ceo-image-placeholder">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="ceo-message">
+                            <p>{{ ceo_section.paragraph_1 }}</p>
+                            <p>{{ ceo_section.paragraph_2 }}</p>
+                            <p>{{ ceo_section.paragraph_3 }}</p>
+                            <p>{{ ceo_section.paragraph_4 }}</p>
+                            <div class="ceo-signature">
+                                <p class="closing-text">{{ ceo_section.closing_text }}</p>
+                                <p class="signature-name">{% if ceo_section.signature_name %}{{ ceo_section.signature_name }}{% else %}{{ ceo_section.ceo_name }}{% endif %}</p>
+                                <p class="signature-title">{{ ceo_section.ceo_title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
             <div class="simple-cta">
                 <h2>{{ about_page.cta_title }}</h2>
                 <p>{{ about_page.cta_text }}</p>
@@ -55,6 +86,37 @@
                     <img src="{% static 'images/about-team.webp' %}" alt="Equacare Caregivers">
                 </div>
             </div>
+            
+            <!-- CEO Section -->
+            {% if ceo_section %}
+            <div class="ceo-section">
+                <div class="ceo-container">
+                    <h2 class="section-title">{{ ceo_section.section_title }}</h2>
+                    <div class="ceo-content">
+                        <div class="ceo-image-wrapper">
+                            {% if ceo_section.ceo_image %}
+                            <img src="{{ ceo_section.ceo_image.url }}" alt="{{ ceo_section.ceo_name }}" class="ceo-image-photo">
+                            {% else %}
+                            <div class="ceo-image-placeholder">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="ceo-message">
+                            <p>{{ ceo_section.paragraph_1 }}</p>
+                            <p>{{ ceo_section.paragraph_2 }}</p>
+                            <p>{{ ceo_section.paragraph_3 }}</p>
+                            <p>{{ ceo_section.paragraph_4 }}</p>
+                            <div class="ceo-signature">
+                                <p class="closing-text">{{ ceo_section.closing_text }}</p>
+                                <p class="signature-name">{% if ceo_section.signature_name %}{{ ceo_section.signature_name }}{% else %}{{ ceo_section.ceo_name }}{% endif %}</p>
+                                <p class="signature-title">{{ ceo_section.ceo_title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             
             <div class="simple-cta">
                 <h2>Ready to Learn More?</h2>

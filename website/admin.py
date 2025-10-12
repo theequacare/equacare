@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     ContactMessage, Service, Testimonial, Notice, Document, 
     HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings,
-    JobListing, JobApplication, AboutPage
+    JobListing, JobApplication, AboutPage, CEOSection
 )
 
 
@@ -258,6 +258,34 @@ class AboutPageAdmin(admin.ModelAdmin):
         ('CTA Section', {
             'fields': ('cta_title', 'cta_text', 'button_text'),
             'description': 'Call-to-action section at the bottom'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(CEOSection)
+class CEOSectionAdmin(admin.ModelAdmin):
+    list_display = ('section_title', 'ceo_name', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Section Header', {
+            'fields': ('section_title',),
+            'description': 'Title for the CEO section'
+        }),
+        ('CEO Information', {
+            'fields': ('ceo_name', 'ceo_title', 'ceo_image'),
+            'description': 'CEO name, title, and optional photo'
+        }),
+        ('Message Content', {
+            'fields': ('paragraph_1', 'paragraph_2', 'paragraph_3', 'paragraph_4'),
+            'description': 'CEO message divided into paragraphs for better readability'
+        }),
+        ('Signature', {
+            'fields': ('closing_text', 'signature_name'),
+            'description': 'Closing and signature (leave signature_name blank to use CEO name)'
         }),
         ('Status', {
             'fields': ('is_active', 'updated_at')

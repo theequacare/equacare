@@ -345,6 +345,47 @@ class AboutPage(models.Model):
         super().save(*args, **kwargs)
 
 
+class CEOSection(models.Model):
+    """Model for CEO section on About page"""
+    section_title = models.CharField(max_length=200, default="A Message from Our CEO")
+    ceo_name = models.CharField(max_length=200, default="[CEO Name]", help_text="Full name of the CEO")
+    ceo_title = models.CharField(max_length=100, default="Chief Executive Officer")
+    ceo_image = models.ImageField(upload_to='ceo/', blank=True, null=True, help_text="Optional: CEO photo (recommended size: 400x400px)")
+    
+    # Message paragraphs
+    paragraph_1 = models.TextField(
+        default="Welcome to Equacare LLC. We are truly honored that you have chosen us to be part of your care journey. At Equacare, our mission is to promote independence, dignity, comfort, and quality of life for each individual we serve."
+    )
+    paragraph_2 = models.TextField(
+        default="Our team is dedicated to providing compassionate, reliable, and person-centered support in the comfort of your own home. We believe that with the right assistance, every person can enjoy the safety, familiarity, and meaningful connections of their home and community for as long as possible."
+    )
+    paragraph_3 = models.TextField(
+        default="As a valued member, you are at the heart of everything we do. We are committed to respecting your rights, honoring your choices, and working closely with you and your family to support your unique needs and goals."
+    )
+    paragraph_4 = models.TextField(
+        default="Thank you for placing your trust in Equacare LLC. We look forward to working together to make each day safe, comfortable, and meaningful."
+    )
+    
+    # Signature/Closing
+    closing_text = models.CharField(max_length=100, default="Warm regards,", help_text="Closing line before signature")
+    signature_name = models.CharField(max_length=200, blank=True, help_text="Name for signature (leave blank to use CEO name)")
+    
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'CEO Section'
+        verbose_name_plural = 'CEO Section'
+    
+    def __str__(self):
+        return f"CEO Section - {self.ceo_name}"
+    
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            CEOSection.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
+
 class SiteSettings(models.Model):
     """Model for site-wide contact information and settings"""
     # Company Info

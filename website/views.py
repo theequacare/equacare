@@ -36,11 +36,13 @@ def home(request):
 
 def about(request):
     """About page view"""
-    from .models import AboutPage
+    from .models import AboutPage, CEOSection
     
     about_page = AboutPage.objects.filter(is_active=True).first()
+    ceo_section = CEOSection.objects.filter(is_active=True).first()
     context = {
         'about_page': about_page,
+        'ceo_section': ceo_section,
     }
     return render(request, 'website/about.html', context)
 
