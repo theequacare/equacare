@@ -108,8 +108,12 @@ def submit_contact(request):
         
         # Send email notification
         try:
-            email_subject = f'New Contact Form Submission: {subject}'
-            email_body = f"""
+            # Check if email is properly configured
+            if not settings.EMAIL_HOST_PASSWORD:
+                logger.warning("Email not configured - contact form submission saved to database only")
+            else:
+                email_subject = f'New Contact Form Submission: {subject}'
+                email_body = f"""
 New contact form submission from Equacare website:
 
 Name: {name}
@@ -122,15 +126,16 @@ Message:
 
 ---
 This is an automated notification from your Equacare website.
-            """
-            
-            send_mail(
-                email_subject,
-                email_body,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.ADMIN_EMAIL],
-                fail_silently=True,
-            )
+                """
+                
+                send_mail(
+                    email_subject,
+                    email_body,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.ADMIN_EMAIL],
+                    fail_silently=True,
+                )
+                logger.info(f"Contact form email sent successfully for: {name}")
         except Exception as e:
             # Log error but don't fail the request
             logger.error(f"Failed to send contact form email: {e}")
