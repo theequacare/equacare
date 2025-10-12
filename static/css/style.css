@@ -340,10 +340,13 @@ a:hover {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: scroll;
     margin-top: 70px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     /* Enhance brightness and clarity */
     filter: brightness(1.1) contrast(1.05);
+    width: 100%;
+    overflow: hidden;
 }
 
 .hero-overlay {
@@ -2768,8 +2771,14 @@ a:hover {
     }
     
     .hero {
-        height: 65vh;
-        min-height: 450px;
+        height: 60vh;
+        min-height: 400px;
+        max-height: 500px;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: scroll;
+        width: 100%;
+        overflow: hidden;
     }
     
     .hero-content-section {
@@ -2957,6 +2966,45 @@ a:hover {
     
     .page-header h1 {
         font-size: 2rem;
+    }
+    
+    .hero {
+        height: 50vh;
+        min-height: 350px;
+        max-height: 450px;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: scroll;
+        margin-top: 60px;
+    }
+    
+    .hero-title { 
+        font-size: 1.5rem; 
+    }
+    
+    .hero-subtitle { 
+        font-size: 1rem; 
+    }
+    
+    .hero-content-wrapper h1 {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .hero-content-wrapper p {
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-content-wrapper .hero-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
     }
     
     .feature-card,
