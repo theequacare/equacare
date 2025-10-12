@@ -350,6 +350,10 @@ a:hover {
     /* Ensure proper scaling on all devices */
     background-clip: padding-box;
     object-fit: cover;
+    /* Additional responsive properties */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-overlay {
@@ -2993,6 +2997,10 @@ a:hover {
         overflow: hidden;
         /* Ensure image scales properly on mobile */
         background-clip: padding-box;
+        /* Full width on mobile */
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
     }
     
     .hero-title { 
@@ -3040,6 +3048,11 @@ a:hover {
         background-size: cover;
         background-position: center center;
         margin-top: 45px;
+        /* Ensure proper mobile scaling */
+        background-attachment: scroll;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
     }
     
     .hero-title { 
@@ -3048,6 +3061,26 @@ a:hover {
     
     .hero-subtitle { 
         font-size: 0.9rem; 
+    }
+}
+
+/* Ultra small devices (320px and down) */
+@media (max-width: 320px) {
+    .hero {
+        height: 40vh;
+        min-height: 200px;
+        max-height: 300px;
+        background-size: cover;
+        background-position: center center;
+        margin-top: 40px;
+    }
+    
+    .hero-title { 
+        font-size: 1.1rem; 
+    }
+    
+    .hero-subtitle { 
+        font-size: 0.8rem; 
     }
 }
 
