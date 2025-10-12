@@ -2976,6 +2976,8 @@ a:hover {
         background-position: center center;
         background-attachment: scroll;
         margin-top: 60px;
+        width: 100%;
+        overflow: hidden;
     }
     
     .hero-title { 
