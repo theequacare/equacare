@@ -13,7 +13,7 @@ class Command(BaseCommand):
             if User.objects.filter(username='admin').exists():
                 admin_user = User.objects.get(username='admin')
                 # Ensure password is correct even if user exists
-                admin_user.set_password('admin123')
+                admin_user.set_password('Dhangadi$579')
                 admin_user.is_staff = True
                 admin_user.is_superuser = True
                 admin_user.save()
@@ -26,7 +26,7 @@ class Command(BaseCommand):
                 admin_user = User.objects.create_user(
                     username='admin',
                     email='admin@equacare.com',
-                    password='admin123',
+                    password='Dhangadi$579',
                     is_staff=True,
                     is_superuser=True
                 )
@@ -36,7 +36,7 @@ class Command(BaseCommand):
                 logger.info('Admin user created successfully')
             
             self.stdout.write('Username: admin')
-            self.stdout.write('Password: admin123')
+            self.stdout.write('Password: Dhangadi$579')
             
         except Exception as e:
             self.stdout.write(
