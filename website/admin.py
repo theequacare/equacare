@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import (
-    ContactMessage, Service, Testimonial, Notice, Document, 
+    ContactMessage, Notice, Document, 
     HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings,
-    JobListing, JobApplication, AboutPage, CEOSection
+    JobListing, JobApplication, AboutPage, CEOSection, ProgramGallery
 )
 
 
@@ -12,23 +12,6 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_filter = ('is_read', 'created_at')
     search_fields = ('name', 'email', 'subject', 'message')
     readonly_fields = ('created_at',)
-    date_hierarchy = 'created_at'
-
-
-@admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'order', 'is_active')
-    list_filter = ('is_active',)
-    search_fields = ('title', 'description')
-    list_editable = ('order', 'is_active')
-
-
-@admin.register(Testimonial)
-class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ('client_name', 'relationship', 'rating', 'is_featured', 'created_at')
-    list_filter = ('rating', 'is_featured', 'created_at')
-    search_fields = ('client_name', 'testimonial')
-    list_editable = ('is_featured',)
     date_hierarchy = 'created_at'
 
 
@@ -44,12 +27,24 @@ class NoticeAdmin(admin.ModelAdmin):
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'is_active', 'created_at')
-    list_filter = ('category', 'is_active', 'created_at')
+    list_display = ('title', 'category', 'access_type', 'is_active', 'created_at')
+    list_filter = ('category', 'access_type', 'is_active', 'created_at')
     search_fields = ('title', 'description')
-    list_editable = ('is_active',)
+    list_editable = ('access_type', 'is_active')
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at',)
+    fieldsets = (
+        ('Document Information', {
+            'fields': ('title', 'description', 'file', 'category')
+        }),
+        ('Access Control', {
+            'fields': ('access_type',),
+            'description': 'Choose whether users can download this document or only view it in their browser'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'created_at')
+        }),
+    )
 
 
 @admin.register(HeroSection)
@@ -289,6 +284,30 @@ class CEOSectionAdmin(admin.ModelAdmin):
         }),
         ('Status', {
             'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(ProgramGallery)
+class ProgramGalleryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date', 'display_order', 'is_active', 'updated_at')
+    list_filter = ('is_active', 'date')
+    search_fields = ('title', 'description')
+    list_editable = ('display_order', 'is_active')
+    readonly_fields = ('created_at', 'updated_at')
+    date_hierarchy = 'date'
+    fieldsets = (
+        ('Photo Information', {
+            'fields': ('title', 'description', 'photo', 'date'),
+            'description': 'Add program/event photos to display in the gallery on the About page'
+        }),
+        ('Display Settings', {
+            'fields': ('display_order', 'is_active'),
+            'description': 'Control the order and visibility of photos'
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
         }),
     )
 

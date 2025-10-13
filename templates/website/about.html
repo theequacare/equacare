@@ -117,17 +117,40 @@
                 </div>
             </div>
             {% endif %}
-            
-            <div class="simple-cta">
-                <h2>Ready to Learn More?</h2>
-                <p>Let's talk about how we can help you or your loved ones.</p>
-                <div class="simple-cta-buttons">
-                    {% if site_settings %}
-                    <a href="tel:{{ site_settings.phone_link }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call {{ site_settings.phone }}</a>
-                    {% else %}
-                    <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
-                    {% endif %}
-                    <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
+            {% endif %}
+
+            <!-- Program Gallery Section -->
+            {% if gallery_photos %}
+            <div class="program-gallery-section">
+                <div class="container">
+                    <h2 class="section-title">Our Programs & Activities</h2>
+                    <p class="section-subtitle">See the impact we make through our various programs and community activities</p>
+                    
+                    <div class="gallery-grid">
+                        {% for photo in gallery_photos %}
+                        <div class="gallery-item">
+                            <div class="gallery-image-wrapper">
+                                <img src="{{ photo.photo.url }}" alt="{{ photo.title }}" class="gallery-image">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <h3 class="gallery-title">{{ photo.title }}</h3>
+                                        {% if photo.date %}
+                                        <p class="gallery-date">
+                                            <i class="fas fa-calendar-alt"></i> 
+                                            {{ photo.date|date:"F d, Y" }}
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if photo.description %}
+                            <div class="gallery-description">
+                                <p>{{ photo.description|truncatewords:20 }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             {% endif %}

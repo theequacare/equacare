@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import os
 
 
 class ContactMessage(models.Model):
@@ -21,41 +22,6 @@ class ContactMessage(models.Model):
         return f"{self.name} - {self.subject}"
 
 
-class Service(models.Model):
-    """Model for services offered by Equacare"""
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    icon = models.CharField(max_length=50, help_text="Font Awesome icon class")
-    order = models.IntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-
-    class Meta:
-        ordering = ['order']
-        verbose_name = 'Service'
-        verbose_name_plural = 'Services'
-
-    def __str__(self):
-        return self.title
-
-
-class Testimonial(models.Model):
-    """Model for client testimonials"""
-    client_name = models.CharField(max_length=200)
-    relationship = models.CharField(max_length=100, help_text="e.g., 'Family Member', 'Client'")
-    testimonial = models.TextField()
-    rating = models.IntegerField(default=5, choices=[(i, i) for i in range(1, 6)])
-    is_featured = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=timezone.now)
-
-    class Meta:
-        ordering = ['-created_at']
-        verbose_name = 'Testimonial'
-        verbose_name_plural = 'Testimonials'
-
-    def __str__(self):
-        return f"{self.client_name} - {self.rating} stars"
-
-
 class Notice(models.Model):
     """Model for announcements and notices"""
     title = models.CharField(max_length=200)
@@ -74,16 +40,20 @@ class Notice(models.Model):
 
 
 class Document(models.Model):
-    """Model for PDF documents and resources"""
+    """Model for documents and resources (supports all file formats)"""
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    file = models.FileField(upload_to='documents/')
+    file = models.FileField(upload_to='documents/', help_text='Upload any file type: PDF, Word, Excel, PowerPoint, Images, etc.')
     category = models.CharField(max_length=100, choices=[
         ('forms', 'Forms'),
         ('policies', 'Policies'),
         ('guides', 'Guides'),
         ('other', 'Other'),
     ], default='other')
+    access_type = models.CharField(max_length=20, choices=[
+        ('download', 'Download'),
+        ('view', 'View Only (Read-Only)'),
+    ], default='download', help_text='Choose whether users can download or only view this document')
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -94,6 +64,46 @@ class Document(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_file_extension(self):
+        """Get the file extension"""
+        return os.path.splitext(self.file.name)[1].lower()
+    
+    def get_file_icon(self):
+        """Return appropriate Font Awesome icon based on file type"""
+        ext = self.get_file_extension()
+        icon_map = {
+            '.pdf': 'fa-file-pdf',
+            '.doc': 'fa-file-word', '.docx': 'fa-file-word',
+            '.xls': 'fa-file-excel', '.xlsx': 'fa-file-excel', '.csv': 'fa-file-excel',
+            '.ppt': 'fa-file-powerpoint', '.pptx': 'fa-file-powerpoint',
+            '.jpg': 'fa-file-image', '.jpeg': 'fa-file-image', '.png': 'fa-file-image',
+            '.gif': 'fa-file-image', '.bmp': 'fa-file-image', '.svg': 'fa-file-image', '.webp': 'fa-file-image',
+            '.zip': 'fa-file-archive', '.rar': 'fa-file-archive', '.7z': 'fa-file-archive',
+            '.tar': 'fa-file-archive', '.gz': 'fa-file-archive',
+            '.txt': 'fa-file-alt', '.rtf': 'fa-file-alt',
+            '.mp4': 'fa-file-video', '.avi': 'fa-file-video', '.mov': 'fa-file-video',
+            '.wmv': 'fa-file-video', '.flv': 'fa-file-video', '.mkv': 'fa-file-video',
+            '.mp3': 'fa-file-audio', '.wav': 'fa-file-audio', '.ogg': 'fa-file-audio', '.m4a': 'fa-file-audio',
+            '.html': 'fa-file-code', '.css': 'fa-file-code', '.js': 'fa-file-code',
+            '.py': 'fa-file-code', '.java': 'fa-file-code', '.cpp': 'fa-file-code', '.c': 'fa-file-code',
+        }
+        return icon_map.get(ext, 'fa-file')
+    
+    def get_file_color(self):
+        """Return color class based on file type"""
+        ext = self.get_file_extension()
+        color_map = {
+            '.pdf': 'file-color-red',
+            '.doc': 'file-color-blue', '.docx': 'file-color-blue',
+            '.xls': 'file-color-green', '.xlsx': 'file-color-green', '.csv': 'file-color-green',
+            '.ppt': 'file-color-orange', '.pptx': 'file-color-orange',
+            '.jpg': 'file-color-purple', '.jpeg': 'file-color-purple', '.png': 'file-color-purple',
+            '.gif': 'file-color-purple', '.bmp': 'file-color-purple', '.svg': 'file-color-purple', '.webp': 'file-color-purple',
+            '.zip': 'file-color-yellow', '.rar': 'file-color-yellow', '.7z': 'file-color-yellow',
+            '.tar': 'file-color-yellow', '.gz': 'file-color-yellow',
+        }
+        return color_map.get(ext, 'file-color-gray')
 
 
 class HeroSection(models.Model):
@@ -384,6 +394,26 @@ class CEOSection(models.Model):
         if self.is_active:
             CEOSection.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
         super().save(*args, **kwargs)
+
+
+class ProgramGallery(models.Model):
+    """Model for program photos gallery on About page"""
+    title = models.CharField(max_length=200, help_text="Title/name of the program or event")
+    description = models.TextField(blank=True, help_text="Optional description of the program/event")
+    photo = models.ImageField(upload_to='programs/', help_text="Program/event photo (recommended size: 800x600px)")
+    date = models.DateField(blank=True, null=True, help_text="Date of the program/event (optional)")
+    display_order = models.IntegerField(default=0, help_text="Order in which photos appear (lower numbers first)")
+    is_active = models.BooleanField(default=True, help_text="Uncheck to hide this photo from gallery")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Program Gallery Photo'
+        verbose_name_plural = 'Program Gallery Photos'
+        ordering = ['display_order', '-date', '-created_at']
+    
+    def __str__(self):
+        return self.title
 
 
 class SiteSettings(models.Model):

@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
-from .models import Service, Testimonial, ContactMessage, JobListing, JobApplication
+from .models import ContactMessage, JobListing, JobApplication
 import json
 import logging
 
@@ -14,8 +14,6 @@ def home(request):
     """Home page view"""
     from .models import HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection
     
-    services = Service.objects.filter(is_active=True)[:6]
-    testimonials = Testimonial.objects.filter(is_featured=True)[:3]
     hero = HeroSection.objects.filter(is_active=True).first()
     about_preview = AboutPreview.objects.filter(is_active=True).first()
     services_header = ServicesHeader.objects.filter(is_active=True).first()
@@ -23,8 +21,6 @@ def home(request):
     cta_section = CTASection.objects.filter(is_active=True).first()
     
     context = {
-        'services': services,
-        'testimonials': testimonials,
         'hero': hero,
         'about_preview': about_preview,
         'services_header': services_header,
@@ -36,24 +32,22 @@ def home(request):
 
 def about(request):
     """About page view"""
-    from .models import AboutPage, CEOSection
+    from .models import AboutPage, CEOSection, ProgramGallery
     
     about_page = AboutPage.objects.filter(is_active=True).first()
     ceo_section = CEOSection.objects.filter(is_active=True).first()
+    gallery_photos = ProgramGallery.objects.filter(is_active=True)
     context = {
         'about_page': about_page,
         'ceo_section': ceo_section,
+        'gallery_photos': gallery_photos,
     }
     return render(request, 'website/about.html', context)
 
 
 def services(request):
     """Services page view"""
-    services = Service.objects.filter(is_active=True)
-    context = {
-        'services': services,
-    }
-    return render(request, 'website/services.html', context)
+    return render(request, 'website/services.html')
 
 
 def knowledge(request):
