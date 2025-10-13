@@ -129,9 +129,8 @@ USE_TZ = True
 
 
 # Media files - S3 Configuration
-# Temporarily disable S3 to get photos working immediately
-USE_S3 = False  # Force local storage for now
-# USE_S3 = os.environ.get('USE_S3', 'False') == 'True'  # Uncomment when S3 is ready
+# Enable S3 for permanent photo storage
+USE_S3 = os.environ.get('USE_S3', 'False') == 'True'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
