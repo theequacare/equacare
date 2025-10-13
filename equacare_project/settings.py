@@ -165,7 +165,7 @@ if USE_S3:
     STATIC_ROOT = BASE_DIR / 'staticfiles'
     
     # Media files - use S3 for uploaded files
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     MEDIA_ROOT = ''
     
