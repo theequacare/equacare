@@ -17,13 +17,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-your-secret-key-here-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Set DEBUG based on environment: False for production (Render), True for local development
-if os.environ.get('DATABASE_URL'):
-    # Production environment (Render has DATABASE_URL)
-    DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-else:
-    # Local development (no DATABASE_URL)
-    DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+# DEBUG is False by default for security. Set DEBUG=True in environment to enable.
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
