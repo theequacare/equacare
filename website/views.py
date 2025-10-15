@@ -160,6 +160,14 @@ def submit_application(request):
     """Handle job application submission"""
     try:
         job_id = request.POST.get('job_id')
+        
+        # Better validation for job_id
+        if not job_id:
+            return JsonResponse({
+                'success': False,
+                'message': 'No job position selected. Please try again.'
+            }, status=400)
+        
         job = get_object_or_404(JobListing, id=job_id, is_active=True)
         
         # Get form data
@@ -245,11 +253,12 @@ This is an automated notification from your Equacare website.
     except JobListing.DoesNotExist:
         return JsonResponse({
             'success': False,
-            'message': 'Job listing not found.'
+            'message': 'Job listing not found. This position may no longer be available.'
         }, status=404)
     except Exception as e:
+        logger.error(f"Job application error: {str(e)}", exc_info=True)
         return JsonResponse({
             'success': False,
-            'message': 'An error occurred. Please try again later.'
+            'message': f'An error occurred: {str(e)}. Please try again later.'
         }, status=500)
 
