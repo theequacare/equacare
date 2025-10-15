@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     ContactMessage, Notice, Document, 
     HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings,
-    JobListing, JobApplication, AboutPage, CEOSection, ProgramGallery
+    CareerPage, CareerNotice, JobApplication, AboutPage, CEOSection, ProgramGallery
 )
 
 
@@ -178,33 +178,38 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(JobListing)
-class JobListingAdmin(admin.ModelAdmin):
-    list_display = ('title', 'location', 'job_type', 'is_active', 'created_at')
-    list_filter = ('job_type', 'is_active', 'created_at')
-    search_fields = ('title', 'location', 'description')
+@admin.register(CareerPage)
+class CareerPageAdmin(admin.ModelAdmin):
+    list_display = ('page_title', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Page Header', {
+            'fields': ('page_title', 'page_subtitle'),
+            'description': 'Main heading for the careers page'
+        }),
+        ('Intro Content', {
+            'fields': ('intro_paragraph_1', 'intro_paragraph_2'),
+            'description': 'Introductory text shown at the top of the careers page'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(CareerNotice)
+class CareerNoticeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'created_at', 'updated_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('title', 'content')
     list_editable = ('is_active',)
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
-        ('Job Information', {
-            'fields': ('title', 'location', 'job_type', 'salary_range')
-        }),
-        ('Description', {
-            'fields': ('description',),
-            'description': 'Brief overview of the position'
-        }),
-        ('Responsibilities', {
-            'fields': ('responsibilities',),
-            'description': 'List main job responsibilities (one per line)'
-        }),
-        ('Qualifications', {
-            'fields': ('qualifications',),
-            'description': 'List required qualifications (one per line)'
-        }),
-        ('Benefits', {
-            'fields': ('benefits',),
-            'description': 'Optional: List benefits (one per line)'
+        ('Notice Information', {
+            'fields': ('title', 'content'),
+            'description': 'Create simple hiring/career notices that appear on the careers page'
         }),
         ('Status', {
             'fields': ('is_active', 'created_at', 'updated_at')
@@ -214,8 +219,8 @@ class JobListingAdmin(admin.ModelAdmin):
 
 @admin.register(JobApplication)
 class JobApplicationAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'job', 'email', 'phone', 'status', 'created_at')
-    list_filter = ('status', 'created_at', 'job')
+    list_display = ('first_name', 'last_name', 'email', 'phone', 'status', 'created_at')
+    list_filter = ('status', 'created_at')
     search_fields = ('first_name', 'last_name', 'email', 'phone')
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at',)
@@ -224,8 +229,8 @@ class JobApplicationAdmin(admin.ModelAdmin):
         ('Applicant Information', {
             'fields': ('first_name', 'last_name', 'email', 'phone', 'address')
         }),
-        ('Job Details', {
-            'fields': ('job', 'experience_years', 'availability')
+        ('Experience & Availability', {
+            'fields': ('experience_years', 'availability')
         }),
         ('Application Materials', {
             'fields': ('resume', 'cover_letter'),

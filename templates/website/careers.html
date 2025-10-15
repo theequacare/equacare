@@ -7,8 +7,13 @@
 <!-- Page Header -->
 <section class="page-header">
     <div class="container">
+        {% if career_page %}
+        <h1>{{ career_page.page_title }}</h1>
+        <h2 class="page-subtitle">{{ career_page.page_subtitle }}</h2>
+        {% else %}
         <h1>Careers</h1>
         <h2 class="page-subtitle">Join a team that's about service, kindness, and respect</h2>
+        {% endif %}
     </div>
 </section>
 
@@ -16,10 +21,42 @@
 <section class="career-info-section">
     <div class="container">
         <div class="career-info-content">
+            {% if career_page %}
+            <p>{{ career_page.intro_paragraph_1 }}</p>
+            <p>{{ career_page.intro_paragraph_2 }}</p>
+            {% else %}
             <p>Are you interested in working with us? Simply submit the application on this page. We'll review it now, and keep it on file for future openings.</p>
-            
             <p>If you are the type of healthcare professional who takes pride in a job well done, our agency may be the right career move for you. We put the patient's needs first, but we also know that to give good service, you have to treat our caregivers well. Our first step in delivering excellent service to clients is to give the caregivers the support they need and the respect they deserve. If you would like to know about future job opportunities, simply use the form below to send your information.</p>
+            {% endif %}
         </div>
+    </div>
+</section>
+
+<!-- Career Notices Section -->
+<section class="job-openings-section">
+    <div class="container">
+        <h2><i class="fas fa-briefcase"></i> We're Hiring</h2>
+        
+        {% if career_notices %}
+            <div class="job-listings-simple">
+                {% for notice in career_notices %}
+                <div class="job-item-simple">
+                    <div class="job-item-header">
+                        <span class="job-icon"><i class="fas fa-bullhorn"></i></span>
+                        <div class="job-item-info">
+                            <h3>{{ notice.title }}</h3>
+                        </div>
+                    </div>
+                    <p class="job-description-text">{{ notice.content|linebreaks }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-jobs-message">
+                <i class="fas fa-info-circle"></i>
+                <p>We're always looking for compassionate caregivers and health care professionals! While we don't have specific notices posted right now, please submit your application below and we'll keep your information on file for current and future opportunities.</p>
+            </div>
+        {% endif %}
     </div>
 </section>
 
@@ -65,17 +102,6 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="direct_job_id">Position for which you are applying <span class="required">*</span></label>
-                    <select id="direct_job_id" name="job_id" required>
-                        <option value="">Select a position...</option>
-                        {% for job in jobs %}
-                        <option value="{{ job.id }}">{{ job.title }}</option>
-                        {% endfor %}
-                        <option value="general">General Application</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
                     <label for="date_available">Date available</label>
                     <input type="date" id="date_available" name="date_available">
                 </div>
@@ -117,54 +143,6 @@
                                     <span class="file-size" id="directResumeFileSize"></span>
                                 </div>
                                 <button type="button" class="file-remove" id="directResumeRemove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="supporting_doc1">Supporting Documents upload</label>
-                    <div class="file-upload-wrapper">
-                        <input type="file" id="supporting_doc1" name="supporting_doc1" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
-                        <div class="file-drop-area-compact" id="supportingDoc1DropArea">
-                            <i class="fas fa-upload"></i>
-                            <span>Click to upload or drag & drop</span>
-                            <small>Certifications, licenses, etc.</small>
-                        </div>
-                        <div class="file-preview" id="supportingDoc1Preview" style="display: none;">
-                            <div class="file-info">
-                                <i class="fas fa-file-alt"></i>
-                                <div class="file-details">
-                                    <span class="file-name" id="supportingDoc1FileName"></span>
-                                    <span class="file-size" id="supportingDoc1FileSize"></span>
-                                </div>
-                                <button type="button" class="file-remove" id="supportingDoc1Remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="supporting_doc2">Supporting Documents Upload</label>
-                    <div class="file-upload-wrapper">
-                        <input type="file" id="supporting_doc2" name="supporting_doc2" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
-                        <div class="file-drop-area-compact" id="supportingDoc2DropArea">
-                            <i class="fas fa-upload"></i>
-                            <span>Click to upload or drag & drop</span>
-                            <small>Additional documents</small>
-                        </div>
-                        <div class="file-preview" id="supportingDoc2Preview" style="display: none;">
-                            <div class="file-info">
-                                <i class="fas fa-file-alt"></i>
-                                <div class="file-details">
-                                    <span class="file-name" id="supportingDoc2FileName"></span>
-                                    <span class="file-size" id="supportingDoc2FileSize"></span>
-                                </div>
-                                <button type="button" class="file-remove" id="supportingDoc2Remove">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
@@ -238,22 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const directResumeFileSize = document.getElementById('directResumeFileSize');
     const directResumeRemove = document.getElementById('directResumeRemove');
     
-    // Supporting document 1 elements
-    const supportingDoc1Input = document.getElementById('supporting_doc1');
-    const supportingDoc1DropArea = document.getElementById('supportingDoc1DropArea');
-    const supportingDoc1Preview = document.getElementById('supportingDoc1Preview');
-    const supportingDoc1FileName = document.getElementById('supportingDoc1FileName');
-    const supportingDoc1FileSize = document.getElementById('supportingDoc1FileSize');
-    const supportingDoc1Remove = document.getElementById('supportingDoc1Remove');
-    
-    // Supporting document 2 elements
-    const supportingDoc2Input = document.getElementById('supporting_doc2');
-    const supportingDoc2DropArea = document.getElementById('supportingDoc2DropArea');
-    const supportingDoc2Preview = document.getElementById('supportingDoc2Preview');
-    const supportingDoc2FileName = document.getElementById('supportingDoc2FileName');
-    const supportingDoc2FileSize = document.getElementById('supportingDoc2FileSize');
-    const supportingDoc2Remove = document.getElementById('supportingDoc2Remove');
-    
     // File upload: Click to browse
     directResumeDropArea.addEventListener('click', function() {
         directResumeInput.click();
@@ -322,104 +284,6 @@ document.addEventListener('DOMContentLoaded', function() {
         directResumePreview.style.display = 'none';
     });
     
-    // Supporting Document 1 upload handlers
-    supportingDoc1DropArea.addEventListener('click', function() {
-        supportingDoc1Input.click();
-    });
-    
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        supportingDoc1DropArea.addEventListener(eventName, preventDefaults, false);
-    });
-    
-    ['dragenter', 'dragover'].forEach(eventName => {
-        supportingDoc1DropArea.addEventListener(eventName, function() {
-            supportingDoc1DropArea.classList.add('drag-over');
-        }, false);
-    });
-    
-    ['dragleave', 'drop'].forEach(eventName => {
-        supportingDoc1DropArea.addEventListener(eventName, function() {
-            supportingDoc1DropArea.classList.remove('drag-over');
-        }, false);
-    });
-    
-    supportingDoc1DropArea.addEventListener('drop', function(e) {
-        const files = e.dataTransfer.files;
-        if (files.length) {
-            supportingDoc1Input.files = files;
-            handleSupportingDoc1Select(files[0]);
-        }
-    });
-    
-    supportingDoc1Input.addEventListener('change', function(e) {
-        if (e.target.files.length) {
-            handleSupportingDoc1Select(e.target.files[0]);
-        }
-    });
-    
-    function handleSupportingDoc1Select(file) {
-        supportingDoc1FileName.textContent = file.name;
-        supportingDoc1FileSize.textContent = formatFileSize(file.size);
-        supportingDoc1DropArea.style.display = 'none';
-        supportingDoc1Preview.style.display = 'block';
-    }
-    
-    supportingDoc1Remove.addEventListener('click', function(e) {
-        e.stopPropagation();
-        supportingDoc1Input.value = '';
-        supportingDoc1DropArea.style.display = 'block';
-        supportingDoc1Preview.style.display = 'none';
-    });
-    
-    // Supporting Document 2 upload handlers
-    supportingDoc2DropArea.addEventListener('click', function() {
-        supportingDoc2Input.click();
-    });
-    
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        supportingDoc2DropArea.addEventListener(eventName, preventDefaults, false);
-    });
-    
-    ['dragenter', 'dragover'].forEach(eventName => {
-        supportingDoc2DropArea.addEventListener(eventName, function() {
-            supportingDoc2DropArea.classList.add('drag-over');
-        }, false);
-    });
-    
-    ['dragleave', 'drop'].forEach(eventName => {
-        supportingDoc2DropArea.addEventListener(eventName, function() {
-            supportingDoc2DropArea.classList.remove('drag-over');
-        }, false);
-    });
-    
-    supportingDoc2DropArea.addEventListener('drop', function(e) {
-        const files = e.dataTransfer.files;
-        if (files.length) {
-            supportingDoc2Input.files = files;
-            handleSupportingDoc2Select(files[0]);
-        }
-    });
-    
-    supportingDoc2Input.addEventListener('change', function(e) {
-        if (e.target.files.length) {
-            handleSupportingDoc2Select(e.target.files[0]);
-        }
-    });
-    
-    function handleSupportingDoc2Select(file) {
-        supportingDoc2FileName.textContent = file.name;
-        supportingDoc2FileSize.textContent = formatFileSize(file.size);
-        supportingDoc2DropArea.style.display = 'none';
-        supportingDoc2Preview.style.display = 'block';
-    }
-    
-    supportingDoc2Remove.addEventListener('click', function(e) {
-        e.stopPropagation();
-        supportingDoc2Input.value = '';
-        supportingDoc2DropArea.style.display = 'block';
-        supportingDoc2Preview.style.display = 'none';
-    });
-    
     // Handle direct application form submission
     directApplicationForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -481,21 +345,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 directResumeInput.value = '';
                 directResumeDropArea.style.display = 'block';
                 directResumePreview.style.display = 'none';
-                
-                supportingDoc1Input.value = '';
-                supportingDoc1DropArea.style.display = 'block';
-                supportingDoc1Preview.style.display = 'none';
-                
-                supportingDoc2Input.value = '';
-                supportingDoc2DropArea.style.display = 'block';
-                supportingDoc2Preview.style.display = 'none';
             } else {
                 formMessage.textContent = result.message;
                 formMessage.className = 'form-message error';
                 formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         } catch (error) {
-            formMessage.textContent = 'An error occurred. Please try again later.';
+            console.error('Form submission error:', error);
+            formMessage.textContent = 'An error occurred: ' + error.message + '. Please try again later.';
             formMessage.className = 'form-message error';
             formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } finally {

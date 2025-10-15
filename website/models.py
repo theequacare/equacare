@@ -248,51 +248,47 @@ class CTASection(models.Model):
         super().save(*args, **kwargs)
 
 
-class JobListing(models.Model):
-    """Model for job/career listings"""
-    title = models.CharField(max_length=200)
-    location = models.CharField(max_length=200, default="Urbandale, IA")
-    job_type = models.CharField(max_length=50, choices=[
-        ('full-time', 'Full-Time'),
-        ('part-time', 'Part-Time'),
-        ('contract', 'Contract'),
-        ('per-diem', 'Per Diem'),
-    ], default='full-time')
-    description = models.TextField(help_text="Brief job description")
-    responsibilities = models.TextField(help_text="List main responsibilities (one per line)")
-    qualifications = models.TextField(help_text="List required qualifications (one per line)")
-    benefits = models.TextField(blank=True, help_text="List benefits (one per line)")
-    salary_range = models.CharField(max_length=100, blank=True, help_text="e.g., $15-20/hour")
+class CareerPage(models.Model):
+    """Model for Career page header and intro content"""
+    page_title = models.CharField(max_length=200, default="Careers")
+    page_subtitle = models.CharField(max_length=300, default="Join a team that's about service, kindness, and respect")
+    intro_paragraph_1 = models.TextField(default="Are you interested in working with us? Simply submit the application on this page. We'll review it now, and keep it on file for future openings.")
+    intro_paragraph_2 = models.TextField(default="If you are the type of healthcare professional who takes pride in a job well done, our agency may be the right career move for you. We put the patient's needs first, but we also know that to give good service, you have to treat our caregivers well. Our first step in delivering excellent service to clients is to give the caregivers the support they need and the respect they deserve. If you would like to know about future job opportunities, simply use the form below to send your information.")
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Career Page'
+        verbose_name_plural = 'Career Page'
+
+    def __str__(self):
+        return self.page_title
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            CareerPage.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
+
+class CareerNotice(models.Model):
+    """Model for career/hiring notices - simple notice-style announcements"""
+    title = models.CharField(max_length=200, help_text="e.g., 'We're Hiring!', 'Join Our Team', 'Career Opportunities Available'")
+    content = models.TextField(help_text="Description of available positions or hiring information")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         ordering = ['-created_at']
-        verbose_name = 'Job Listing'
-        verbose_name_plural = 'Job Listings'
-    
+        verbose_name = 'Career Notice'
+        verbose_name_plural = 'Career Notices'
+
     def __str__(self):
-        return f"{self.title} - {self.location}"
-    
-    def get_responsibilities_list(self):
-        """Return responsibilities as a list"""
-        return [resp.strip() for resp in self.responsibilities.split('\n') if resp.strip()]
-    
-    def get_qualifications_list(self):
-        """Return qualifications as a list"""
-        return [qual.strip() for qual in self.qualifications.split('\n') if qual.strip()]
-    
-    def get_benefits_list(self):
-        """Return benefits as a list"""
-        if self.benefits:
-            return [benefit.strip() for benefit in self.benefits.split('\n') if benefit.strip()]
-        return []
+        return self.title
 
 
 class JobApplication(models.Model):
-    """Model for job applications"""
-    job = models.ForeignKey(JobListing, on_delete=models.CASCADE, related_name='applications')
+    """Model for job applications - all applications are general"""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -318,7 +314,7 @@ class JobApplication(models.Model):
         verbose_name_plural = 'Job Applications'
     
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.job.title}"
+        return f"{self.first_name} {self.last_name} - General Application"
 
 
 class AboutPage(models.Model):

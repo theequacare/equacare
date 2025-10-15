@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
-from .models import ContactMessage, JobListing, JobApplication
+from .models import ContactMessage, JobApplication
 import json
 import logging
 
@@ -148,28 +148,20 @@ This is an automated notification from your Equacare website.
 
 def careers(request):
     """Careers page view"""
-    jobs = JobListing.objects.filter(is_active=True)
+    from .models import CareerPage, CareerNotice
+    career_page = CareerPage.objects.filter(is_active=True).first()
+    career_notices = CareerNotice.objects.filter(is_active=True)
     context = {
-        'jobs': jobs,
+        'career_page': career_page,
+        'career_notices': career_notices,
     }
     return render(request, 'website/careers.html', context)
 
 
 @require_http_methods(["POST"])
 def submit_application(request):
-    """Handle job application submission"""
+    """Handle general job application submission"""
     try:
-        job_id = request.POST.get('job_id')
-        
-        # Better validation for job_id
-        if not job_id:
-            return JsonResponse({
-                'success': False,
-                'message': 'No job position selected. Please try again.'
-            }, status=400)
-        
-        job = get_object_or_404(JobListing, id=job_id, is_active=True)
-        
         # Get form data
         first_name = request.POST.get('first_name', '').strip()
         last_name = request.POST.get('last_name', '').strip()
@@ -190,7 +182,6 @@ def submit_application(request):
         
         # Save application
         application = JobApplication.objects.create(
-            job=job,
             first_name=first_name,
             last_name=last_name,
             email=email,
@@ -202,13 +193,14 @@ def submit_application(request):
             resume=resume
         )
         
-        # Send email notification with resume
+        # Send email notification with resume (optional - won't fail if email not configured)
         try:
-            email_subject = f'New Job Application: {job.title} - {first_name} {last_name}'
-            email_body = f"""
-New job application received from Equacare website:
+            # Only send email if properly configured
+            if settings.EMAIL_HOST_PASSWORD:
+                email_subject = f'New Job Application - {first_name} {last_name}'
+                email_body = f"""
+New general job application received from Equacare website:
 
-Position: {job.title}
 Applicant: {first_name} {last_name}
 Email: {email}
 Phone: {phone}
@@ -226,21 +218,24 @@ http://127.0.0.1:8000/admin/website/jobapplication/{application.id}/change/
 
 ---
 This is an automated notification from your Equacare website.
-            """
-            
-            # Create email with attachment
-            email_message = EmailMessage(
-                email_subject,
-                email_body,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.ADMIN_EMAIL],
-            )
-            
-            # Attach resume if provided
-            if resume:
-                email_message.attach(resume.name, resume.read(), resume.content_type)
-            
-            email_message.send(fail_silently=True)
+                """
+                
+                # Create email with attachment
+                email_message = EmailMessage(
+                    email_subject,
+                    email_body,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.ADMIN_EMAIL],
+                )
+                
+                # Attach resume if provided
+                if resume:
+                    email_message.attach(resume.name, resume.read(), resume.content_type)
+                
+                email_message.send(fail_silently=True)
+                logger.info(f"Job application email sent for: {first_name} {last_name}")
+            else:
+                logger.info(f"Job application saved (email not configured): {first_name} {last_name}")
         except Exception as e:
             # Log error but don't fail the request
             logger.error(f"Failed to send job application email: {e}")
