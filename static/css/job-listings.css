@@ -67,34 +67,7 @@
 .job-item-info h3 {
     font-size: 1.25rem;
     color: var(--text-dark);
-    margin: 0 0 var(--spacing-xs) 0;
-}
-
-.job-item-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
-    font-size: 0.875rem;
-    color: var(--text-light);
-}
-
-.job-location, .job-type-badge, .job-salary-text {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.job-type-badge {
-    padding: 0.25rem 0.5rem;
-    background: #e0f2fe;
-    color: var(--primary-color);
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-}
-
-.job-salary-text {
-    color: var(--secondary-color);
-    font-weight: 600;
+    margin: 0;
 }
 
 .job-description-text {
@@ -137,11 +110,6 @@
         width: 35px;
         height: 35px;
     }
-    
-    .job-item-meta {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -161,4 +129,3 @@
         font-size: 1.125rem;
     }
 }
-
