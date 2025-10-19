@@ -23,11 +23,17 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '.onrender.com',  # Allow all Render domains
+    '.railway.app',   # Allow Railway domains
 ]
 
 # Add Render external hostname if provided
 if os.environ.get('RENDER_EXTERNAL_HOSTNAME'):
     ALLOWED_HOSTS.append(os.environ.get('RENDER_EXTERNAL_HOSTNAME'))
+
+# Add custom domain from environment variable (for production)
+if os.environ.get('CUSTOM_DOMAIN'):
+    custom_domains = os.environ.get('CUSTOM_DOMAIN').split(',')
+    ALLOWED_HOSTS.extend([domain.strip() for domain in custom_domains])
 
 
 # Application definition
@@ -155,6 +161,12 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.up.railway.app',
     'https://*.onrender.com',
 ]
+
+# Add custom domain CSRF origins from environment variable
+if os.environ.get('CUSTOM_DOMAIN'):
+    custom_domains = os.environ.get('CUSTOM_DOMAIN').split(',')
+    for domain in custom_domains:
+        CSRF_TRUSTED_ORIGINS.append(f'https://{domain.strip()}')
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
