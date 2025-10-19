@@ -88,7 +88,7 @@
                 
                 <div class="form-note">
                     <i class="fas fa-info-circle"></i>
-                    <p><strong>Note:</strong> If you are uploading a resume, you can skip the sections below where duplicate information is requested.</p>
+                    <p><strong>Note:</strong> Resume upload is optional. If you upload a resume, you can skip the sections below where duplicate information is requested. Otherwise, please fill out the information below.</p>
                 </div>
                 
                 <div class="form-group">
@@ -127,9 +127,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="direct_resume">Resume upload <span class="required">*</span></label>
+                    <label for="direct_resume">Resume upload (optional)</label>
                     <div class="file-upload-wrapper">
-                        <input type="file" id="direct_resume" name="resume" accept=".pdf,.doc,.docx" required hidden>
+                        <input type="file" id="direct_resume" name="resume" accept=".pdf,.doc,.docx" hidden>
                         <div class="file-drop-area-compact" id="directResumeDropArea">
                             <i class="fas fa-upload"></i>
                             <span>Click to upload or drag & drop</span>
@@ -306,13 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const generalComments = document.getElementById('general_comments').value.trim();
         document.getElementById('hidden_cover_letter').value = generalComments || 'Application submitted via careers form.';
         
-        // Validate resume upload
-        if (!directResumeInput.files.length) {
-            formMessage.textContent = 'Please upload your resume.';
-            formMessage.className = 'form-message error';
-            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
-        }
+        // Resume upload is now optional - no validation needed
         
         // Show loading state
         submitBtn.disabled = true;
