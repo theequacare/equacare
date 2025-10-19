@@ -12,5 +12,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('submit-contact/', views.submit_contact, name='submit_contact'),
     path('submit-application/', views.submit_application, name='submit_application'),
+    # SEO
+    path('sitemap.xml', views.sitemap, name='sitemap'),
+    path('robots.txt', views.robots_txt, name='robots_txt'),
 ]
 

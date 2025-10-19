@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
@@ -286,4 +286,22 @@ This is an automated notification from your Equacare website.
             'success': False,
             'message': f'An error occurred: {str(e)}. Please try again later.'
         }, status=500)
+
+
+def sitemap(request):
+    """Serve sitemap.xml for SEO"""
+    from django.template import loader
+    template = loader.get_template('sitemap.xml')
+    return HttpResponse(template.render(), content_type='application/xml')
+
+
+def robots_txt(request):
+    """Serve robots.txt for SEO"""
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "",
+        f"Sitemap: https://www.equacarellc.com/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
 

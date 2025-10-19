@@ -4,9 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Equacare LLC - Non-Medical Home Care Services. Personal care, companionship, and daily living assistance for seniors and individuals at home.">
-    <meta name="keywords" content="non-medical home care, personal care assistance, companion care, elderly care, daily living assistance, home care services">
-    <title>{% block title %}Equacare LLC - Professional Home Care Services{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Equacare LLC - Non-Medical Home Care Services in Urbandale, Iowa. Personal care, companionship, and daily living assistance for seniors and individuals at home.{% endblock %}">
+    <meta name="keywords" content="non-medical home care, personal care assistance, companion care, elderly care, daily living assistance, home care services, Urbandale Iowa, Des Moines home care">
+    <meta name="author" content="Equacare LLC">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.equacarellc.com{% block canonical_url %}{{ request.path }}{% endblock %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.equacarellc.com{{ request.path }}">
+    <meta property="og:title" content="{% block og_title %}Equacare LLC - Professional Home Care Services{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Non-Medical Home Care Services. Personal care, companionship, and daily living assistance for seniors and individuals at home.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/hero-bg.webp' %}{% endblock %}">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Equacare LLC">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.equacarellc.com{{ request.path }}">
+    <meta name="twitter:title" content="{% block twitter_title %}Equacare LLC - Professional Home Care Services{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Non-Medical Home Care Services in Urbandale, Iowa.{% endblock %}">
+    <meta name="twitter:image" content="{% static 'images/hero-bg.webp' %}">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Equacare LLC",
+      "description": "Non-Medical Home Care Services",
+      "url": "https://www.equacarellc.com",
+      "telephone": "(515) 508-1556",
+      "email": "equacare77@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "7611 Douglas Ave #24",
+        "addressLocality": "Urbandale",
+        "addressRegion": "IA",
+        "postalCode": "50322-3076",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.6261,
+        "longitude": -93.7384
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "priceRange": "$$",
+      "sameAs": []
+    }
+    </script>
+    
+    <title>{% block title %}Equacare LLC - Professional Home Care Services in Urbandale, IA{% endblock %}</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
