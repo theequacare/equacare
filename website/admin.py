@@ -219,22 +219,27 @@ class CareerNoticeAdmin(admin.ModelAdmin):
 
 @admin.register(JobApplication)
 class JobApplicationAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'phone', 'status', 'created_at')
-    list_filter = ('status', 'created_at')
-    search_fields = ('first_name', 'last_name', 'email', 'phone')
+    list_display = ('first_name', 'last_name', 'email', 'phone', 'date_available', 'status', 'created_at')
+    list_filter = ('status', 'created_at', 'date_available')
+    search_fields = ('first_name', 'last_name', 'email', 'phone', 'current_employment')
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at',)
     list_editable = ('status',)
     fieldsets = (
         ('Applicant Information', {
-            'fields': ('first_name', 'last_name', 'email', 'phone', 'address')
+            'fields': ('first_name', 'last_name', 'email', 'phone', 'address', 'best_time', 'date_available')
         }),
-        ('Experience & Availability', {
-            'fields': ('experience_years', 'availability')
+        ('Education & Certifications', {
+            'fields': ('degree_info', 'other_certifications'),
+            'description': 'Educational background and certifications'
+        }),
+        ('Employment Information', {
+            'fields': ('current_employment', 'employment_history', 'experience_years', 'availability'),
+            'description': 'Current and previous employment information'
         }),
         ('Application Materials', {
-            'fields': ('resume', 'cover_letter'),
-            'description': 'Resume upload and cover letter'
+            'fields': ('resume', 'general_comments', 'cover_letter'),
+            'description': 'Resume upload, comments and cover letter'
         }),
         ('Status & Notes', {
             'fields': ('status', 'notes', 'created_at')

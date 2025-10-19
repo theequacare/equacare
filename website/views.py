@@ -168,6 +168,13 @@ def submit_application(request):
         email = request.POST.get('email', '').strip()
         phone = request.POST.get('phone', '').strip()
         address = request.POST.get('address', '').strip()
+        best_time = request.POST.get('best_time', '').strip()
+        date_available = request.POST.get('date_available', '').strip()
+        degree_info = request.POST.get('degree_info', '').strip()
+        other_certifications = request.POST.get('other_certifications', '').strip()
+        current_employment = request.POST.get('current_employment', '').strip()
+        employment_history = request.POST.get('employment_history', '').strip()
+        general_comments = request.POST.get('general_comments', '').strip()
         cover_letter = request.POST.get('cover_letter', '').strip()
         experience_years = request.POST.get('experience_years', 0)
         availability = request.POST.get('availability', '').strip()
@@ -187,6 +194,13 @@ def submit_application(request):
             email=email,
             phone=phone,
             address=address,
+            best_time=best_time,
+            date_available=date_available if date_available else None,
+            degree_info=degree_info,
+            other_certifications=other_certifications,
+            current_employment=current_employment,
+            employment_history=employment_history,
+            general_comments=general_comments,
             cover_letter=cover_letter,
             experience_years=int(experience_years) if experience_years else 0,
             availability=availability,
@@ -201,20 +215,36 @@ def submit_application(request):
                 email_body = f"""
 New general job application received from Equacare website:
 
-Applicant: {first_name} {last_name}
+APPLICANT INFORMATION:
+Name: {first_name} {last_name}
 Email: {email}
 Phone: {phone}
 Address: {address}
-Experience: {experience_years} years
-Availability: {availability}
+Best Time to Call: {best_time if best_time else 'Not specified'}
+Date Available: {date_available if date_available else 'Not specified'}
 
-Cover Letter:
-{cover_letter}
+EDUCATION & CERTIFICATIONS:
+Degree/Certification: {degree_info if degree_info else 'Not provided'}
+Other Certifications: {other_certifications if other_certifications else 'Not provided'}
 
-The resume is attached to this email.
+EMPLOYMENT INFORMATION:
+Current Employment: {current_employment if current_employment else 'Not provided'}
+Employment History:
+{employment_history if employment_history else 'Not provided'}
+
+Experience Years: {experience_years} years
+Availability: {availability if availability else 'Not specified'}
+
+GENERAL COMMENTS:
+{general_comments if general_comments else 'No comments provided'}
+
+COVER LETTER:
+{cover_letter if cover_letter else 'No cover letter provided'}
+
+Resume: {'Attached' if resume else 'Not provided'}
 
 View full application in admin panel:
-http://127.0.0.1:8000/admin/website/jobapplication/{application.id}/change/
+https://www.equacarellc.com/admin/website/jobapplication/{application.id}/change/
 
 ---
 This is an automated notification from your Equacare website.
