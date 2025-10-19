@@ -1,8 +1,8 @@
 from django.contrib import admin
 from .models import (
-    ContactMessage, Service, Testimonial, Notice, Document, 
+    ContactMessage, Notice, Document, 
     HeroSection, AboutPreview, ServicesHeader, ContactFormSection, CTASection, SiteSettings,
-    JobListing, JobApplication, AboutPage
+    CareerPage, CareerNotice, JobApplication, AboutPage, CEOSection, ProgramGallery
 )
 
 
@@ -12,23 +12,6 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_filter = ('is_read', 'created_at')
     search_fields = ('name', 'email', 'subject', 'message')
     readonly_fields = ('created_at',)
-    date_hierarchy = 'created_at'
-
-
-@admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'order', 'is_active')
-    list_filter = ('is_active',)
-    search_fields = ('title', 'description')
-    list_editable = ('order', 'is_active')
-
-
-@admin.register(Testimonial)
-class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ('client_name', 'relationship', 'rating', 'is_featured', 'created_at')
-    list_filter = ('rating', 'is_featured', 'created_at')
-    search_fields = ('client_name', 'testimonial')
-    list_editable = ('is_featured',)
     date_hierarchy = 'created_at'
 
 
@@ -44,12 +27,24 @@ class NoticeAdmin(admin.ModelAdmin):
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'is_active', 'created_at')
-    list_filter = ('category', 'is_active', 'created_at')
+    list_display = ('title', 'category', 'access_type', 'is_active', 'created_at')
+    list_filter = ('category', 'access_type', 'is_active', 'created_at')
     search_fields = ('title', 'description')
-    list_editable = ('is_active',)
+    list_editable = ('access_type', 'is_active')
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at',)
+    fieldsets = (
+        ('Document Information', {
+            'fields': ('title', 'description', 'file', 'category')
+        }),
+        ('Access Control', {
+            'fields': ('access_type',),
+            'description': 'Choose whether users can download this document or only view it in their browser'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'created_at')
+        }),
+    )
 
 
 @admin.register(HeroSection)
@@ -183,33 +178,38 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(JobListing)
-class JobListingAdmin(admin.ModelAdmin):
-    list_display = ('title', 'location', 'job_type', 'is_active', 'created_at')
-    list_filter = ('job_type', 'is_active', 'created_at')
-    search_fields = ('title', 'location', 'description')
+@admin.register(CareerPage)
+class CareerPageAdmin(admin.ModelAdmin):
+    list_display = ('page_title', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Page Header', {
+            'fields': ('page_title', 'page_subtitle'),
+            'description': 'Main heading for the careers page'
+        }),
+        ('Intro Content', {
+            'fields': ('intro_paragraph_1', 'intro_paragraph_2'),
+            'description': 'Introductory text shown at the top of the careers page'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(CareerNotice)
+class CareerNoticeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'created_at', 'updated_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('title', 'content')
     list_editable = ('is_active',)
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
-        ('Job Information', {
-            'fields': ('title', 'location', 'job_type', 'salary_range')
-        }),
-        ('Description', {
-            'fields': ('description',),
-            'description': 'Brief overview of the position'
-        }),
-        ('Responsibilities', {
-            'fields': ('responsibilities',),
-            'description': 'List main job responsibilities (one per line)'
-        }),
-        ('Qualifications', {
-            'fields': ('qualifications',),
-            'description': 'List required qualifications (one per line)'
-        }),
-        ('Benefits', {
-            'fields': ('benefits',),
-            'description': 'Optional: List benefits (one per line)'
+        ('Notice Information', {
+            'fields': ('title', 'content'),
+            'description': 'Create simple hiring/career notices that appear on the careers page'
         }),
         ('Status', {
             'fields': ('is_active', 'created_at', 'updated_at')
@@ -219,8 +219,8 @@ class JobListingAdmin(admin.ModelAdmin):
 
 @admin.register(JobApplication)
 class JobApplicationAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'job', 'email', 'phone', 'status', 'created_at')
-    list_filter = ('status', 'created_at', 'job')
+    list_display = ('first_name', 'last_name', 'email', 'phone', 'status', 'created_at')
+    list_filter = ('status', 'created_at')
     search_fields = ('first_name', 'last_name', 'email', 'phone')
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at',)
@@ -229,8 +229,8 @@ class JobApplicationAdmin(admin.ModelAdmin):
         ('Applicant Information', {
             'fields': ('first_name', 'last_name', 'email', 'phone', 'address')
         }),
-        ('Job Details', {
-            'fields': ('job', 'experience_years', 'availability')
+        ('Experience & Availability', {
+            'fields': ('experience_years', 'availability')
         }),
         ('Application Materials', {
             'fields': ('resume', 'cover_letter'),
@@ -261,6 +261,58 @@ class AboutPageAdmin(admin.ModelAdmin):
         }),
         ('Status', {
             'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(CEOSection)
+class CEOSectionAdmin(admin.ModelAdmin):
+    list_display = ('section_title', 'ceo_name', 'is_active', 'updated_at')
+    list_filter = ('is_active',)
+    readonly_fields = ('updated_at',)
+    fieldsets = (
+        ('Section Header', {
+            'fields': ('section_title',),
+            'description': 'Title for the CEO section'
+        }),
+        ('CEO Information', {
+            'fields': ('ceo_name', 'ceo_title', 'ceo_image'),
+            'description': 'CEO name, title, and optional photo'
+        }),
+        ('Message Content', {
+            'fields': ('paragraph_1', 'paragraph_2', 'paragraph_3', 'paragraph_4'),
+            'description': 'CEO message divided into paragraphs for better readability'
+        }),
+        ('Signature', {
+            'fields': ('closing_text', 'signature_name'),
+            'description': 'Closing and signature (leave signature_name blank to use CEO name)'
+        }),
+        ('Status', {
+            'fields': ('is_active', 'updated_at')
+        }),
+    )
+
+
+@admin.register(ProgramGallery)
+class ProgramGalleryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date', 'display_order', 'is_active', 'updated_at')
+    list_filter = ('is_active', 'date')
+    search_fields = ('title', 'description')
+    list_editable = ('display_order', 'is_active')
+    readonly_fields = ('created_at', 'updated_at')
+    date_hierarchy = 'date'
+    fieldsets = (
+        ('Photo Information', {
+            'fields': ('title', 'description', 'photo', 'date'),
+            'description': 'Add program/event photos to display in the gallery on the About page'
+        }),
+        ('Display Settings', {
+            'fields': ('display_order', 'is_active'),
+            'description': 'Control the order and visibility of photos'
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
         }),
     )
 

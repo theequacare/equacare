@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import os
 
 
 class ContactMessage(models.Model):
@@ -21,41 +22,6 @@ class ContactMessage(models.Model):
         return f"{self.name} - {self.subject}"
 
 
-class Service(models.Model):
-    """Model for services offered by Equacare"""
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    icon = models.CharField(max_length=50, help_text="Font Awesome icon class")
-    order = models.IntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-
-    class Meta:
-        ordering = ['order']
-        verbose_name = 'Service'
-        verbose_name_plural = 'Services'
-
-    def __str__(self):
-        return self.title
-
-
-class Testimonial(models.Model):
-    """Model for client testimonials"""
-    client_name = models.CharField(max_length=200)
-    relationship = models.CharField(max_length=100, help_text="e.g., 'Family Member', 'Client'")
-    testimonial = models.TextField()
-    rating = models.IntegerField(default=5, choices=[(i, i) for i in range(1, 6)])
-    is_featured = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=timezone.now)
-
-    class Meta:
-        ordering = ['-created_at']
-        verbose_name = 'Testimonial'
-        verbose_name_plural = 'Testimonials'
-
-    def __str__(self):
-        return f"{self.client_name} - {self.rating} stars"
-
-
 class Notice(models.Model):
     """Model for announcements and notices"""
     title = models.CharField(max_length=200)
@@ -74,16 +40,20 @@ class Notice(models.Model):
 
 
 class Document(models.Model):
-    """Model for PDF documents and resources"""
+    """Model for documents and resources (supports all file formats)"""
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    file = models.FileField(upload_to='documents/')
+    file = models.FileField(upload_to='documents/', help_text='Upload any file type: PDF, Word, Excel, PowerPoint, Images, etc.')
     category = models.CharField(max_length=100, choices=[
         ('forms', 'Forms'),
         ('policies', 'Policies'),
         ('guides', 'Guides'),
         ('other', 'Other'),
     ], default='other')
+    access_type = models.CharField(max_length=20, choices=[
+        ('download', 'Download'),
+        ('view', 'View Only (Read-Only)'),
+    ], default='download', help_text='Choose whether users can download or only view this document')
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -94,6 +64,46 @@ class Document(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_file_extension(self):
+        """Get the file extension"""
+        return os.path.splitext(self.file.name)[1].lower()
+    
+    def get_file_icon(self):
+        """Return appropriate Font Awesome icon based on file type"""
+        ext = self.get_file_extension()
+        icon_map = {
+            '.pdf': 'fa-file-pdf',
+            '.doc': 'fa-file-word', '.docx': 'fa-file-word',
+            '.xls': 'fa-file-excel', '.xlsx': 'fa-file-excel', '.csv': 'fa-file-excel',
+            '.ppt': 'fa-file-powerpoint', '.pptx': 'fa-file-powerpoint',
+            '.jpg': 'fa-file-image', '.jpeg': 'fa-file-image', '.png': 'fa-file-image',
+            '.gif': 'fa-file-image', '.bmp': 'fa-file-image', '.svg': 'fa-file-image', '.webp': 'fa-file-image',
+            '.zip': 'fa-file-archive', '.rar': 'fa-file-archive', '.7z': 'fa-file-archive',
+            '.tar': 'fa-file-archive', '.gz': 'fa-file-archive',
+            '.txt': 'fa-file-alt', '.rtf': 'fa-file-alt',
+            '.mp4': 'fa-file-video', '.avi': 'fa-file-video', '.mov': 'fa-file-video',
+            '.wmv': 'fa-file-video', '.flv': 'fa-file-video', '.mkv': 'fa-file-video',
+            '.mp3': 'fa-file-audio', '.wav': 'fa-file-audio', '.ogg': 'fa-file-audio', '.m4a': 'fa-file-audio',
+            '.html': 'fa-file-code', '.css': 'fa-file-code', '.js': 'fa-file-code',
+            '.py': 'fa-file-code', '.java': 'fa-file-code', '.cpp': 'fa-file-code', '.c': 'fa-file-code',
+        }
+        return icon_map.get(ext, 'fa-file')
+    
+    def get_file_color(self):
+        """Return color class based on file type"""
+        ext = self.get_file_extension()
+        color_map = {
+            '.pdf': 'file-color-red',
+            '.doc': 'file-color-blue', '.docx': 'file-color-blue',
+            '.xls': 'file-color-green', '.xlsx': 'file-color-green', '.csv': 'file-color-green',
+            '.ppt': 'file-color-orange', '.pptx': 'file-color-orange',
+            '.jpg': 'file-color-purple', '.jpeg': 'file-color-purple', '.png': 'file-color-purple',
+            '.gif': 'file-color-purple', '.bmp': 'file-color-purple', '.svg': 'file-color-purple', '.webp': 'file-color-purple',
+            '.zip': 'file-color-yellow', '.rar': 'file-color-yellow', '.7z': 'file-color-yellow',
+            '.tar': 'file-color-yellow', '.gz': 'file-color-yellow',
+        }
+        return color_map.get(ext, 'file-color-gray')
 
 
 class HeroSection(models.Model):
@@ -238,51 +248,47 @@ class CTASection(models.Model):
         super().save(*args, **kwargs)
 
 
-class JobListing(models.Model):
-    """Model for job/career listings"""
-    title = models.CharField(max_length=200)
-    location = models.CharField(max_length=200, default="Urbandale, IA")
-    job_type = models.CharField(max_length=50, choices=[
-        ('full-time', 'Full-Time'),
-        ('part-time', 'Part-Time'),
-        ('contract', 'Contract'),
-        ('per-diem', 'Per Diem'),
-    ], default='full-time')
-    description = models.TextField(help_text="Brief job description")
-    responsibilities = models.TextField(help_text="List main responsibilities (one per line)")
-    qualifications = models.TextField(help_text="List required qualifications (one per line)")
-    benefits = models.TextField(blank=True, help_text="List benefits (one per line)")
-    salary_range = models.CharField(max_length=100, blank=True, help_text="e.g., $15-20/hour")
+class CareerPage(models.Model):
+    """Model for Career page header and intro content"""
+    page_title = models.CharField(max_length=200, default="Careers")
+    page_subtitle = models.CharField(max_length=300, default="Join a team that's about service, kindness, and respect")
+    intro_paragraph_1 = models.TextField(default="Are you interested in working with us? Simply submit the application on this page. We'll review it now, and keep it on file for future openings.")
+    intro_paragraph_2 = models.TextField(default="If you are the type of healthcare professional who takes pride in a job well done, our agency may be the right career move for you. We put the patient's needs first, but we also know that to give good service, you have to treat our caregivers well. Our first step in delivering excellent service to clients is to give the caregivers the support they need and the respect they deserve. If you would like to know about future job opportunities, simply use the form below to send your information.")
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Career Page'
+        verbose_name_plural = 'Career Page'
+
+    def __str__(self):
+        return self.page_title
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            CareerPage.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
+
+class CareerNotice(models.Model):
+    """Model for career/hiring notices - simple notice-style announcements"""
+    title = models.CharField(max_length=200, help_text="e.g., 'We're Hiring!', 'Join Our Team', 'Career Opportunities Available'")
+    content = models.TextField(help_text="Description of available positions or hiring information")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         ordering = ['-created_at']
-        verbose_name = 'Job Listing'
-        verbose_name_plural = 'Job Listings'
-    
+        verbose_name = 'Career Notice'
+        verbose_name_plural = 'Career Notices'
+
     def __str__(self):
-        return f"{self.title} - {self.location}"
-    
-    def get_responsibilities_list(self):
-        """Return responsibilities as a list"""
-        return [resp.strip() for resp in self.responsibilities.split('\n') if resp.strip()]
-    
-    def get_qualifications_list(self):
-        """Return qualifications as a list"""
-        return [qual.strip() for qual in self.qualifications.split('\n') if qual.strip()]
-    
-    def get_benefits_list(self):
-        """Return benefits as a list"""
-        if self.benefits:
-            return [benefit.strip() for benefit in self.benefits.split('\n') if benefit.strip()]
-        return []
+        return self.title
 
 
 class JobApplication(models.Model):
-    """Model for job applications"""
-    job = models.ForeignKey(JobListing, on_delete=models.CASCADE, related_name='applications')
+    """Model for job applications - all applications are general"""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -308,7 +314,7 @@ class JobApplication(models.Model):
         verbose_name_plural = 'Job Applications'
     
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.job.title}"
+        return f"{self.first_name} {self.last_name} - General Application"
 
 
 class AboutPage(models.Model):
@@ -343,6 +349,67 @@ class AboutPage(models.Model):
         if self.is_active:
             AboutPage.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
         super().save(*args, **kwargs)
+
+
+class CEOSection(models.Model):
+    """Model for CEO section on About page"""
+    section_title = models.CharField(max_length=200, default="A Message from Our CEO")
+    ceo_name = models.CharField(max_length=200, default="[CEO Name]", help_text="Full name of the CEO")
+    ceo_title = models.CharField(max_length=100, default="Chief Executive Officer")
+    ceo_image = models.ImageField(upload_to='ceo/', blank=True, null=True, help_text="Optional: CEO photo (recommended size: 400x400px)")
+    
+    # Message paragraphs
+    paragraph_1 = models.TextField(
+        default="Welcome to Equacare LLC. We are truly honored that you have chosen us to be part of your care journey. At Equacare, our mission is to promote independence, dignity, comfort, and quality of life for each individual we serve."
+    )
+    paragraph_2 = models.TextField(
+        default="Our team is dedicated to providing compassionate, reliable, and person-centered support in the comfort of your own home. We believe that with the right assistance, every person can enjoy the safety, familiarity, and meaningful connections of their home and community for as long as possible."
+    )
+    paragraph_3 = models.TextField(
+        default="As a valued member, you are at the heart of everything we do. We are committed to respecting your rights, honoring your choices, and working closely with you and your family to support your unique needs and goals."
+    )
+    paragraph_4 = models.TextField(
+        default="Thank you for placing your trust in Equacare LLC. We look forward to working together to make each day safe, comfortable, and meaningful."
+    )
+    
+    # Signature/Closing
+    closing_text = models.CharField(max_length=100, default="Warm regards,", help_text="Closing line before signature")
+    signature_name = models.CharField(max_length=200, blank=True, help_text="Name for signature (leave blank to use CEO name)")
+    
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'CEO Section'
+        verbose_name_plural = 'CEO Section'
+    
+    def __str__(self):
+        return f"CEO Section - {self.ceo_name}"
+    
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            CEOSection.objects.filter(is_active=True).exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
+
+
+class ProgramGallery(models.Model):
+    """Model for program photos gallery on About page"""
+    title = models.CharField(max_length=200, help_text="Title/name of the program or event")
+    description = models.TextField(blank=True, help_text="Optional description of the program/event")
+    photo = models.ImageField(upload_to='programs/', help_text="Program/event photo (recommended size: 800x600px)")
+    date = models.DateField(blank=True, null=True, help_text="Date of the program/event (optional)")
+    display_order = models.IntegerField(default=0, help_text="Order in which photos appear (lower numbers first)")
+    is_active = models.BooleanField(default=True, help_text="Uncheck to hide this photo from gallery")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Program Gallery Photo'
+        verbose_name_plural = 'Program Gallery Photos'
+        ordering = ['display_order', '-date', '-created_at']
+    
+    def __str__(self):
+        return self.title
 
 
 class SiteSettings(models.Model):

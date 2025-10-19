@@ -25,18 +25,36 @@
                 </div>
             </div>
             
-            <div class="simple-cta">
-                <h2>{{ about_page.cta_title }}</h2>
-                <p>{{ about_page.cta_text }}</p>
-                <div class="simple-cta-buttons">
-                    {% if site_settings %}
-                    <a href="tel:{{ site_settings.phone_link }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call {{ site_settings.phone }}</a>
-                    {% else %}
-                    <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
-                    {% endif %}
-                    <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">{{ about_page.button_text }}</a>
+            <!-- CEO Section -->
+            {% if ceo_section %}
+            <div class="ceo-section">
+                <div class="ceo-container">
+                    <h2 class="section-title">{{ ceo_section.section_title }}</h2>
+                    <div class="ceo-content">
+                        <div class="ceo-image-wrapper">
+                            {% if ceo_section.ceo_image %}
+                            <img src="{{ ceo_section.ceo_image.url }}" alt="{{ ceo_section.ceo_name }}" class="ceo-image-photo">
+                            {% else %}
+                            <div class="ceo-image-placeholder">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="ceo-message">
+                            <p>{{ ceo_section.paragraph_1 }}</p>
+                            <p>{{ ceo_section.paragraph_2 }}</p>
+                            <p>{{ ceo_section.paragraph_3 }}</p>
+                            <p>{{ ceo_section.paragraph_4 }}</p>
+                            <div class="ceo-signature">
+                                <p class="closing-text">{{ ceo_section.closing_text }}</p>
+                                <p class="signature-name">{% if ceo_section.signature_name %}{{ ceo_section.signature_name }}{% else %}{{ ceo_section.ceo_name }}{% endif %}</p>
+                                <p class="signature-title">{{ ceo_section.ceo_title }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {% endif %}
             {% else %}
             <!-- Fallback content if no About Page is set in admin -->
             <div class="simple-about-header">
@@ -56,16 +74,70 @@
                 </div>
             </div>
             
-            <div class="simple-cta">
-                <h2>Ready to Learn More?</h2>
-                <p>Let's talk about how we can help you or your loved ones.</p>
-                <div class="simple-cta-buttons">
-                    {% if site_settings %}
-                    <a href="tel:{{ site_settings.phone_link }}" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call {{ site_settings.phone }}</a>
-                    {% else %}
-                    <a href="tel:+15155081556" class="btn btn-primary btn-lg"><i class="fas fa-phone"></i> Call (515) 508-1556</a>
-                    {% endif %}
-                    <a href="{% url 'website:contact' %}" class="btn btn-secondary btn-lg">Contact Us</a>
+            <!-- CEO Section -->
+            {% if ceo_section %}
+            <div class="ceo-section">
+                <div class="ceo-container">
+                    <h2 class="section-title">{{ ceo_section.section_title }}</h2>
+                    <div class="ceo-content">
+                        <div class="ceo-image-wrapper">
+                            {% if ceo_section.ceo_image %}
+                            <img src="{{ ceo_section.ceo_image.url }}" alt="{{ ceo_section.ceo_name }}" class="ceo-image-photo">
+                            {% else %}
+                            <div class="ceo-image-placeholder">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="ceo-message">
+                            <p>{{ ceo_section.paragraph_1 }}</p>
+                            <p>{{ ceo_section.paragraph_2 }}</p>
+                            <p>{{ ceo_section.paragraph_3 }}</p>
+                            <p>{{ ceo_section.paragraph_4 }}</p>
+                            <div class="ceo-signature">
+                                <p class="closing-text">{{ ceo_section.closing_text }}</p>
+                                <p class="signature-name">{% if ceo_section.signature_name %}{{ ceo_section.signature_name }}{% else %}{{ ceo_section.ceo_name }}{% endif %}</p>
+                                <p class="signature-title">{{ ceo_section.ceo_title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            <!-- Program Gallery Section -->
+            {% if gallery_photos %}
+            <div class="program-gallery-section">
+                <div class="container">
+                    <h2 class="section-title">Our Programs & Activities</h2>
+                    <p class="section-subtitle">See the impact we make through our various programs and community activities</p>
+                    
+                    <div class="gallery-grid">
+                        {% for photo in gallery_photos %}
+                        <div class="gallery-item">
+                            <div class="gallery-image-wrapper">
+                                <img src="{{ photo.photo.url }}" alt="{{ photo.title }}" class="gallery-image">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-overlay-content">
+                                        <h3 class="gallery-title">{{ photo.title }}</h3>
+                                        {% if photo.date %}
+                                        <p class="gallery-date">
+                                            <i class="fas fa-calendar-alt"></i> 
+                                            {{ photo.date|date:"F d, Y" }}
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if photo.description %}
+                            <div class="gallery-description">
+                                <p>{{ photo.description|truncatewords:20 }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             {% endif %}
